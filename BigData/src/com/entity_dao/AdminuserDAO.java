@@ -36,8 +36,13 @@ public class AdminuserDAO  {
     }
 
     private Session getCurrentSession(){
-     return sessionFactory.getCurrentSession(); 
+    	Session session = sessionFactory.getCurrentSession();
+    	if(session == null){
+    		log.info("session == null");
+    	}
+    	return session; 
     }
+    
 	protected void initDao() {
 		//do nothing
 	}

@@ -1,0 +1,127 @@
+
+#login-bg{
+    position: relative;
+    width: 100%;
+    height:100%;
+    /*border:1px solid red;*/
+    float: left;
+    z-index:0;
+    left: 0px;/*   定位到右上   */
+    top: 412px;
+}
+.user{
+    margin:0 auto;
+    width: 350px;
+    z-index:2;
+    border-right:    #7cb5ea    1px   solid;
+    border-top:    #7cb5ea    1px   solid;
+    vertical-align:   middle;
+    border-left:    #7cb5ea   1px   solid;
+    width:350px;
+    color:  #FFFFFF ;
+    border-bottom:  #7cb5ea   1px   solid;
+
+}
+.password{
+    margin:0 auto;
+    width: 350px;
+    z-index:2;
+    border-right:    #7cb5ea    1px   solid;
+    border-top:    #7cb5ea    1px   solid;
+    vertical-align:   middle;
+    border-left:    #7cb5ea   1px   solid;
+    width:350px;
+    color:  #FFFFFF ;
+    border-bottom:  #7cb5ea   1px   solid;
+    margin-top: 10px;
+}
+
+/*body{text-align:center}*/
+
+.row{
+    margin:0 auto;
+    /*margin-right: 0px;*/
+    margin-left: 100px;
+    margin:624px;;
+    width: 400px;
+    margin-top: 10px;
+
+}
+.login-row{
+
+    float: left;
+    position: relative;
+    padding: 0 10px 40px 0;
+}
+
+.login-col{
+   float: left;
+    position: relative;
+}
+
+
+
+.text-row {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 13px;
+    top: 9px;
+    opacity: 1;
+    margin:0 auto;
+    width: 30px;
+    color: #ffffff;
+}
+.text-row:hover{
+
+    background: image("images/登录/_btn_danger_u6_mouseDown.png");
+    opacity: 0.5;
+    transition: opacity 0.1s;
+
+}
+.text-col {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 12px;
+    top: 9px;
+    opacity: 1;
+    margin:0 auto;
+    width: 30px;
+}
+.text-col:hover{
+    background-image: image("images/登录/_btn_danger_u6_mouseOver.png");
+    opacity: 0.5;
+    transition: opacity 0.1s;
+}
+
+.buttonClass
+{
+    border-right:   blue   1px   solid;
+    border-top:   blue   1px   solid;
+    font-size:   14pt;
+    background-color: #0c73d0;
+    vertical-align:   middle;
+    border-left:   blue   1px   solid;
+    cursor:   hand;
+    color:  #FFFFFF ;
+    width:260px;
+    border-bottom:   blue   1px   solid;
+    font-family:   "宋体 ";
+    text-align:   center;
+}
+.buttonClass1
+{
+    border-right:    #7cb5ea    1px   solid;
+    border-top:    #7cb5ea    1px   solid;
+    font-size:   14pt;
+    background-color: transparent;
+    vertical-align:   middle;
+    border-left:    #7cb5ea   1px   solid;
+    cursor:   hand;
+    color:  #FFFFFF ;
+    width:80px;
+    border-bottom:  #7cb5ea   1px   solid;
+    font-family:   "宋体 ";
+    text-align:   center;
+}

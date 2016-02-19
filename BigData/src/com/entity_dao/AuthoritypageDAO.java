@@ -1,11 +1,15 @@
 package com.entity_dao;
 
 import java.util.List;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.service.ServiceRegistryBuilder;
+
 import static org.hibernate.criterion.Example.create;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -133,6 +137,27 @@ public class AuthoritypageDAO  {
 			log.error("find all failed", re);
 			throw re;
 		}
+	}
+	
+	public List<Authoritypage> findAuthorityPage(int authId,int pageId) {
+		Session session = getCurrentSession();
+		Query query = session
+				.createQuery("from AuthorityPage as A where A.authId=? and A.pageId=?");
+		query.setInteger(0, authId);
+		query.setInteger(1, pageId);
+		List<Authoritypage> response=query.list();
+		session.beginTransaction().commit();
+		return response;
+	}
+	
+	
+	public void deleteByAuthId(String authId) {
+		Session session = getCurrentSession();
+		Query query = session
+				.createQuery("delete AuthorityPage as A where A.authId=?");
+		query.setString(0, authId);
+		query.executeUpdate();
+		session.beginTransaction().commit();
 	}
 	
     public Authoritypage merge(Authoritypage detachedInstance) {

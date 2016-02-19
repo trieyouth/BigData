@@ -1,11 +1,17 @@
 package com.entity_dao;
 
 import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.service.ServiceRegistryBuilder;
+
 import static org.hibernate.criterion.Example.create;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -112,6 +118,24 @@ public class AdimauthorityDAO  {
 			log.error("find all failed", re);
 			throw re;
 		}
+	}
+	
+	//添加的
+	public List findAuthId(int adminId) {
+		Session session = getCurrentSession();
+		Criteria criteria=session.createCriteria(Adimauthority.class);
+		criteria.add(Restrictions.eq("id.adminId",adminId)); 
+		return criteria.list();
+	}
+	
+	//添加的
+	public void deleteByAuthId(int adminId,int oldauthid) {
+		Session session = getCurrentSession();
+		AdimauthorityId tempAdimAuthorityId=new AdimauthorityId(oldauthid,adminId);
+		Adimauthority tempAdimAuthority=(Adimauthority)session.load(Adimauthority.class, tempAdimAuthorityId);
+		session.delete(tempAdimAuthority);
+		session.beginTransaction().commit();
+		session.close();
 	}
 	
     public Adimauthority merge(Adimauthority detachedInstance) {
