@@ -3,11 +3,17 @@ package com.service;
 import java.util.Date;
 import java.util.List;
 
-import com.entity_dao.Logweb;
-import com.entity_dao.LogwebDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.dao.LogwebDAO;
+import com.entity.Logweb;
+
+@Service
 public class LogService {
-	private LogwebDAO logWebDao = new LogwebDAO();
+	
+	@Autowired
+	private LogwebDAO logWebDao;
 
 	public LogService() {
 		// TODO Auto-generated constructor stub

@@ -3,25 +3,33 @@ package com.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.entity_dao.Adimauthority;
-import com.entity_dao.AdimauthorityDAO;
-import com.entity_dao.AdimauthorityId;
-import com.entity_dao.Adminuser;
-import com.entity_dao.AdminuserDAO;
-import com.entity_dao.Authoritypage;
-import com.entity_dao.AuthoritypageDAO;
-import com.entity_dao.Logweb;
+import com.dao.AdimauthorityDAO;
+import com.dao.AdminuserDAO;
+import com.dao.AuthoritypageDAO;
+import com.entity.Adimauthority;
+import com.entity.AdimauthorityId;
+import com.entity.Adminuser;
+import com.entity.Authoritypage;
+import com.entity.Logweb;
 
 @Service
+@Transactional
 public class UserService {
 	
-	private AdminuserDAO adminuserDao = new AdminuserDAO();
-	private AdimauthorityDAO adminauthorityDao = new AdimauthorityDAO();
-	private AuthoritypageDAO authorityPageDao = new AuthoritypageDAO();
+	@Autowired
+	private AdminuserDAO adminuserDao;
+	@Autowired
+	private AdimauthorityDAO adminauthorityDao;
+	@Autowired
+	private AuthoritypageDAO authorityPageDao;
 	public int adminID;
-	private LogService logservice = new LogService();
+	
+	@Autowired
+	private LogService logservice;
 
 	public UserService() {
 		// TODO Auto-generated constructor stub

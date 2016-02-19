@@ -3,8 +3,8 @@ package com.test;
 
 import org.junit.Test;
 
-import com.entity_dao.Authority;
-import com.entity_dao.AuthorityDAO;
+import com.dao.AuthorityDAO;
+import com.entity.Authority;
 
 public class TestHib1 {
 	@Test
