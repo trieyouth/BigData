@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-		<context:component-scan base-package="com">
+		<context:component-scan base-package="com.zero">
 			<context:exclude-filter expression="org.springframework.stereotype.Controller"
         type="annotation"/>
 		</context:component-scan>
@@ -38,7 +38,7 @@
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-		<property name="packagesToScan" value="com.dao"></property>
+		<property name="packagesToScan" value="com.zero.dao"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
@@ -48,23 +48,23 @@
 		</property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.entity.Templateuser</value>
-				<value>com.entity.Singleusercreditinformation</value>
-				<value>com.entity.Logweb</value>
-				<value>com.entity.Templatedata</value>
-				<value>com.entity.Secondtemplatedata</value>
-				<value>com.entity.Roleauthority</value>
-				<value>com.entity.Adminrole</value>
-				<value>com.entity.Creditratingclassification</value>
-				<value>com.entity.Finaproduct</value>
-				<value>com.entity.Adimauthority</value>
-				<value>com.entity.Authoritypage</value>
-				<value>com.entity.Role</value>
-				<value>com.entity.Singleuserriskinformation</value>
-				<value>com.entity.Authority</value>
-				<value>com.entity.Riskpreferencetemplatecontext</value>
-				<value>com.entity.Adminuser</value>
-				<value>com.entity.Creditanalysistemplatecontext</value></list>
+				<value>com.zero.entity.Templateuser</value>
+				<value>com.zero.entity.Singleusercreditinformation</value>
+				<value>com.zero.entity.Logweb</value>
+				<value>com.zero.entity.Templatedata</value>
+				<value>com.zero.entity.Secondtemplatedata</value>
+				<value>com.zero.entity.Roleauthority</value>
+				<value>com.zero.entity.Adminrole</value>
+				<value>com.zero.entity.Creditratingclassification</value>
+				<value>com.zero.entity.Finaproduct</value>
+				<value>com.zero.entity.Adimauthority</value>
+				<value>com.zero.entity.Authoritypage</value>
+				<value>com.zero.entity.Role</value>
+				<value>com.zero.entity.Singleuserriskinformation</value>
+				<value>com.zero.entity.Authority</value>
+				<value>com.zero.entity.Riskpreferencetemplatecontext</value>
+				<value>com.zero.entity.Adminuser</value>
+				<value>com.zero.entity.Creditanalysistemplatecontext</value></list>
 		</property>
 	</bean>
 	<bean id="transactionManager"
@@ -73,93 +73,93 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 <bean
-		id="TemplateuserDAO" class="com.dao.TemplateuserDAO">
+		id="TemplateuserDAO" class="com.zero.dao.TemplateuserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 </bean>
 	<bean id="SingleusercreditinformationDAO"
-		class="com.dao.SingleusercreditinformationDAO">
+		class="com.zero.dao.SingleusercreditinformationDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="LogwebDAO" class="com.dao.LogwebDAO">
+	<bean id="LogwebDAO" class="com.zero.dao.LogwebDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="TemplatedataDAO" class="com.dao.TemplatedataDAO">
+	<bean id="TemplatedataDAO" class="com.zero.dao.TemplatedataDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<bean id="SecondtemplatedataDAO"
-		class="com.dao.SecondtemplatedataDAO">
+		class="com.zero.dao.SecondtemplatedataDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="RoleauthorityDAO" class="com.dao.RoleauthorityDAO">
+	<bean id="RoleauthorityDAO" class="com.zero.dao.RoleauthorityDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="AdminroleDAO" class="com.dao.AdminroleDAO">
+	<bean id="AdminroleDAO" class="com.zero.dao.AdminroleDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<bean id="CreditratingclassificationDAO"
-		class="com.dao.CreditratingclassificationDAO">
+		class="com.zero.dao.CreditratingclassificationDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="FinaproductDAO" class="com.dao.FinaproductDAO">
+	<bean id="FinaproductDAO" class="com.zero.dao.FinaproductDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="AdimauthorityDAO" class="com.dao.AdimauthorityDAO">
+	<bean id="AdimauthorityDAO" class="com.zero.dao.AdimauthorityDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="AuthoritypageDAO" class="com.dao.AuthoritypageDAO">
+	<bean id="AuthoritypageDAO" class="com.zero.dao.AuthoritypageDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="RoleDAO" class="com.dao.RoleDAO">
+	<bean id="RoleDAO" class="com.zero.dao.RoleDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<bean id="SingleuserriskinformationDAO"
-		class="com.dao.SingleuserriskinformationDAO">
+		class="com.zero.dao.SingleuserriskinformationDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="AuthorityDAO" class="com.dao.AuthorityDAO">
+	<bean id="AuthorityDAO" class="com.zero.dao.AuthorityDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<bean id="RiskpreferencetemplatecontextDAO"
-		class="com.dao.RiskpreferencetemplatecontextDAO">
+		class="com.zero.dao.RiskpreferencetemplatecontextDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	<bean id="AdminuserDAO" class="com.dao.AdminuserDAO">
+	<bean id="AdminuserDAO" class="com.zero.dao.AdminuserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
 	<bean id="CreditanalysistemplatecontextDAO"
-		class="com.dao.CreditanalysistemplatecontextDAO">
+		class="com.zero.dao.CreditanalysistemplatecontextDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
