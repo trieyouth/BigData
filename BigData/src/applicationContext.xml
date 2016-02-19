@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<context:component-scan base-package="com" />
+	
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/bigdata">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="standno58no"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.entity_dao.Templateuser</value>
+				<value>com.entity_dao.Singleusercreditinformation</value>
+				<value>com.entity_dao.Logweb</value>
+				<value>com.entity_dao.Templatedata</value>
+				<value>com.entity_dao.Secondtemplatedata</value>
+				<value>com.entity_dao.Roleauthority</value>
+				<value>com.entity_dao.Adminrole</value>
+				<value>com.entity_dao.Creditratingclassification</value>
+				<value>com.entity_dao.Finaproduct</value>
+				<value>com.entity_dao.Adimauthority</value>
+				<value>com.entity_dao.Authoritypage</value>
+				<value>com.entity_dao.Role</value>
+				<value>com.entity_dao.Singleuserriskinformation</value>
+				<value>com.entity_dao.Authority</value>
+				<value>com.entity_dao.Riskpreferencetemplatecontext</value>
+				<value>com.entity_dao.Adminuser</value>
+				<value>com.entity_dao.Creditanalysistemplatecontext</value></list>
+		</property></bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" /><bean
+		id="TemplateuserDAO" class="com.entity_dao.TemplateuserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+</bean>
+	<bean id="SingleusercreditinformationDAO"
+		class="com.entity_dao.SingleusercreditinformationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="LogwebDAO" class="com.entity_dao.LogwebDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TemplatedataDAO" class="com.entity_dao.TemplatedataDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SecondtemplatedataDAO"
+		class="com.entity_dao.SecondtemplatedataDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RoleauthorityDAO" class="com.entity_dao.RoleauthorityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdminroleDAO" class="com.entity_dao.AdminroleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CreditratingclassificationDAO"
+		class="com.entity_dao.CreditratingclassificationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FinaproductDAO" class="com.entity_dao.FinaproductDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdimauthorityDAO" class="com.entity_dao.AdimauthorityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AuthoritypageDAO" class="com.entity_dao.AuthoritypageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RoleDAO" class="com.entity_dao.RoleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SingleuserriskinformationDAO"
+		class="com.entity_dao.SingleuserriskinformationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AuthorityDAO" class="com.entity_dao.AuthorityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RiskpreferencetemplatecontextDAO"
+		class="com.entity_dao.RiskpreferencetemplatecontextDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AdminuserDAO" class="com.entity_dao.AdminuserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CreditanalysistemplatecontextDAO"
+		class="com.entity_dao.CreditanalysistemplatecontextDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+</beans>
