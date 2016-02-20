@@ -1,13 +1,10 @@
-<%@page import="com.zero.service.UserService"%>
-<%@page import="com.zero.dao.LogwebDAO"%>
-<%@page import="com.zero.entity.Logweb"%>
-<%@page import="com.zero.service.LogService"%>
+<%@page import="com.zero.entity.self.LogModel"%>
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -48,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <!--jsp循环此处的tr,在</td>前填数据-->
     
-<% 
+<%-- <% 
    LogService logService=new LogService();
 	List<Logweb> log = logService.selectAllLog();
 
@@ -65,22 +62,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		else{System.out.println(log.get(i).getAdminId());}
 		int k=j-i-1;
 		
-%>
+%> --%>
     
-    
+    <c:forEach var="log" items="${logList}">
     <tr>
+      <td width="33%"  height="30" class="cell"><label id="labelbody" ><c:out value="${log.logDate}" /> </label></td>
+      <!--生成时间-->
+      <td width="33%"  height="30"class="cell"><label id="labelbody" ><c:out value="${log.username}" /> </label></td>
+      <!--操作人-->
+      <td width="33%"  height="30"class="cell"><label id="labelbody" ><c:out value="${log.logContent} }" /></label></td>
+      <!--根据操作人去选择href-->
+    </tr>
+    </c:forEach>
+    
+   <%--  <tr>
       <td width="33%"  height="30" class="cell"><label id="labelbody" ><%=log.get(k).getLogDate() %> </label></td>
       <!--生成时间-->
       <td width="33%"  height="30"class="cell"><label id="labelbody" ><%=username %> </label></td>
       <!--操作人-->
       <td width="33%"  height="30"class="cell"><label id="labelbody" ><%=log.get(k).getLogConten() %></label></td>
       <!--根据操作人去选择href-->
-
-    </tr>
-    
-    <%
+    </tr> --%>
+  <%--   <%
     } 
-    %>
+    %> --%>
   </table>
 </div>
   </body>
