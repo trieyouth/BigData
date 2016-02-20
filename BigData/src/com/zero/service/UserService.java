@@ -154,6 +154,7 @@ public class UserService {
 	public List<Authoritypage> getAuthorityList() {
 		return authorityPageDao.findAll();
 	}
+	
 	public List<Adminuser> getAdminUser1()
 	{
 		List<Adminuser> temp=adminuserDao.findAll();

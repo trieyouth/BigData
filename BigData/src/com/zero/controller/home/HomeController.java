@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 	
-	@RequestMapping("/ccas")
+	@RequestMapping("/ccas/index")
 	public String ccasIndex(){
 		return "client-credit-analyse-system/CCASIndex";
 	}
 	
-	@RequestMapping("/icpas")
+	@RequestMapping("/icpas/index")
 	public String icpasIndex(){
 		return "invesr-client-preference-analyse-system/ICPASIndex";
 	}
 	
-	@RequestMapping("/manager")
+	@RequestMapping("/manager/index")
 	public String manager(){
 		return "manager/SMIndex";
 	}
+	
 }

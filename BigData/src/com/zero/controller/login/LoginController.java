@@ -34,15 +34,15 @@ public class LoginController {
 		if(loginFlag){
 			session.setAttribute(Global.USERNAME, username);
 			if(userService.findAuthority(username,1)){
-				return "redirect:/ccas";
+				return "redirect:/ccas/index";
 			}
 			
 			if(userService.findAuthority(username,2)){
-				return "redirect:/icpas";
+				return "redirect:/icpas/index";
 			}
 			
 			if(userService.findAuthority(username,3)){
-				return "redirect:/manager";
+				return "redirect:/manager/index";
 			}
 			
 			session.removeAttribute(Global.USERNAME);
