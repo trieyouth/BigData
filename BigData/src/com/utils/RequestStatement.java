@@ -7,8 +7,8 @@ package com.utils;
  * 
  */
 public class RequestStatement {
-	//public static final String postmakedata1 = "http://172.23.27.190:8090/jobs?appName=makedatajob1&classPath=spark.jobserver.MakeDataJob";
-	//public static final String postmakedata2 = "http://172.23.27.190:8090/jobs?appName=makedatajob3&classPath=spark.jobserver.MakeData2Job";
+	public static final String postmakedata1 = "http://172.23.27.190:8090/jobs?appName=makedatajob1&classPath=spark.jobserver.MakeDataJob";
+	public static final String postmakedata2 = "http://172.23.27.190:8090/jobs?appName=makedatajob3&classPath=spark.jobserver.MakeData2Job";
 	
 	public static final String urlAndPort = "http://172.23.27.190:8090";
 	public static final String getalljarinfo = "http://172.23.27.190:8090/jobs";
