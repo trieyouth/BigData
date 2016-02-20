@@ -8,10 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.service.ServiceRegistryBuilder;
-
 import static org.hibernate.criterion.Example.create;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -137,7 +134,6 @@ public class AdimauthorityDAO  {
 		AdimauthorityId tempAdimAuthorityId=new AdimauthorityId(oldauthid,adminId);
 		Adimauthority tempAdimAuthority=(Adimauthority)session.load(Adimauthority.class, tempAdimAuthorityId);
 		session.delete(tempAdimAuthority);
-		session.beginTransaction().commit();
 	}
 	
     public Adimauthority merge(Adimauthority detachedInstance) {

@@ -39,28 +39,27 @@ public class UserAcssessInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object arg2) throws Exception {
 		String contextPath = request.getContextPath();
-		System.out.println("context : "+contextPath);
         String  url=request.getServletPath().toString();
         HttpSession session = request.getSession();
         
         String username = (String)session.getAttribute(Global.USERNAME);
-        
+        System.out.println("debug : "+"request url : "+url);
         if(username != null){
         	
         	if(userService.findAuthority(username,1)){
-        		if(Pattern.matches("/ccas/([a-z]|/)*",url)){
+        		if(Pattern.matches("/ccas/([a-z]|/|-|[0-9]|[A-Z])*",url)){
         			return true;
         		}
         	}
         	
         	if(userService.findAuthority(username,2)){
-        		if(Pattern.matches("/icpas/([a-z]|/)*",url)){
+        		if(Pattern.matches("/icpas/([a-z]|/|-|[0-9]|[A-Z])*",url)){
         			return true;
         		}
         	}
         	
         	if(userService.findAuthority(username,3)){
-        		if(Pattern.matches("/manager/([a-z]|/)*",url)){
+        		if(Pattern.matches("/manager/([a-z]|/|-|[0-9]|[A-Z])*",url)){
         			return true;
         		}
         	}

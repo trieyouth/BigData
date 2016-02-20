@@ -44,6 +44,7 @@
                         <div  class="login-row ">
                                 <button class="buttonClass" type="submit" name="Submit" onClick="return validateLogin()">登录</button>
                         </div>
+                        <div>${message}</div>
                         <div class="login-col ">
                             <button class="buttonClass1" type="reset" name="Reset"  >重置</button>
                       </div>

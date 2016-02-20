@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div id="continaer">
 	<div id="header">
-    <a href="WebView/SystemManage/SMIndex.jsp">
+    <a href="<c:url value='manager/index'/>">
     <img src="<c:url value='/images/manager/logo.png' />" width="620" height="75" alt="logo" > <hr color="#6F7DA0"/>
    </a>
    <div id="navhead">

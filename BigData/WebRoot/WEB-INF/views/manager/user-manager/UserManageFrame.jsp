@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	
-<link href="WebView/css/mycss.css" rel="stylesheet" type="text/css"  >
+<link rel="stylesheet" href="<c:url value='/css/mycss.css' />">
 
   </head>
   <style>
@@ -29,13 +29,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>
   <body>
     <div id="continaer">
-  <div id="header"> <a href="WebView/SystemManage/SMIndex.jsp"> <img src="WebView/images/SystemManageIndex.png" width="620" height="75" alt="logo" > </a>
+  <div id="header"> <a href="<c:url value='manager/index'/>"> <img src="<c:url value='/images/manager/logo.png' />" width="620" height="75" alt="logo" > </a>
     <hr color="#6F7DA0"/>
     <div id="navhead">
       <div class="nav">
         <ul>
-          <li><a href="WebView/SystemManage/ProductManage/ProductManageMainFrame.jsp">产品管理</a></li>
-          <li><a href="WebView/SystemManage/UserManage/UserManageFrame.jsp">用户管理</a></li>
+          <li><a href="<c:url value='manager/product/index'/>">产品管理</a></li>
+          <li><a href="<c:url value='manager/user/index'/>">用户管理</a></li>
         </ul>
       </div>
     </div>
@@ -49,9 +49,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
           
           <!--选择子功能-->
-          <li ><a href="WebView/SystemManage/UserManage/UserManage.jsp" target="rightbody" >用户管理</a></li>
+          <li ><a href="<c:url value='manager/user/manage'/>" target="rightbody" >用户管理</a></li>
           <hr color="#575C6F"/>
-          <li><a href="WebView/SystemManage/UserManage/Operatelog.jsp"  target="rightbody">操作日志</a></li>
+          <li><a href="<c:url value='manager/user/operate-log'/>"  target="rightbody">操作日志</a></li>
           <hr color="#575C6F"/>
        
           
@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
     <div id="rightbody">
-      <iframe src="WebView/SystemManage/UserManage/UserManage.jsp" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe>
+      <iframe src="<c:url value='manager/user/manage'/>" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe>
     </div>
   </div>
 </div>
