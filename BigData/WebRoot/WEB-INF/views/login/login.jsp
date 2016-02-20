@@ -38,12 +38,13 @@
    <form method="POST" name="frmLogin">
               <div id="container">
                     <div id="login-bg" >
-                     <div class="user">   <input id="name" type="text" name="username" style="width:350px;height: 36px;background: #040a20"  onfocus="if (this.value=='Your name')  this.value='';" />    </div>
+                     <div class="user">   <input id="name" type="text" name="username" style="width:350px;height: 36px;background: #040a20"  onfocus="if (this.value=='Your name')  this.value='';" />   </div>
                      <div class="password">  <input id="password" type="password" name="password" style="width:350px;height: 36px;background-color: #040a20" onfocus="if (this.value=='Your password')  this.value='';" /> </div>
                         <div class="row" >
                         <div  class="login-row ">
                                 <button class="buttonClass" type="submit" name="Submit" onClick="return validateLogin()">登录</button>
                         </div>
+                        <div>${message}</div>
                         <div class="login-col ">
                             <button class="buttonClass1" type="reset" name="Reset"  >重置</button>
                       </div>
