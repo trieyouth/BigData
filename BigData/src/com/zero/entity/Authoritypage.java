@@ -86,12 +86,4 @@ public class Authoritypage  implements java.io.Serializable {
         this.pageName = pageName;
     }
    
-
-
-
-
-
-
-
-
 }

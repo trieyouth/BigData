@@ -2,19 +2,13 @@ package com.zero.controller.login;
 
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.zero.common.Global;
-import com.zero.dao.AdminuserDAO;
 import com.zero.service.UserService;
 
 
@@ -37,20 +31,20 @@ public class LoginController {
 	@RequestMapping(value="",method=RequestMethod.POST)
 	public String login(String username, String password, Model model,HttpSession session){
 		boolean loginFlag =  userService.loginValidation1(username, password);
-		Map<String,String> map = new HashMap<String,String>();
 		if(loginFlag){
 			session.setAttribute(Global.USERNAME, username);
 			if(userService.findAuthority(username,1)){
-				return "redirect:";
+				return "redirect:/ccas";
 			}
 			
 			if(userService.findAuthority(username,2)){
-				return "redirect:";
+				return "redirect:/icpas";
 			}
 			
 			if(userService.findAuthority(username,3)){
-				return "redirect:";
+				return "redirect:/manager";
 			}
+			
 			session.removeAttribute(Global.USERNAME);
 			return "error";
 		}else{

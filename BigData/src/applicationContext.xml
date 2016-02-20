@@ -31,7 +31,6 @@
         <property name="minPoolSize" value="1"></property>
         <property name="initialPoolSize" value="1"></property>
         <property name="maxIdleTime" value="20"></property>
-        <property name="dataSourceName" value=""></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
