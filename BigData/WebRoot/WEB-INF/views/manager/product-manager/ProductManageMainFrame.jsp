@@ -3,11 +3,11 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
+    <base href="<%=basePath%>"/>
     
     <meta charset="utf-8">
     <title>产品管理主框架</title>
@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">	
-<link href="WebView/css/mycss.css" rel="stylesheet" type="text/css"  >
+	<link href="<c:url value="/css/mycss.css"/>" rel="stylesheet">
   <style>
 #labelbody {
 	color: #FFF;
@@ -27,13 +27,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  </head>
   <body>
     <div id="continaer">
-  <div id="header"> <a href="WebView/SystemManage/SMIndex.jsp"> <img src="WebView/images/SystemManageIndex.png" width="620" height="75" alt="logo" > </a>
+  <div id="header"> <a href="<c:url value="/manager/index" />"> <img src="<c:url value='/images/manager/logo.png' />" width="620" height="75" alt="logo" > </a>
     <hr color="#6F7DA0"/>
     <div id="navhead">
       <div class="nav">
         <ul>
-          <li><a href="WebView/SystemManage/ProductManage/ProductManageMainFrame.jsp">产品管理</a></li>
-          <li><a href="WebView/SystemManage/UserManage/UserManageFrame.jsp">用户管理</a></li>
+          <li><a href="<c:url value='manager/product/index'/>">产品管理</a></li>
+          <li><a href="<c:url value='manager/user/index'/>">用户管理</a></li>
         </ul>
       </div>
     </div>
@@ -45,9 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <ul>
           <hr color="#575C6F"/>
           <!--选择子功能-->
-          <li ><a href="WebView/SystemManage/ProductManage/ProductsList.jsp" target="rightbody" >现有产品管理</a></li>
+          <li ><a href="<c:url value='manager/product/list'/>" target="rightbody" >现有产品管理</a></li>
           <hr color="#575C6F"/>
-          <li><a href="WebView/SystemManage/ProductManage/AddProducts.jsp"  target="rightbody">增加产品</a></li>
+          <li><a href="<c:url value='manager/product/add'/>"  target="rightbody">增加产品</a></li>
           <hr color="#575C6F"/>
         
           
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
     <div id="rightbody">
-      <iframe src="WebView/SystemManage/ProductManage/ProductsList.jsp" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe>
+      <iframe src="<c:url value='manager/product/list'/>" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe>
     </div>
   </div>
 </div>

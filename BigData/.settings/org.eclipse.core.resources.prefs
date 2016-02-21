@@ -1,9 +1,9 @@
 eclipse.preferences.version=1
 encoding//WebRoot/index.jsp=UTF-8
-encoding//src/com/BI/servlet=GBK
-encoding//src/com/service/HiveService.java=GBK
 encoding//src/com/service/LogService.java=GBK
 encoding//src/com/service/UserService.java=GBK
-encoding//src/com/utils/JobServiceCon.java=UTF-8
-encoding//src/com/utils/RequestStatement.java=UTF-8
+encoding//src/com/zero/BI/servlet=GBK
+encoding//src/com/zero/service/HiveService.java=GBK
+encoding//src/com/zero/utils/JobServiceCon.java=UTF-8
+encoding//src/com/zero/utils/RequestStatement.java=UTF-8
 encoding/<project>=UTF-8
