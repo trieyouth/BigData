@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
  <div style="height:8px; width:100%;"></div>
       <div id="lightcolor" >
-      <form action="ClientPortrayServlet" method="post">
+      <form method="post">
         <label id="labelbody" >证件类型： </label>
         <select name="cars"  style=" border: 1; background:#4B5C88;color:#FFF;">
           <option value="fiat" selected="selected" style="background: #4B5C88;"> 身份证  </option>

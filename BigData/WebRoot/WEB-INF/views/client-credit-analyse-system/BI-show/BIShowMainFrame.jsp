@@ -24,21 +24,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
           <!-- onclick="javascript:window.open(encodeURI('map.jsp'))" -->
           选择子功能
-          <li ><a href="map.jsp"  target="rightbody">地区贷款重量统计</a></li>
+          <li ><a href="<c:url value="/ccas/index/BIShow/map" />"  target="rightbody">地区贷款重量统计</a></li>
           <hr color="#575C6F"/>
-          <li><a href="jobpie.jsp"   target="rightbody">行业逾期展示</a></li>
+          <li><a href="<c:url value="/ccas/index/BIShow/jobpie" />"   target="rightbody">行业逾期展示</a></li>
           <hr color="#575C6F"/>
-          <li><a href="dklx.jsp" target="rightbody">贷款类型逾期展示</a></li>
+          <li><a href="<c:url value="/ccas/index/BIShow/dklx" />" target="rightbody">贷款类型逾期展示</a></li>
           <hr color="#575C6F"/>
-          <li><a href="dkzl.jsp" target="rightbody">贷款量统计</a></li>
+          <li><a href="<c:url value="/ccas/index/BIShow/dkzl" />" target="rightbody">贷款量统计</a></li>
           <hr color="#575C6F"/>
-          <li><a href="xueli.jsp" target="rightbody">学历逾期展示</a></li>
+          <li><a href="<c:url value="/ccas/index/BIShow/xueli" />" target="rightbody">学历逾期展示</a></li>
           <hr color="#575C6F"/>
-          <li><a href="yixiang.jsp" target="rightbody">贷款周期调查统计</a></li>
+          <li><a href="<c:url value="/ccas/index/BIShow/yixiang" />" target="rightbody">贷款周期调查统计</a></li>
           <hr color="#575C6F"/>
             <li><a href="http://172.23.27.190/ganglia/" target="rightbody">集群性能展示</a></li>
           <hr color="#575C6F"/>
-            <li><a href="jiqun.jsp" target="rightbody">系统监控</a></li>
+           <li><a href="<c:url value="/ccas/index/BIShow/jiqun" />" target="rightbody">系统监控</a></li>
           <hr color="#575C6F"/>
            
           
@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
     <div id="rightbody">
-       <iframe src="BI.jsp" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe> 
+       <iframe src="<c:url value="/ccas/index/BIShow/BI" />" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe> 
     </div>
   </div>
 </div>

@@ -29,7 +29,7 @@ import com.zero.entity.Templatedata;
 
 @RequestMapping("/ccas/index/dataCollect")
 @Controller
-public class DataCollectController {
+public class CCASDataCollectController {
 	@Autowired
 	SimulationDataService sds;
 	@Autowired

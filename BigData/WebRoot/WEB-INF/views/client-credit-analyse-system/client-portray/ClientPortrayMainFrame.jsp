@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <hr color="#575C6F"/>
           <li><a href="<c:url value="/ccas/index/clientPortray/personalCreditQueryByCard" />"  target="rightbody">按证件查询客户信用模型</a></li>
           <hr color="#575C6F"/>
-          <li><a href="WebView/ClientCreditAnalyseSystem/ClientPortray/Kreditlinien.jsp" target="rightbody">贷款金额匹配</a></li>
+          <li><a href="<c:url value="/ccas/index/clientPortray/checkCreditLevel" />" target="rightbody">查看信用等级</a></li>
           <hr color="#575C6F"/>
 
         </ul>

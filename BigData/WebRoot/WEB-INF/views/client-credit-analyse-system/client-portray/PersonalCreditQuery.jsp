@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
  <div style="height:4px; width:100%;"></div>
-<form  action="ClientPortrayServlet" method="post">
+<form  method="post">
   
   <!--基本参数设置区域-->
   
