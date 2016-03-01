@@ -19,10 +19,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
   </head>
   
   <body>
+  	<p><a href="<c:url value='/ccas/index/dataCollect/filedownload'/>">模板下载</a></p></br>
     <form method="post" action="<c:url value='/ccas/index/dataCollect/dataFileInput' />" enctype="multipart/form-data">
     	<input type="file" name="file" id="file"/>
     	<input type="submit" value="提交" name="submit">
