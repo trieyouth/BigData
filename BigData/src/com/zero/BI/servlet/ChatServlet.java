@@ -62,6 +62,5 @@ public class ChatServlet extends HttpServlet {
 			out.println(al);	
 			out.close();	
 		}
-		
 	}
 }

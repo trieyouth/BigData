@@ -33,7 +33,7 @@ hr {margin-top: 0;margin-bottom: 0;}
 </head>
 <body>
 	<div id="continaer">
-		<<c:import url="header2.jsp"/>
+		<c:import url="header2.jsp"/>
 		<div id="bod">
 			<div id="leftbody">
 				<br />
@@ -47,7 +47,7 @@ hr {margin-top: 0;margin-bottom: 0;}
 	</div>
 
 
-	<script async>
+	<script>
 		var height900 = document.getElementById("continaer");
 		w = height900.offsetWidth;
 		h = w * 0.5;

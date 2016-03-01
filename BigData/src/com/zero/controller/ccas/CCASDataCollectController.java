@@ -1,9 +1,11 @@
 package com.zero.controller.ccas;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,8 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.zero.entitylib.CreditDataTemplate;
 import com.zero.entity.Adminuser;
@@ -24,7 +32,6 @@ import com.zero.entity.CreditTemplateAllInfo;
 import com.zero.service.SimulationDataService;
 import com.zero.service.TemplatService;
 import com.zero.service.UserService;
-
 import com.zero.entity.Templatedata;
 
 @RequestMapping("/ccas/index/dataCollect")
@@ -36,6 +43,10 @@ public class CCASDataCollectController {
 	TemplatService ts;
 	@Autowired
 	UserService us;
+	
+	@Autowired  
+    private HttpServletRequest request;
+	
 	@RequestMapping(value="/generateData",method=RequestMethod.GET)
 	public String generateData(Model model){
 		return "client-credit-analyse-system/data-collect/generateData";
@@ -61,9 +72,25 @@ public class CCASDataCollectController {
 			return "client-credit-analyse-system/data-collect/generateData";
 	}
 	
+	
+	//文件上传
 	@RequestMapping("/dataFileInput")
 	public String dataFileInput(){
 		return "client-credit-analyse-system/data-collect/dataFileInput";
+	}
+	
+	//文件上传
+	//只是完成了文件上传，还没有加入数据库记录
+	//数据表 userId filepath 
+	@RequestMapping(value="/dataFileInput",method=RequestMethod.POST)
+	public String dataFileInput(@RequestParam("file") CommonsMultipartFile file) throws IOException {
+       System.out.println("上传文件 fileName："+file.getOriginalFilename());
+       String path=request.getSession().getServletContext().getRealPath("/") + "WEB-INF/tmp/"  
+               + file.getOriginalFilename();
+       File newFile=new File(path);
+       //通过CommonsMultipartFile的方法直接写文件
+       file.transferTo(newFile);
+       return "client-credit-analyse-system/data-collect/dataFileInput";
 	}
 	
 	@RequestMapping("/dataInput")
@@ -103,18 +130,12 @@ public class CCASDataCollectController {
 		return "client-credit-analyse-system/data-collect/TempletCreateRecordDetail";
 	}
 	
+	
 	@RequestMapping("/operationLog")
 	public String operationLog(){
 		return "client-credit-analyse-system/data-collect/DataCollectMainFrame";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	/**
 	 *    根据身份证的Id查询【CreateRecord.jsp】
@@ -359,4 +380,7 @@ public class CCASDataCollectController {
 		}
 		System.out.println(request.getAttribute("GenerateOrSave"));
     }
+    
+    
+    
 }

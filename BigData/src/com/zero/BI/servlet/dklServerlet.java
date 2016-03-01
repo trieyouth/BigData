@@ -41,13 +41,7 @@ public class dklServerlet extends HttpServlet {
             this.Pie(request, response);
         }else if("two".equals(action)){
         	this.ty(request,response);
-        }
-		
-		
-
-       
-       
-
+        }   
 	}
 	private void ty(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
