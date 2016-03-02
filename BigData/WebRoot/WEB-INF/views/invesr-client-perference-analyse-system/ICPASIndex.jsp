@@ -4,22 +4,13 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
-    <meta charset="utf-8">
 <title>投资客户分析偏好数据分析与推荐系统索引页</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<link href="WebView/css/mycss.css" rel="stylesheet" type="text/css"  >
+<c:import url="header1.jsp"/>
 <style>
 
 #continaer{
@@ -126,33 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
 <div id="continaer">
-	<div id="header">
-    <a href="WebView/InvesrClientPerferenceAnalyseSystem/ICPASIndex.jsp">
-    <img src="WebView/images/InvesrClientPerferenceAnalyseSystemLogo.png" width="620" height="75" alt="logo" > <hr color="#6F7DA0"/>
-   </a>
-   <div id="navhead">
-   
-   
-    <div class="nav">
-      <ul>
-        <li><a href="WebView/InvesrClientPerferenceAnalyseSystem/DataCollect/DataCollectMainFrame.jsp">数据采集</a></li>   <!--链接到了数据采集主框架-->
-        <li><a href="WebView/InvesrClientPerferenceAnalyseSystem/EvaluateClientRiskPreference/EvaluateClienRiskPreferenceMainFrame.jsp">评估风险偏好</a></li>
-        <li><a href="WebView/InvesrClientPerferenceAnalyseSystem/BIShow/BIShowMainFrame.jsp">BI展示</a></li>
-         <li><a href="WebView/InvesrClientPerferenceAnalyseSystem/ProductManage/ProductManageMainFrame.jsp">产品管理</a></li>
-      </ul>
-    
-      
-
-    </div> 
-   
-   
-   
-   </div>
-   
-    
-    <hr color="#848FAD"/>
-    
-     </div>
+	<c:import url="header2.jsp"/>
 
    
    <div id="bod">
@@ -167,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <br/> 
         
         
-       <img src="WebView/images/InvesrClientPerferenceAnalyseSystemLogoIndex.png" width="700" height="330" alt="系统操作流程图"> </div>
+       <img src="<c:url value='/images/icpas/InvesrClientPerferenceAnalyseSystemLogoIndex.png'/>" width="700" height="330" alt="系统操作流程图"> </div>
 
 
    </div>

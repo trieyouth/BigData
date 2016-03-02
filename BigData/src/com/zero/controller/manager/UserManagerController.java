@@ -19,7 +19,6 @@ import com.zero.service.UserService;
 /*
  * created by youth on 16-2-20
  * */
-
 @RequestMapping("/manager/user")
 @Controller
 public class UserManagerController {
@@ -30,58 +29,57 @@ public class UserManagerController {
 	@Autowired
 	private LogService logService;
 	
-	//ÓÃ»§¹ÜÀíÊ×Ò³
+	//home
 	@RequestMapping("/index")
 	public String index(){
 		return "manager/user-manager/UserManageFrame";
 	}
 	
-	//ÓÃ»§¹ÜÀíÊ×Ò³
+	//user manage
 	@RequestMapping("/manage")
 	public String manage(Model model){
 		model.addAttribute("userList",userService.findUserList());
 		return "manager/user-manager/UserManage";
 	}
 	
-	
-	//ÓÃ»§È¨ÏŞ²é¿´
+	//user authority show 
 	@RequestMapping("/authshow/{username}")
 	public String authShow(@PathVariable("username")String username,Model model){
 		int auth = userService.findAuthority(username);
 		model.addAttribute("auth",auth);
-		model.addAttribute("authDetail",auth==1?"·ÃÎÊºóÌ¨¹ÜÀíÏµÍ³":auth==2?"·ÃÎÊ¿Í»§ĞÅÓÃ·ÖÎöÏµÍ³":auth==3?"·ÃÎÊÍ¶×Ê¿Í»§·çÏÕÆ«ºÃÊı¾İ·ÖÎöÓëÍÆ¼öÏµÍ³":"");
+		model.addAttribute("authDetail",auth==1?"ï¿½ï¿½ï¿½Êºï¿½Ì¨ï¿½ï¿½ï¿½ï¿½ÏµÍ³":auth==2?"ï¿½ï¿½ï¿½Ê¿Í»ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ÏµÍ³":auth==3?"ï¿½ï¿½ï¿½ï¿½Í¶ï¿½Ê¿Í»ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½İ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ÏµÍ³":"");
 		model.addAttribute("username",username);
 		return "manager/user-manager/UserAuthority";
 	}
 	
-	//ÓÃ»§È¨ÏŞ¸üĞÂ
+	//user authority update
 	@RequestMapping("/authupdate/{username}")
 	public String authUpdate(@PathVariable("username")String username,Model model){
 		//System.out.println(username);
 		int auth = userService.findAuthority(username);
-		model.addAttribute("clientAuthDetail",auth == 1?"ÒÑ¼¤»î":"Î´¼¤»î");
-		model.addAttribute("invesrAuthDetail",auth == 2?"ÒÑ¼¤»î":"Î´¼¤»î");
-		model.addAttribute("managerAuthDetail",auth == 3?"ÒÑ¼¤»î":"Î´¼¤»î");
+		model.addAttribute("clientAuthDetail",auth == 1?"ï¿½Ñ¼ï¿½ï¿½ï¿½":"Î´ï¿½ï¿½ï¿½ï¿½");
+		model.addAttribute("invesrAuthDetail",auth == 2?"ï¿½Ñ¼ï¿½ï¿½ï¿½":"Î´ï¿½ï¿½ï¿½ï¿½");
+		model.addAttribute("managerAuthDetail",auth == 3?"ï¿½Ñ¼ï¿½ï¿½ï¿½":"Î´ï¿½ï¿½ï¿½ï¿½");
 		model.addAttribute("clientAuthChecked",auth == 1?"checked":"");
 		model.addAttribute("invesrAuthChecked",auth == 2?"checked":"");
 		model.addAttribute("managerAuthChecked",auth == 3?"checked":"");
 		return "manager/user-manager/AlterUserAuthority";
 	}
 	
-	//ÓÃ»§È¨ÏŞ¸üĞÂ
+	//user authority update 
 	@RequestMapping(value="/authupdate/{username}",method=RequestMethod.POST)
 	public String authUpdate(@PathVariable("username")String username,String qx){
 		userService.updateAuthority(Integer.valueOf(qx),username);
 		return "redirect:/manager/user/authshow/"+username;
 	}
 	
-	//Ôö¼ÓÓÃ»§
+	//add user
 	@RequestMapping("/add")
 	public String addUser(){
 		return "manager/user-manager/AddUser";
 	}
 	
-	//Ôö¼ÓÓÃ»§
+	//add user
 	@RequestMapping(value="/add",method=RequestMethod.POST)
 	public String addUser(String username,String passwd1,String userback,String qx){
 //		System.out.println(username);
@@ -96,10 +94,10 @@ public class UserManagerController {
 		return "redirect:/manager/user/manage";
 	}
 	
-	//ÓÃ»§²Ù×÷ÈÕÖ¾Ò³
-	/*ÓÅ»¯Ë¼¿¼£º
-	 * µÚÒ»£ºÈÕÖ¾Êı¾İ·ÖÒ³ÇëÇó
-	 * µÚ¶ş£ºÓÃ»§µÄusernameÊ¹ÓÃHashMap»º´æ,¼õÉÙÊı¾İ¿â²éÑ¯´ÎÊı
+	//user operate log show
+	/*think in how to make it better 
+	 * first ï¼š paging
+	 * second ï¼š cache & reduce the times of database query
 	 * */
 	@RequestMapping("operate-log")
 	public String operateLog(Model model){
@@ -115,7 +113,7 @@ public class UserManagerController {
 				list.add(logModel);	
 			}
 		}catch(IndexOutOfBoundsException e){
-			System.out.println("debug £º Êı¾İ¿âµÄ²Ù×÷ÈÕÖ¾¿Óµù£¬Êı¾İ²»¾ßÓĞÍêÕûĞÔ°¡");
+			System.out.println("debug æ•°æ®åº“çš„ç”¨æˆ·æ“ä½œæ—¥å¿—å‘çˆ¹å•Šï¼Œæ•°æ®ä¸å®Œæ•´");
 		}
 		model.addAttribute("logList",list);
 		return "manager/user-manager/Operatelog";

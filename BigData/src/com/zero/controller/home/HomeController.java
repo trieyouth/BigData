@@ -15,7 +15,7 @@ public class HomeController {
 	
 	@RequestMapping("/icpas/index")
 	public String icpasIndex(){
-		return "invesr-client-preference-analyse-system/ICPASIndex";
+		return "invesr-client-perference-analyse-system/ICPASIndex";
 	}
 	
 	@RequestMapping("/manager/index")

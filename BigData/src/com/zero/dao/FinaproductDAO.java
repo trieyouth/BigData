@@ -3,6 +3,8 @@ package com.zero.dao;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,7 +14,9 @@ import static org.hibernate.criterion.Example.create;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zero.entity.Finaproduct;
@@ -25,7 +29,8 @@ import com.zero.entity.Finaproduct;
 	 * @see com.zero.entity.Finaproduct
   * @author MyEclipse Persistence Tools 
  */
-    @Transactional   
+@Repository(value="FinaproductDAO")
+@Transactional   
 public class FinaproductDAO  {
 	     private static final Logger log = LoggerFactory.getLogger(FinaproductDAO.class);
 		//property constants
@@ -36,9 +41,10 @@ public class FinaproductDAO  {
 	public static final String MINI_MONEY = "miniMoney";
 
 
-
+	@Autowired
     private SessionFactory sessionFactory;
 
+	@Resource
     public void setSessionFactory(SessionFactory sessionFactory){
        this.sessionFactory = sessionFactory;
     }
@@ -76,7 +82,7 @@ public class FinaproductDAO  {
         log.debug("getting Finaproduct instance with id: " + id);
         try {
             Finaproduct instance = (Finaproduct) getCurrentSession()
-                    .get("com.entity.Finaproduct", id);
+                    .get("com.zero.entity.Finaproduct", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
@@ -88,7 +94,7 @@ public class FinaproductDAO  {
     public List<Finaproduct> findByExample(Finaproduct instance) {
         log.debug("finding Finaproduct instance by example");
         try {
-            List<Finaproduct> results = (List<Finaproduct>) getCurrentSession() .createCriteria("com.entity.Finaproduct").add( create(instance) ).list();
+            List<Finaproduct> results = (List<Finaproduct>) getCurrentSession() .createCriteria("com.zero.entity.Finaproduct").add( create(instance) ).list();
             log.debug("find by example successful, result size: " + results.size());
             return results;
         } catch (RuntimeException re) {
@@ -168,6 +174,13 @@ public class FinaproductDAO  {
         }
     }
 
+    public void deleteProductId(int id){
+    	Finaproduct finaproduct = new Finaproduct(id);
+    	Session session = getCurrentSession();
+    	session.delete(finaproduct);
+    	session.flush();
+    }
+    
     public void attachDirty(Finaproduct instance) {
         log.debug("attaching dirty Finaproduct instance");
         try {

@@ -1,7 +1,9 @@
 package com.zero.entity;
 
 import java.util.Date;
+
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +17,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="finaproduct")
-
 public class Finaproduct  implements java.io.Serializable {
 
 
@@ -36,6 +37,9 @@ public class Finaproduct  implements java.io.Serializable {
     public Finaproduct() {
     }
 
+    public Finaproduct(Integer prodId){
+    	this.prodId = prodId;
+    }
     
     /** full constructor */
     public Finaproduct(String prodCode, String prodName, String prodDetail, String riskLevel, Date issueDate, Double miniMoney) {
@@ -50,9 +54,7 @@ public class Finaproduct  implements java.io.Serializable {
    
     // Property accessors
     @Id @GeneratedValue
-    
     @Column(name="prod_id", unique=true, nullable=false)
-
     public Integer getProdId() {
         return this.prodId;
     }
