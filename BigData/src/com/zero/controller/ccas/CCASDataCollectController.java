@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 import com.zero.entitylib.CreditDataTemplate;
 import com.zero.entity.Adminuser;
 import com.zero.entity.CreditTemplateContext;
@@ -114,6 +115,7 @@ public class CCASDataCollectController {
 	                                      headers, HttpStatus.CREATED);  
 	}  
 	
+	//待改
 	@RequestMapping("/templateManage")
 	public String templateManage(HttpServletRequest request, HttpServletResponse response){
 		List<CreditDataTemplate> list=new ArrayList<CreditDataTemplate>();
@@ -121,6 +123,7 @@ public class CCASDataCollectController {
 		Templatedata td;
 		CreditDataTemplate cdt;
 		List<Templatedata> lt=ts.checkTotalCreditTemplate();
+		
 		if(lt.size()>0)
 		{
 			System.out.println("size:"+lt.size());

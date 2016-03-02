@@ -11,11 +11,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class HiveService {
+	
 	private static String driverName = "org.apache.hadoop.hive.jdbc.HiveDriver";
 	private static String ip="172.23.27.193";
 	private static int port=10000;
 	private static String sql=null;
 	private static ResultSet res;  
+	
+	public HiveService(){
+		
+	}
 	
 	public Connection getConnection()
 	{

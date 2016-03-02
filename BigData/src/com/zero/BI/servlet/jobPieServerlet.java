@@ -36,19 +36,13 @@ public class jobPieServerlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("pie");
-		
         if ("pie".equals(action)) {	
             this.Pie(request, response);
         }else if("ty".equals(action)){
         	this.ty(request,response);
         }
-		
-		
-
-       
-       
-
 	}
+	
 	private void ty(HttpServletRequest request,HttpServletResponse response) throws IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
