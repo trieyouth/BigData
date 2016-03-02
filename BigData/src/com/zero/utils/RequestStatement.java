@@ -13,4 +13,6 @@ public class RequestStatement {
 	public static final String urlAndPort = "http://172.23.27.190:8090";
 	public static final String getalljarinfo = "http://172.23.27.190:8090/jobs";
 	public static final String postjar = "http://172.23.27.190:8090/jobs?";
+	
+
 }

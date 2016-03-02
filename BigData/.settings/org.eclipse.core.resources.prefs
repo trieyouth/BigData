@@ -1,11 +1,13 @@
 eclipse.preferences.version=1
 encoding//WebRoot/index.jsp=UTF-8
 encoding//src/com/zero/BI/servlet=GBK
+encoding//src/com/zero/BI/servlet/whereServerlet.java=UTF-8
 encoding//src/com/zero/common/Global.java=UTF-8
 encoding//src/com/zero/controller/login/LoginController.java=GBK
 encoding//src/com/zero/controller/manager/UserManagerController.java=UTF-8
 encoding//src/com/zero/interceptor/UserAcssessInterceptor.java=UTF-8
 encoding//src/com/zero/service/HiveService.java=GBK
+encoding//src/com/zero/service/LogService.java=GBK
 encoding//src/com/zero/service/UserService.java=GBK
 encoding//src/com/zero/utils/JobServiceCon.java=UTF-8
 encoding//src/com/zero/utils/RequestStatement.java=UTF-8

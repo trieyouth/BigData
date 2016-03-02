@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
 <title>数据采集页面组主框架</title>
     <c:import url="../header1.jsp"/>
+    <link href="<c:url value="/css/mycss.css"/>" rel="stylesheet" type="text/css"  >
 </head>
 
 <body>
@@ -32,8 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <hr color="#575C6F"/>
           <li ><a href="<c:url value="/ccas/index/dataCollect/templateManage" />" target="rightbody" >模板管理</a></li>
           <hr color="#575C6F"/>
-          <li><a href="<c:url value="/ccas/index/dataCollect/operationLog" />"  target="rightbody">采集记录</a></li>
-          <hr color="#575C6F"/>
+          <!-- <li><a href="<c:url value="/ccas/index/dataCollect/operationLog" />"  target="rightbody">采集记录</a></li>
+          <hr color="#575C6F"/> -->
           </form>
         </ul>
       </div>

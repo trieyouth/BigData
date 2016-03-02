@@ -39,7 +39,7 @@ public class SimulationDataService {
 				+ "s" + allInfo.getCreditTemplateContext().getMaxWorkYears();
 		// 生成数据
 		String[][] dataarr = JobServiceCon.runMakedataJobAndGetDoubleArr1(
-				"sc1", Integer.valueOf(allInfo.getGenerateNums()), dataSaveDir,
+				"sc11", Integer.valueOf(allInfo.getGenerateNums()), dataSaveDir,
 				userAndTime, "/tmp/modelsave/model", scopeInput, 40);
 		// 将生成数据插入hive
 		Connection con = DBUtils_Hive.getConn();
