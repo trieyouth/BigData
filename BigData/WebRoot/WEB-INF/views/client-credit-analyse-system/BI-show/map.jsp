@@ -9,14 +9,15 @@
 <script src="<c:url value="/js/echarts.js"/>"></script>
 <script src="<c:url value="/js/esl.js"/>" language="javascript" charset="utf-8"></script>
 <script src="<c:url value="/js/jquery-1.6.2.js"/>"></script>
+<link rel="stylesheet" href="<c:url value='/css/bootstrap.css' />">
 </head>
 <body  style="background-color:#4B5C88" >
 <div style="font-family:Arial, Helvetica, sans-serif; text-align:center">
 	<b><font size="7">区域贷款量</font></b>
-	<br  />
-	<br  />
+	<br/>
+	<br/>
 	<hr color="#0033CC" width="1024px" />
-     <br />
+     <br/>
      <hr color="#0033CC" width="1024px" />
     <div>
     <div id="main" style="height:500px;border:1px solid blue"/>
@@ -29,7 +30,7 @@
 //配置路径
 require.config({
 	 paths:{
-		 echarts: 'js/dist',		 
+		 echarts: '/BigData/js/dist',		 
 	 }
 });
 var myChart = null;
@@ -129,7 +130,7 @@ var myChart = null;
                 },
                 
                 
-               /* data : [
+               /*  data : [
                      {name: "海门", value: 9},
                     {name: "鄂尔多斯", value: 12},
                     {name: "招远", value: 12},
@@ -320,7 +321,7 @@ var myChart = null;
                     {name: "合肥", value: 229},
                     {name: "武汉", value: 273},
                     {name: "大庆", value: 279}
-                ]    */
+                ]            */
             },
             geoCoord: {
                 '上海': [121.4648,31.2891],
@@ -504,17 +505,16 @@ var myChart = null;
         
     ]
 };
-		 $.ajax({
-			type : "post",
-			url : "whereServerlet",
-			data : {},
-			dataType : 'json', //返回数据形式为json
+		$.ajax({
+			type : "get",
+			timeout : 60000,
+			url : "/BigData/ccas/index/BIShow/map/area",
+			dataType: 'json',
 			beforeSend : function() {
 				myChart.showLoading({
 					text : "图表数据正在努力加载..."
 				});
 			},
-
 			success : function(result) {
 				if (result) {
 				     option.series[0].data = result;
@@ -525,16 +525,12 @@ var myChart = null;
 			},complete : function() {
 				myChart.hideLoading();
 			},
-			error : function(errorMsg) {
+			error : function(xhr,textStatus){
+			    console.log('error:'+textStatus)
 				alert("不好意思，大爷，图表请求数据失败啦!");
-
 			}
 		});
-			      
-		
-			   
-		
-	}
+	} 
 );
 </script>
 </html>

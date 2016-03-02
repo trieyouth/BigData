@@ -71,6 +71,7 @@ public class ProductManagerController {
 		return "redirect:/manager/product/list";
 	}
 	
+	//这个原功能没做
 	@RequestMapping("/update/{proId}")
 	public String productUpdate(){
 		return "";

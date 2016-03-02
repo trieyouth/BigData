@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>行业逾期分析</title>
 <script src="<c:url value="/js/echarts.js"/>"></script>
-<script src="<c:url value="/js/jquery.min.js"/>"></script>
+<script src="<c:url value="/js/esl.js"/>" language="javascript" charset="utf-8"></script>
+<script src="<c:url value="/js/jquery-1.6.2.js"/>"></script>
+<link rel="stylesheet" href="<c:url value='/css/bootstrap.css' />">
 </head>
 <body style="background-color:#4B5C88">
 	<div id="main" style="height:400px;border:1px solid blue"></div>
@@ -23,7 +26,7 @@
 	//配置路径
 	require.config({
 		paths : {
-			echarts : './js/dist',
+			echarts : '/BigData/js/dist',
 		}
 	});
 	var myChart = null;
@@ -42,7 +45,10 @@
 			myChart2.showLoading({
 					text : "图表数据正在努力加载..."
 				});
-			$.get("jobPieServerlet?pie=ty&type="+encodeURI(name)+"&nocache="+ new Date().getTime(),
+			var url = "/BigData/ccas/index/BIShow/jobpie/ty/"+name;
+			url=encodeURI(url);
+			url=encodeURI(url);
+			$.get(url,
 				function(data) {
 				   var ss = data.split(";");
 					var data1 = new Array();
@@ -83,9 +89,6 @@
 			      option2.title.text = name + '行业收入情况';
 			      myChart2.setOption(option2);
 				});
-		
-			
-			
 		});
 
 		option = {
@@ -119,7 +122,7 @@
 					exportexcel : {
 						show : true,//是否显示    
 						title : '导出图片到Excel', //鼠标移动上去显示的文字    
-						icon : 'excel.png', //图标    
+						icon : '/BigData/images/ccas/BI/excel.png', //图标    
 						option : {},
 						onclick : function(option) {//点击事件,这里的option1是chart的option信息    
 							openImage();//这里可以加入自己的处理代码，切换不同的图形    
@@ -147,13 +150,10 @@
 		};
 
 		$.ajax({
-		
-			type : "post",
-			url : "jobPieServerlet",
-			data : {pie:"pie"},
+			type : "get",
+			url : "/BigData/ccas/index/BIShow/jobpie/pie",
 			dataType : "json", //返回数据形式为json
 			beforeSend : function() {
-
 				myChart.showLoading({
 					text : "图表数据正在努力加载..."
 				});
@@ -214,7 +214,7 @@
 					exportexcel : {
 						show : true,//是否显示    
 						title : '导出图片到Excel', //鼠标移动上去显示的文字    
-						icon : 'excel.png', //图标    
+						icon : '/BigData/images/ccas/BI/excel.png', //图标    
 						option : {},
 						onclick : function(option) {//点击事件,这里的option1是chart的option信息    
 							openImage();//这里可以加入自己的处理代码，切换不同的图形    

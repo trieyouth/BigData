@@ -19,7 +19,6 @@ import com.zero.service.UserService;
 /*
  * created by youth on 16-2-20
  * */
-
 @RequestMapping("/manager/user")
 @Controller
 public class UserManagerController {
@@ -42,7 +41,6 @@ public class UserManagerController {
 		model.addAttribute("userList",userService.findUserList());
 		return "manager/user-manager/UserManage";
 	}
-	
 	
 	//user authority show 
 	@RequestMapping("/authshow/{username}")

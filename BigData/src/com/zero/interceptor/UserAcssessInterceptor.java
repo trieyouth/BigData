@@ -47,19 +47,19 @@ public class UserAcssessInterceptor implements HandlerInterceptor {
 		if (username != null) {
 
 			if (userService.findAuthority(username, 1)) {
-				if (Pattern.matches("/ccas/([a-z]|/|-|[0-9]|[A-Z])*", url)) {
+				if (Pattern.matches("/ccas/([a-z]|/|-|[0-9]|[A-Z]|.)*", url)) {
 					return true;
 				}
 			}
 
 			if (userService.findAuthority(username, 2)) {
-				if (Pattern.matches("/icpas/([a-z]|/|-|[0-9]|[A-Z])*", url)) {
+				if (Pattern.matches("/icpas/([a-z]|/|-|[0-9]|[A-Z]|.)*", url)) {
 					return true;
 				}
 			}
 
 			if (userService.findAuthority(username, 3)) {
-				if (Pattern.matches("/manager/([a-z]|/|-|[0-9]|[A-Z])*", url)) {
+				if (Pattern.matches("/manager/([a-z]|/|-|[0-9]|[A-Z]|.)*", url)) {
 					return true;
 				}
 			}

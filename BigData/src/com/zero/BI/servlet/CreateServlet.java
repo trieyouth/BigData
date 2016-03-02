@@ -25,6 +25,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import sun.misc.BASE64Decoder;
 
+/*
+ * 打印图表
+ * */
+
 /**
  * Servlet implementation class CreateServlet
  */
@@ -67,9 +71,9 @@ public class CreateServlet extends HttpServlet {
 		try {
 	        String[] url = data.split(",");
 	        String u = url[1];
-	        // Base64����
+	        // Base64锟斤拷锟斤拷
 	        byte[] b = new BASE64Decoder().decodeBuffer(u);
-	        // ���ͼƬ
+	        // 锟斤拷锟酵计�
 	        OutputStream out = new FileOutputStream(new File(fileName));
 	        out.write(b);
 	        out.flush();
@@ -82,9 +86,9 @@ public class CreateServlet extends HttpServlet {
 	public void createExcel(HttpServletRequest request, HttpServletResponse response, String fileName) 
 			throws ServletException, IOException {
         
-		  // ��һ��������һ��webbook����Ӧһ��Excel�ļ�
+		  // 锟斤拷一锟斤拷锟斤拷锟斤拷锟斤拷一锟斤拷webbook锟斤拷锟斤拷应一锟斤拷Excel锟侥硷拷
 		HSSFWorkbook wb = new HSSFWorkbook();
-		  // �ڶ�������webbook�����һ��sheet,��ӦExcel�ļ��е�sheet
+		  // 锟节讹拷锟斤拷锟斤拷锟斤拷webbook锟斤拷锟斤拷锟揭伙拷锟絪heet,锟斤拷应Excel锟侥硷拷锟叫碉拷sheet
 		HSSFSheet sheet = wb.createSheet("echart");
 		
 		HSSFRow row = null;
@@ -98,9 +102,9 @@ public class CreateServlet extends HttpServlet {
         HSSFCell cells = row.createCell(0);
         cells.setCellType(HSSFCell.CELL_TYPE_BLANK);
         
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream(); // ��ͼƬд������
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream(); // 锟斤拷图片写锟斤拷锟斤拷锟斤拷
         BufferedImage bufferImg = ImageIO.read(new File(fileName));
-        ImageIO.write(bufferImg, "PNG", outStream); // ����HSSFPatriarch��ͼƬд��EXCEL
+        ImageIO.write(bufferImg, "PNG", outStream); // 锟斤拷锟斤拷HSSFPatriarch锟斤拷图片写锟斤拷EXCEL
         HSSFPatriarch patri = sheet.createDrawingPatriarch();
         HSSFClientAnchor anchor = new HSSFClientAnchor(20, 20, 20, 20,
           (short) 10, 20, (short) 20, 45);

@@ -23,7 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <hr color="#575C6F"/>
           
           <!-- onclick="javascript:window.open(encodeURI('map.jsp'))" -->
-          选择子功能
           <li ><a href="<c:url value="/ccas/index/BIShow/map" />"  target="rightbody">地区贷款重量统计</a></li>
           <hr color="#575C6F"/>
           <li><a href="<c:url value="/ccas/index/BIShow/jobpie" />"   target="rightbody">行业逾期展示</a></li>
@@ -41,8 +40,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <li><a href="<c:url value="/ccas/index/BIShow/jiqun" />" target="rightbody">系统监控</a></li>
           <hr color="#575C6F"/>
            
-          
-          
         </ul>
       </div>
     </div>

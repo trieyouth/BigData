@@ -6,21 +6,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.zero.service.HiveService;
-
-import net.sf.json.JSONObject;
 
 
 @WebServlet("/whereServerlet")
@@ -81,11 +72,7 @@ public class whereServerlet extends HttpServlet {
             } catch (SQLException e) {  
                 e.printStackTrace();  
             }  
-        }  
-
-       
-       
-
+        } 
 	}
 
 }

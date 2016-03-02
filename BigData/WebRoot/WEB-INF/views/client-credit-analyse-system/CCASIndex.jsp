@@ -47,7 +47,7 @@ hr {margin-top: 0;margin-bottom: 0;}
 	</div>
 
 
-	<script async>
+	<script>
 		var height900 = document.getElementById("continaer");
 		w = height900.offsetWidth;
 		h = w * 0.5;

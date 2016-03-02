@@ -42,9 +42,25 @@
 			<bean id="multipartResolver"
 				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 				<property name="defaultEncoding" value="UTF-8" />
-				<property name="maxUploadSize" value="2000000" />
+				<property name="maxUploadSize" value="100000000" />
+				<property name="uploadTempDir" value="/WEB-INF/tmp"></property>
 			</bean>
-
+			
+			<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+    			<property name="messageConverters">  
+        			<list>  
+            			<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/> 
+            			<bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" >  
+                			<property name = "supportedMediaTypes">  
+                    			<list>  
+                        			<value>text/plain;charset=UTF-8</value>  
+                    			</list>  
+                			</property>  
+            			</bean>  
+        			</list>  
+    			</property>  
+			</bean>   -->
+			
 			<mvc:resources mapping="/static/**" location="/" />
 			<mvc:resources mapping="/js/**"
 				location="/WEB-INF/resources/js/" cache-period="31556926" />
@@ -52,6 +68,7 @@
 				location="/WEB-INF/resources/css/" cache-period="31556926" />
 			<mvc:resources mapping="/images/**"
 				location="/WEB-INF/resources/images/" cache-period="31556926" />
+			<mvc:resources location="/WEB-INF/resources/file/" mapping="/file/**" cache-period="31556926"/>
 			<mvc:default-servlet-handler />
 
 </beans>
