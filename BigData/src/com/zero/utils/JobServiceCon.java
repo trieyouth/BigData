@@ -24,9 +24,10 @@ import com.zero.utils.RequestStatement;
  * 
  */
 public class JobServiceCon {
-	
+
 	/**
 	 * 生成数据
+	 * 
 	 * @param sc
 	 * @param nums
 	 * @param dir
@@ -36,17 +37,19 @@ public class JobServiceCon {
 	 * @param partitionNum
 	 * @return
 	 */
-	 public static String[][] runMakedataJobAndGetDoubleArr1(String sc, int nums,
-				String dir, String unameAndTime, String mode1savePath,
-				String scopeData, int partitionNum){
-		 try {
-			return getJobResultDoubleArrByJobid1(runMakedataJob1(sc, nums, dir, unameAndTime, mode1savePath, scopeData, partitionNum));
+	public static String[][] runMakedataJobAndGetDoubleArr1(String sc,
+			int nums, String dir, String unameAndTime, String mode1savePath,
+			String scopeData, int partitionNum) {
+		try {
+			return getJobResultDoubleArrByJobid1(runMakedataJob1(sc, nums, dir,
+					unameAndTime, mode1savePath, scopeData, partitionNum));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 return null;
-	 }
+		return null;
+	}
+
 	/**
 	 * 运行jar1并返回结果数组
 	 * 
@@ -99,6 +102,7 @@ public class JobServiceCon {
 
 	/**
 	 * 运行jar1返回jobId
+	 * 
 	 * @param sc
 	 * @param nums
 	 * @param dir
@@ -205,6 +209,7 @@ public class JobServiceCon {
 
 	/**
 	 * 运行jar2返回jobId
+	 * 
 	 * @param sc
 	 * @param nums
 	 * @param dir
@@ -214,7 +219,7 @@ public class JobServiceCon {
 	 * @throws Exception
 	 */
 	public static String runMakedataJob2(String sc, int nums, String dir,
-			String unameAndTime,int partitionNum) throws Exception{
+			String unameAndTime, int partitionNum) throws Exception {
 		String returnstr = null;
 		String reqStatement = null;
 		if (sc.equals("")) {
@@ -222,7 +227,12 @@ public class JobServiceCon {
 		} else {
 			reqStatement = RequestStatement.postmakedata2 + "&context=" + sc;
 		}
-		Response<String> resp = Requests.post(reqStatement).timeout(100_000).data("param=" + String.valueOf(nums) + " " + dir + " "+ unameAndTime + " " + String.valueOf(partitionNum)).text();
+		Response<String> resp = Requests
+				.post(reqStatement)
+				.timeout(100_000)
+				.data("param=" + String.valueOf(nums) + " " + dir + " "
+						+ unameAndTime + " " + String.valueOf(partitionNum))
+				.text();
 		JSONObject object = null;
 		try {
 			object = new JSONObject(resp.getBody());
@@ -237,10 +247,11 @@ public class JobServiceCon {
 
 	/**
 	 * 有jobId得到返回结果
+	 * 
 	 * @param jobId
 	 * @return
 	 */
-	public static String getJobResult2(String jobId){
+	public static String getJobResult2(String jobId) {
 		String returnstr = null;
 		Response<String> resp = null;
 		JSONObject object = null;
@@ -274,6 +285,7 @@ public class JobServiceCon {
 		returnstr = returnstr.substring(2, returnstr.length() - 2);
 		return returnstr;
 	}
+
 	/**
 	 * 返回结果数组
 	 * 
@@ -298,17 +310,79 @@ public class JobServiceCon {
 		}
 		return doubleArr;
 	}
-	
-	public static String[][] runMakedataJobAndGetDoubleArr2(String sc, int nums,
-			String dir, String unameAndTime,int partitionNum){
-	 try {
-		return getJobResultDoubleArrByJobid2(runMakedataJob2(sc, nums, dir, unameAndTime, partitionNum));
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
+	public static String[][] runMakedataJobAndGetDoubleArr2(String sc,
+			int nums, String dir, String unameAndTime, int partitionNum) {
+		try {
+			return getJobResultDoubleArrByJobid2(runMakedataJob2(sc, nums, dir,
+					unameAndTime, partitionNum));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
-	 return null;
- }
-	
+
+	/**
+	 * 运行一个jar返回ID
+	 * 
+	 * @param AppName
+	 *            应用名
+	 * @param classPath
+	 *            主类路径
+	 * @param scName
+	 *            context名
+	 * @param arguments
+	 *            参数数组
+	 * @return
+	 * @throws Exception
+	 */
+	public static String runJobGetID(String AppName, String classPath,
+			String scName, String[] arguments) throws Exception {
+		String returnstr = null;
+		// 拼接请求语句
+		String reqSta = RequestStatement.postjar + "appName=" + AppName
+				+ "&classPath=" + classPath;
+		if (scName == null || scName.equals("")) {
+			System.out.println("sc is null or empty");
+		} else {
+			reqSta += "&context=" + scName;
+		}
+		// 拼接数据
+		String dataSta = "param=";
+		for (int i = 0; i < arguments.length; i++) {
+			dataSta += arguments[i] + " ";
+		}
+		dataSta = dataSta.substring(0, dataSta.length() - 1);
+		// 发起请求得到结果
+		Response<String> resp = Requests.post(reqSta).timeout(100_000)
+				.data(dataSta).text();
+		JSONObject object = null;
+		try {
+			object = new JSONObject(resp.getBody());
+			if (!object.getString("status").equals("STARTED"))
+				throw new Exception("数据生成时运行jar包失败");
+			returnstr = object.getJSONObject("result").getString("jobId");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return returnstr;
+	}
+
+	/**
+	 * 启动一个指定名字的context,这个context与指定的jar关联
+	 * 
+	 * @param conTextName
+	 * @param jarName
+	 * @return
+	 */
+	public static String startContextConnectionApp(String conTextName,
+			String jarName) {
+		return Requests
+				.post("http://172.23.27.190:8090/contexts/"
+						+ conTextName
+						+ "?dependent-jar-uris=file:///172.23.27.190:8090/jars/"
+						+ jarName).timeout(100_000).text().getBody();
+	}
 
 }

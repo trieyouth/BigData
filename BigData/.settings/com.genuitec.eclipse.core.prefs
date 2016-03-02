@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
+validator.Checked=WebRoot/WEB-INF/resources/js/dist/echarts-all.js,WebRoot/WEB-INF/resources/js/dist/echarts.js,WebRoot/WEB-INF/resources/js/echart/src/util/mapData/rawData/geoJson/bei_jing_geo.json,WebRoot/WEB-INF/resources/js/echart/src/util/mapData/rawData/geoJson/an_hui_geo.json
+=======
 validator.Checked=WebRoot/WEB-INF/resources/js/dist/echarts-all.js,WebRoot/WEB-INF/resources/js/dist/echarts.js,WebRoot/WEB-INF/resources/js/echart/src/util/mapData/rawData/geoJson
+>>>>>>> 00365b0495f0674b67e08ae02a06aea76f111f2d
 validator.Unchecked=

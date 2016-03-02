@@ -287,6 +287,7 @@ public class CCASDataCollectController {
 			catch(Exception ex)
 			{
 				request.setAttribute("GenerateOrSave", "模拟数据生成失败");
+				System.out.println(ex.toString());
 			}
 		}
 		else if(btnSave!=null)//插入到数据模板的接口
