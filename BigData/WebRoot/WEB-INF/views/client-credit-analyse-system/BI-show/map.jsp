@@ -526,7 +526,7 @@ var myChart = null;
 				myChart.hideLoading();
 			},
 			error : function(xhr,textStatus){
-			    console.log('error:'+textStatus)
+			    console.log('error:'+textStatus);
 				alert("不好意思，大爷，图表请求数据失败啦!");
 			}
 		});

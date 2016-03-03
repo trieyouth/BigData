@@ -49,9 +49,8 @@
 		});
 
 		$.ajax({
-			type : "post",
-			url : "dklxServerlet",
-			data : {},
+			type : "get",
+			url : "/BigData/ccas/index/BIShow/dklx/chart",
 			dataType : 'text', //返回数据形式为json
 			beforeSend : function() {
 				myChart.showLoading({
@@ -95,7 +94,8 @@
 			complete : function() {
 				myChart.hideLoading();
 			},
-			error : function(errorMsg) {
+			error : function(xhr,textStatus){
+			    console.log('error:'+textStatus);
 				alert("不好意思，大爷，图表请求数据失败啦!");
 
 			}
@@ -135,7 +135,7 @@
 					exportexcel : {
 						show : true,//是否显示    
 						title : '导出图片到Excel', //鼠标移动上去显示的文字    
-						icon : 'excel.png', //图标    
+						icon : '/BigData/images/ccas/BI/excel.png', //图标    
 						option : {},
 						onclick : function(option) {//点击事件,这里的option1是chart的option信息    
 							openImage();//这里可以加入自己的处理代码，切换不同的图形    

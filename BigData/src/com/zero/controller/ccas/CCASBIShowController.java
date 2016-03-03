@@ -6,14 +6,19 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.zero.cache.LRUCache;
 import com.zero.service.HiveService;
+
 /*
  * created by youth
  * 這個controller的數據全部做了cache，不知道好不好，勿噴
@@ -29,9 +34,11 @@ public class CCASBIShowController {
 
 	private final String AREA = "AREA";
 	private final String PIE = "PIE";
-	private final String TY="TY";
+	private final String TY = "TY";
+	private final String DKLX = "DKLX";
 
-	private LRUCache<String, String> cache = new LRUCache<String, String>(10,60000);
+	private LRUCache<String, String> cache = new LRUCache<String, String>(10,
+			60000);
 
 	@RequestMapping("/BI")
 	public String BI() {
@@ -47,50 +54,34 @@ public class CCASBIShowController {
 	@ResponseBody
 	@RequestMapping(value = "/map/area", produces = "text/html;charset=UTF-8")
 	public String mapArea() {
-		String json = cache.get(AREA);
-		if (json != null) {
-			return json;
-		} else {
-			json = "[";
-			Connection connection = null;
-			Statement stmt = null;
-			//建立JDBC連接
-			while (connection == null) {
-				connection = hiveService.getConnection();
-			}
-			try {
-				stmt = connection.createStatement();
-				String sql = "select v61 ,sum(a.v4) as dd,sum(a.isbad) from (select v61,v4,case when v52='是'  then 1  else 0 end as isbad from makedata1_table_orc )a group by v61 order by dd";
-				ResultSet res = stmt.executeQuery(sql);
-				while (res.next()) {
-					String s = res.getString(2).substring(0,
-							res.getString(2).length() - 4);
-					System.out.println(s);
-					json += "{\"name\":\"" + res.getString(1)
-							+ "\",\"value\":\"" + s + "\"},";
-				}
-				json = json.substring(0, json.length() - 1);
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				json += "]";
+		return getJson(new AbsJsonProducer(AREA) {
+			
+			@Override
+			public String produceJson(ResultSet res) {
+				String json ="";
 				try {
-					// if (connection != null) {
-					// connection.close();
-					// connection = null;
-					// }
-					if (stmt != null) {
-						stmt.close();
-						stmt = null;
+					while (res.next()) {
+						String s = res.getString(2).substring(0,
+								res.getString(2).length() - 4);
+						System.out.println(s);
+						json += "{\"name\":\"" + res.getString(1)
+								+ "\",\"value\":\"" + s + "\"},";
+					}
+					if(json.length() >= 1){
+						json = json.substring(0, json.length() - 1);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+				return json;
 			}
-			cache.put(AREA, json);
-			return json;
-		}
+			
+			@Override
+			public String getSql() {
+				String sql = "select v61 ,sum(a.v4) as dd,sum(a.isbad) from (select v61,v4,case when v52='是'  then 1  else 0 end as isbad from makedata1_table_orc )a group by v61 order by dd";
+				return sql;
+			}
+		});
 	}
 
 	@RequestMapping("/jobpie")
@@ -101,78 +92,54 @@ public class CCASBIShowController {
 	@ResponseBody
 	@RequestMapping(value = "/jobpie/pie", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	public String jobpiePie() {
-		String json = cache.get(PIE);
-		if (json != null) {
-			return json;
-		} else {
-			json = "[";
-			Connection connection = null;
-			Statement stmt = null;
-			try {
-				while (null == connection) {
-					connection = hiveService.getConnection();
-				}
-				stmt = connection.createStatement();
-
-				String sql = "select  v19,count(*)  from makedata1_table_orc where v52='是' group by v19";
-				ResultSet res = stmt.executeQuery(sql);
-				while (res.next()) {
-					json += "{\"name\":\"" + res.getString(1)
-							+ "\"  ,  \"value\":\"" + res.getString(2) + "\"},";
-				}
-				json = json.substring(0, json.length() - 1);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				json += "]";
+		
+		return getJson(new AbsJsonProducer(PIE) {
+			
+			@Override
+			public String produceJson(ResultSet res) {
+				String json = "";
 				try {
-					// if (connection != null) {
-					// connection.close();
-					// connection = null;
-					// }
-					if (stmt != null) {
-						stmt.close();
-						stmt = null;
+					while (res.next()) {
+						json += "{\"name\":\"" + res.getString(1)
+								+ "\"  ,  \"value\":\"" + res.getString(2) + "\"},";
+					}
+					if(json.length() >= 1){
+						json = json.substring(0, json.length() - 1);
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+				return json;
 			}
-			cache.put(PIE,json);
-			return json;
-		}
+			
+			@Override
+			public String getSql() {
+				String sql = "select  v19,count(*)  from makedata1_table_orc where v52='是' group by v19";
+				return sql;
+			}
+		});
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/jobpie/ty/{type}", method = RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	public String jobpieTY(@PathVariable("type") String type) {
+		final String s [] = new String[1];
 		try {
-			type = URLDecoder.decode(type, "UTF-8");
-			String msg = cache.get(TY+type);
-			if(msg != null){
-				System.out.println("msg : "+msg);
-				return msg;
-			}else{
-				msg = "[";
-				Connection connection = null;
-				Statement stmt = null;
+			 s[0] = URLDecoder.decode(type, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		};
+		return getJson(new AbsJsonProducer(TY+type) {
+			@Override
+			public String produceJson(ResultSet res) {
+				String msg = "";
+				String msg1 = "";
+				String msg2 = "";
+				String msg3 = "";
+				String msg4 = "";
+				String msg5 = "";
+				String msg6 = "";
 				try {
-					// type = new String(type.getBytes("UTF-8"),"UTF-8");
-					System.out.println(type + ":");
-					while (null == connection) {
-						connection = hiveService.getConnection();
-					}
-					stmt = connection.createStatement();
-					String sql = "select year,income ,sum(count) from (select substring(v62, 0,4) as year,case when cast(v9 as bigint)<36000 then 36000 when cast(v9 as bigint)< 72000 then 72000 when cast(v9 as bigint)< 96000 then 96000  when cast(v9 as bigint)< 120000 then 120000 else  1200001 end as income,count(*) as count from makedata1_table_orc where v19='"
-							+ type
-							+ "' group by  substring(v62, 0,4),income) a group by year,income order by year,income";
-					ResultSet res = stmt.executeQuery(sql);
-					String msg1 = "";
-					String msg2 = "";
-					String msg3 = "";
-					String msg4 = "";
-					String msg5 = "";
-					String msg6 = "";
 					while (res.next()) {
 						if (res.getString(2).equals("36000")) {
 							msg1 += res.getString(3) + ",";
@@ -201,28 +168,18 @@ public class CCASBIShowController {
 							+ msg6.substring(0, msg6.length() - 1);
 				} catch (SQLException e) {
 					e.printStackTrace();
-				}  finally {
-					msg += "]";
-					try {
-						// if (connection != null) {
-						// connection.close();
-						// connection = null;
-						// }
-						if (stmt != null) {
-							stmt.close();
-							stmt = null;
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
 				}
-				cache.put(TY+type,msg);
 				return msg;
 			}
-		} catch (UnsupportedEncodingException e2) {
-			e2.printStackTrace();
-		}
-		return "[]";
+			@Override
+			public String getSql() {
+				System.out.println(s[0]);
+				String sql = "select year,income ,sum(count) from (select substring(v62, 0,4) as year,case when cast(v9 as bigint)<36000 then 36000 when cast(v9 as bigint)< 72000 then 72000 when cast(v9 as bigint)< 96000 then 96000  when cast(v9 as bigint)< 120000 then 120000 else  1200001 end as income,count(*) as count from makedata1_table_orc where v19='"
+						+ s[0]
+						+ "' group by  substring(v62, 0,4),income) a group by year,income order by year,income";
+				return sql;
+			}
+		});
 	}
 
 	@RequestMapping("/dklx")
@@ -230,6 +187,45 @@ public class CCASBIShowController {
 		return "client-credit-analyse-system/BI-show/dklx";
 	}
 
+	@ResponseBody
+	@RequestMapping("/dklx/chart")
+	public String dklxChart(){
+		return getJson(new AbsJsonProducer(DKLX) {
+			
+			@Override
+			public String produceJson(ResultSet res) {
+				System.out.println("cacacacacac");
+				Map<String, StringBuffer> map =new HashMap<String, StringBuffer>();
+		        try {
+					while (res.next()) { 
+						if(map.containsKey(res.getString(2))){
+					     map.get(res.getString(2)).append(",").append(res.getString(3));
+						}else{
+							map.put(res.getString(2),new StringBuffer( res.getString(3)));
+						}
+					    System.out.println(res.getString(1)+","+res.getString(2)+","+res.getString(3));  
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} 
+		        String msg="";
+		        for (String year : map.keySet()) {
+					msg+=map.get(year)+":";
+				}
+		        if(msg.length() >= 1){
+		        	msg = msg.substring(0,msg.length()-1);
+		        }
+				return msg;
+			}
+			
+			@Override
+			public String getSql() {
+				String sql=  "select substring(v62, 0,4) as da,v3,count(*)  from makedata1_table_orc where v52='是' group by substring(v62, 0,4),v3 order by da ,v3;";
+				return sql;
+			}
+		});
+	}
+	
 	@RequestMapping("/dkzl")
 	public String dkzl() {
 		return "client-credit-analyse-system/BI-show/dkzl";
@@ -250,4 +246,40 @@ public class CCASBIShowController {
 		return "client-credit-analyse-system/BI-show/jiqun";
 	}
 
+	private String getJson(AbsJsonProducer producer) {
+		String json = cache.get(producer.getType());
+		if (json != null) {
+			return json;
+		} else {
+			json = "[";
+			Connection connection = null;
+			Statement stmt = null;
+			try {
+				while (null == connection) {
+					connection = hiveService.getConnection();
+				}
+				stmt = connection.createStatement();
+				ResultSet res = stmt.executeQuery(producer.getSql());
+				json += producer.produceJson(res);
+				json += "]";
+				cache.put(producer.getType(),json);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					// if (connection != null) {
+					// connection.close();
+					// connection = null;
+					// }
+					if (stmt != null) {
+						stmt.close();
+						stmt = null;
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return json;
+	}
 }
