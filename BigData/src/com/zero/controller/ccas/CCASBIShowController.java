@@ -32,11 +32,13 @@ public class CCASBIShowController {
 	@Autowired
 	HiveService hiveService;
 
-	private final String AREA = "AREA";
-	private final String PIE = "PIE";
-	private final String TY = "TY";
-	private final String DKLX = "DKLX";
-
+	private final String AREA = "AREA";//地区贷款量统计缓存
+	private final String PIE = "PIE";//行业逾期总表缓存
+	private final String TY = "TY";//行业逾期子表缓存
+	private final String DKLX = "DKLX";//贷款类型逾期展示缓存
+	private final String DKZLPIE = "DKZLPIE";//贷款量统计总表缓存
+	private final String DKZLTY = "DKZLTY";
+	
 	private LRUCache<String, String> cache = new LRUCache<String, String>(10,
 			60000);
 
@@ -186,9 +188,9 @@ public class CCASBIShowController {
 	public String dklx() {
 		return "client-credit-analyse-system/BI-show/dklx";
 	}
-
+	
 	@ResponseBody
-	@RequestMapping("/dklx/chart")
+	@RequestMapping(value = "/dklx/chart",produces = "text/html;charset=UTF-8")
 	public String dklxChart(){
 		return getJson(new AbsJsonProducer(DKLX) {
 			
@@ -230,12 +232,73 @@ public class CCASBIShowController {
 	public String dkzl() {
 		return "client-credit-analyse-system/BI-show/dkzl";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/dkzl/pie",produces = "text/html;charset=UTF-8")
+	public String dkzlPie(){
+		return getJson(new AbsJsonProducer(DKZLPIE) {
+			
+			@Override
+			public String produceJson(ResultSet res) {
+				String msg=" ";
+			    try {
+					while (res.next()) { 
+						msg+=res.getString(3)+",";
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			    if(msg.length() >= 1){
+			    	msg = msg.substring(0,msg.length()-1);
+			    }
+				return msg;
+			}
+			
+			@Override
+			public String getSql() {
+				String sql=  "select substring(v62, 0,4) as a,substring(v62, 5,2) as b,sum(cast(v4 as bigint))  from makedata1_table_orc  group by substring(v62, 0,4),substring(v62, 5,2) order by a,b ";
+				return sql;
+			}
+		});
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/dkzl/ty/{year}/{mon}",produces = "text/html;charset=UTF-8")
+	public String dkzlTY(@PathVariable("year") String year,@PathVariable("mon")String mon){
+		final String y = year;
+		final String m = mon;
+		return getJson(new AbsJsonProducer(DKZLTY) {
+			
+			@Override
+			public String produceJson(ResultSet res) {
+				String msg=" ";
+			    try {
+					while (res.next()) { 
+						msg+="{\"name\":\""+res.getString(1)+"\"  ,  \"value\":\""+res.getString(2)+"\"},";
+					}
+					msg = msg.substring(0,msg.length()-1);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return msg;
+			}
+			
+			@Override
+			public String getSql() {
+				String sql=  "select v19,sum(cast(v4 as bigint)) from makedata1_table_orc where substring(v62, 0,4) ='"+y+"'and substring(v62, 5,2) = '"+m+"' group by v19";
+				return sql;
+			}
+		});
+	}
+	
+	
 	@RequestMapping("/xueli")
 	public String xueli() {
 		return "client-credit-analyse-system/BI-show/xueli";
 	}
-
+	
+	
+	
 	@RequestMapping("/yixiang")
 	public String yixiang() {
 		return "client-credit-analyse-system/BI-show/yixiang";

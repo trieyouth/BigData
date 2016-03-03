@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
     </div>
     <div id="rightbody">
-       <iframe src="<c:url value="/ccas/index/BIShow/BI" />" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe> 
+       <iframe src="<c:url value="/ccas/index/BIShow/BI" />" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe>
     </div>
   </div>
 </div>
