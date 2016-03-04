@@ -18,28 +18,24 @@ public class HiveService {
 	private static String sql = null;
 	private static ResultSet res;
 
-	private Connection connection = null;
-
 	public HiveService() {
 
 	}
 
 	public Connection getConnection() {
-		if (connection == null) {
+		Connection connection = null;
+		try {
 			try {
-				try {
-					Class.forName(driverName);
+				Class.forName(driverName);
 
-					connection = DriverManager.getConnection("jdbc:hive://"
-							+ ip + ":" + port + "/default", "", "");
-					System.out.println("Get connection succesed.");
-				} catch (SQLException e) {
-					System.out.println("Get connection failed.");
-
-				}
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				connection = DriverManager.getConnection("jdbc:hive://" + ip
+						+ ":" + port + "/default", "", "");
+				System.out.println("Get connection succesed.");
+			} catch (SQLException e) {
+				System.out.println("Get connection failed.");
 			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 		return connection;
 	}

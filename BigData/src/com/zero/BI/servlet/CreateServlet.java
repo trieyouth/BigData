@@ -32,7 +32,7 @@ import sun.misc.BASE64Decoder;
 /**
  * Servlet implementation class CreateServlet
  */
-@WebServlet("/createServlet")
+@WebServlet("/ccas/index/BIShow/createServlet")
 public class CreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -71,9 +71,7 @@ public class CreateServlet extends HttpServlet {
 		try {
 	        String[] url = data.split(",");
 	        String u = url[1];
-	        // Base64锟斤拷锟斤拷
 	        byte[] b = new BASE64Decoder().decodeBuffer(u);
-	        // 锟斤拷锟酵计�
 	        OutputStream out = new FileOutputStream(new File(fileName));
 	        out.write(b);
 	        out.flush();
@@ -85,10 +83,7 @@ public class CreateServlet extends HttpServlet {
 	
 	public void createExcel(HttpServletRequest request, HttpServletResponse response, String fileName) 
 			throws ServletException, IOException {
-        
-		  // 锟斤拷一锟斤拷锟斤拷锟斤拷锟斤拷一锟斤拷webbook锟斤拷锟斤拷应一锟斤拷Excel锟侥硷拷
 		HSSFWorkbook wb = new HSSFWorkbook();
-		  // 锟节讹拷锟斤拷锟斤拷锟斤拷webbook锟斤拷锟斤拷锟揭伙拷锟絪heet,锟斤拷应Excel锟侥硷拷锟叫碉拷sheet
 		HSSFSheet sheet = wb.createSheet("echart");
 		
 		HSSFRow row = null;

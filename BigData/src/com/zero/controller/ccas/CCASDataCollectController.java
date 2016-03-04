@@ -92,7 +92,7 @@ public class CCASDataCollectController {
 	@RequestMapping(value="/dataFileInput",method=RequestMethod.POST)
 	public String dataFileInput(@RequestParam("file") CommonsMultipartFile file) throws IOException {
        System.out.println("上传文件 fileName："+file.getOriginalFilename());
-       String path=request.getSession().getServletContext().getRealPath("/") + "WEB-INF/tmp/"  
+       String path=request.getSession().getServletContext().getRealPath("/") + "WEB-INF/tmp/upData/"  
                + file.getOriginalFilename();
        File newFile=new File(path);
        //通过CommonsMultipartFile的方法直接写文件

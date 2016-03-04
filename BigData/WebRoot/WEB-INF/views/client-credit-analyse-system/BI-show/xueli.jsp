@@ -29,9 +29,8 @@ require.config({
 		myChart = ec.init(document.getElementById('main'));
 				
      $.ajax({
-			type : "post",
-			url : "xlpieServerlet",
-			data : {},
+			type : "get",
+			url : "/BigData/ccas/index/BIShow/xueli/pie",
 			dataType : 'json', //返回数据形式为json
 			beforeSend : function() {
 				myChart.showLoading({
