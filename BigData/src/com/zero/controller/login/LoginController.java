@@ -30,6 +30,8 @@ public class LoginController {
 	
 	@RequestMapping(value="",method=RequestMethod.POST)
 	public String login(String username, String password, Model model,HttpSession session){
+		//System.out.println(username);
+		//System.out.println(password);
 		boolean loginFlag =  userService.loginValidation1(username, password);
 		if(loginFlag){
 			session.setAttribute(Global.USERNAME, username);
