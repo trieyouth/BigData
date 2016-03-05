@@ -1,20 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>贷款类型与逾期</title>
 </head>
-<script type="text/javascript" src="js/esl.js"></script>
-<script src="js/echarts.js" type="text/javascript"></script>
-<script src="js/highcharts.js" type="text/javascript"></script>
-<script src="js/jquery-1.6.2.js"></script>
-
+<script src="<c:url value="/js/echarts.js"/>"></script>
+<script src="<c:url value="/js/esl.js"/>" language="javascript" charset="utf-8"></script>
+<script src="<c:url value="/js/jquery-1.6.2.js"/>"></script>
+<link rel="stylesheet" href="<c:url value='/css/bootstrap.css' />">
 <script type="text/javascript">
 	require.config({
 		paths : {
-			echarts : './js/dist',
+			echarts : '/BigData/js/dist',
 
 		}
 	});
@@ -49,9 +49,8 @@
 		});
 
 		$.ajax({
-			type : "post",
-			url : "dklxServerlet",
-			data : {},
+			type : "get",
+			url : "/BigData/ccas/index/BIShow/dklx/chart",
 			dataType : 'text', //返回数据形式为json
 			beforeSend : function() {
 				myChart.showLoading({
@@ -95,7 +94,8 @@
 			complete : function() {
 				myChart.hideLoading();
 			},
-			error : function(errorMsg) {
+			error : function(xhr,textStatus){
+			    console.log('error:'+textStatus);
 				alert("不好意思，大爷，图表请求数据失败啦!");
 
 			}
@@ -135,7 +135,7 @@
 					exportexcel : {
 						show : true,//是否显示    
 						title : '导出图片到Excel', //鼠标移动上去显示的文字    
-						icon : 'excel.png', //图标    
+						icon : '/BigData/images/ccas/BI/excel.png', //图标    
 						option : {},
 						onclick : function(option) {//点击事件,这里的option1是chart的option信息    
 							openImage();//这里可以加入自己的处理代码，切换不同的图形    

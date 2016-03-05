@@ -80,9 +80,7 @@ public class xlpieServerlet extends HttpServlet {
             }  
         }  
 
-       
-       
-
+    
 	}
 
 }

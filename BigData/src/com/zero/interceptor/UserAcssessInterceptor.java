@@ -63,11 +63,7 @@ public class UserAcssessInterceptor implements HandlerInterceptor {
 		} else {
 			//这里是因为会出现cookie失效后，点击界面，login会嵌入到当前页面，所以不得已而为之
 			//这里用js代码来更改实在是因为没有想到更好的解决办法，对response的方法也不是很熟悉，勿喷
-			if(Pattern.matches("/(ccas|icpas|manager)/([a-z]|/|-|[0-9]|[A-Z]|.)*", url)){
-				response.getWriter().print("<script type='text/javascript'> window.location='"+contextPath + "/login/';"+" </script>");
-			}else{
-				response.sendRedirect(contextPath + "/login");
-			}
+			response.getWriter().print("<script type='text/javascript'> window.location='"+contextPath + "/login';"+" </script>");
 			return false;
 		}
 		response.sendRedirect(contextPath + "/error");
