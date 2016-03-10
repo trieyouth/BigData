@@ -1,13 +1,17 @@
 @charset "utf-8";
 /* CSS Document */
-
+*{
+	padding:0px;
+	margin:0px auto;
+	border:0px;
+}
 #continaer{
 	margin: 0px auto;
 	width:80%;
 	height:750px;
 	//min-height:700px;
 	background-color:rgb(18,24,48);
-	padding:10px;
+	padding:5px;  
 	border:0;
 	}
 #header{
@@ -120,8 +124,12 @@
 	width: 97%;
 	margin-left:1%;
 	background-color: #4B5C88;
-	border:0;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border: 0;
 }
+
 #lighttable {
 	width: 96%;
 	
@@ -148,14 +156,67 @@
 	font-size: 12px;
 	font-family: Microsoft YaHei;
 }
+/* the style of * */
+#labelbody1 {
+	
+	font-size: 24px;
+	color:red;
+}
+/*the style of input【text】 */
 #inputwidth {
-	width: 100px;
-	height: 16px;
+	width: 150px;
+	height: 24px;
 	background: Transparent;
 	border: 1px solid #788587;
- //border:#000;
- //font-size:14px;
 }
 .cell{
 	border-right:#7785A8 solid 1px;
 	}
+	
+/* the style of Button */
+#button1style{
+	width:150px ;
+	height:25px;
+	background:#2976BE;
+	border:0;
+	color:#FFF;
+	font-family: Microsoft YaHei;
+}
+/* the style of Button */
+#button2style{
+    width: 150px;
+	height: 25px;
+	background: #A74544;
+	border: 0;
+	color: #FFF;
+	font-family: Microsoft YaHei;
+}
+/* the style of Button */
+#button3style{
+    width:150px ;
+    height:25px;
+    background:#4F8553;
+    border:0;
+    color:#FFF;
+    font-family: Microsoft YaHei;
+}
+.submitfile{
+	width:150px;
+	height:25px;
+	background-color:#4F8553;
+	color:#FFF;
+	margin-left:3px;}
+.choicefile{
+	width:150px;
+	height:25px;
+	background-color:#2976BE;
+	color:#FFF;
+	margin-right:3px;
+	}
+.filepath{
+	width:310px;
+	border:1px solid #OFC;
+	height:25px;
+	line-height:25px;
+	overflow:hidden;
+	color:#000;}

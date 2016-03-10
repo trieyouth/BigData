@@ -17,21 +17,21 @@ public class Singleusercreditinformation  implements java.io.Serializable {
 
 
     // Fields    
-
-     private String userId;
-     private String userName;
-     private String generateRecordNum;
-     private String selectOwingTaxes;
-     private String electricityArrears;
-     private String administrativerPunishment;
-     private String enforcement;
-     private String civilJudgmentRecord;
-     private String owingTaxes;
-     private String houseLoan;
-     private String loansNum;
-     private String creditNum;
-     private String monthlyIncome;
-     private String age;
+	private int singleuserinfoId;
+	private String userId;
+	private String userName;
+	private String generateRecordNum;
+	private String selectOwingTaxes;
+	private String electricityArrears;
+	private String administrativerPunishment;
+	private String enforcement;
+	private String civilJudgmentRecord;
+	private String owingTaxes;
+	private String houseLoan;
+	private String loansNum;
+	private String creditNum;
+	private String monthlyIncome;
+	private String age;
 
 
     // Constructors
@@ -42,8 +42,9 @@ public class Singleusercreditinformation  implements java.io.Serializable {
 
     
     /** full constructor */
-    public Singleusercreditinformation(String userName, String generateRecordNum, String selectOwingTaxes, String electricityArrears, String administrativerPunishment, String enforcement, String civilJudgmentRecord, String owingTaxes, String houseLoan, String loansNum, String creditNum, String monthlyIncome, String age) {
-        this.userName = userName;
+    public Singleusercreditinformation(String userId,String userName, String generateRecordNum, String selectOwingTaxes, String electricityArrears, String administrativerPunishment, String enforcement, String civilJudgmentRecord, String owingTaxes, String houseLoan, String loansNum, String creditNum, String monthlyIncome, String age) {
+    	this.userId=userId;
+    	this.userName = userName;
         this.generateRecordNum = generateRecordNum;
         this.selectOwingTaxes = selectOwingTaxes;
         this.electricityArrears = electricityArrears;
@@ -62,8 +63,15 @@ public class Singleusercreditinformation  implements java.io.Serializable {
     // Property accessors
     @Id @GeneratedValue
     
-    @Column(name="userID", unique=true, nullable=false, length=50)
+    @Column(name="singleuserinfoID", unique=true, nullable=false)
 
+    public int getSingleuserinfoId() {
+		return singleuserinfoId;
+	}
+    public void setSingleuserinfoId(int singleuserinfoId) {
+        this.singleuserinfoId = singleuserinfoId;
+    }
+    @Column(name="userID", length=50)
     public String getUserId() {
         return this.userId;
     }

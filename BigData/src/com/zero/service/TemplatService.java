@@ -4,16 +4,32 @@ package com.zero.service;
 import java.util.List;
 
 
+
+
+
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+
+
+
+import org.w3c.dom.DOMException;
+
 import com.zero.entity.CreditTemplateAllInfo;
+import com.zero.entity.Creditanalysistemplatecontext;
 import com.zero.entity.Templatedata;
+import com.zero.entity.Templateuser;
 import com.zero.dao.AdminuserDAO;
+import com.zero.dao.CreditanalysistemplatecontextDAO;
 import com.zero.dao.TemplatedataDAO;
 import com.zero.dao.TemplateuserDAO;
 import com.zero.service.LogService;
+
+
 
 
 @Service
@@ -22,10 +38,20 @@ public class TemplatService {
 	private TemplatedataDAO templateDataDao;
 	@Autowired
 	private TemplateuserDAO templateUserDAO;
+	
+	
+	private Creditanalysistemplatecontext creditanalysistemplatecontext=new Creditanalysistemplatecontext();
+	
+	
+	private Templatedata templatedata=new Templatedata();
+	
 	@Autowired
 	private AdminuserDAO adminuserDao;
 	@Autowired
 	private LogService logservice;
+	@Autowired
+	private CreditanalysistemplatecontextDAO creditanalysistemplatecontextDAO;
+	
 	public int adminID;
 	public int templateID;
 	public TemplatService() {
@@ -60,9 +86,14 @@ public class TemplatService {
 	 * 
 	 * @param templateData
 	 */
-	public void insertTemplateData(Templatedata templateData,CreditTemplateAllInfo tempCreditTemplateAllInfo) 
+	public void insertTemplateData(Templatedata templateData,Creditanalysistemplatecontext tempCreditTemplateAllInfo) 
 	{
-		
+		templateDataDao.save(templateData);
+		List<Templatedata> temp = templateDataDao.findByAdminId(templateData.getAdminId());
+		logservice.saveTemplateLog(adminID, temp.get(temp.size()-1).getTempId());
+		tempCreditTemplateAllInfo.setTemplateId(temp.get(temp.size()-1).getTempId());
+		System.out.println("afsasfawf"+tempCreditTemplateAllInfo.getTemplateId());
+		creditanalysistemplatecontextDAO.save(tempCreditTemplateAllInfo);
 	}
 
 	/**
@@ -71,7 +102,8 @@ public class TemplatService {
 	 * @param templateData
 	 */
 	public void deleteTemplateData(Templatedata templateData) {
-		
+		templateDataDao.delete(templateData);
+		logservice.deleteTemplateLog(adminID, templateID);
 	}
 
 	/**
@@ -80,17 +112,13 @@ public class TemplatService {
 	 * @param templateData
 	 */
 	public void deleteTemplateDataByID(String TempId) {
-		
-	}
-
-	/**
-	 * 删除一个模板
-	 * 
-	 * @param tempId
-	 * @param adminId
-	 */
-	public void deleteTemplateUserByID(String tempId, String adminId) {
-		
+		templatedata.setTempId(Integer.parseInt(TempId));
+		templateDataDao.delete(templatedata);
+		//templateDataDao.deleteTempId(TempId);
+		creditanalysistemplatecontext.setTemplateId(Integer.parseInt(TempId));
+		creditanalysistemplatecontextDAO.delete(creditanalysistemplatecontext);
+		//creditanalysistemplatecontextDAO.deleteTempId(TempId);
+		logservice.deleteTemplateLog(adminID, Integer.parseInt(TempId));
 	}
 
 	/**
@@ -98,8 +126,10 @@ public class TemplatService {
 	 * 
 	 * @param templateUser
 	 */
-	public void useTemplateUser(Templatedata templateUser) {
-		
+	public void useTemplateUser(Templateuser templateUser) {
+		templateUserDAO.save(templateUser);
+		List<Templateuser> temp = templateUserDAO.findByDataNumber(templateUser.getDataNumber());
+		logservice.useTemplateLog(adminID, temp.get(temp.size()-1).getId().getTempId());
 	}
 
 	/**
@@ -107,8 +137,9 @@ public class TemplatService {
 	 * 
 	 * @param templateUser
 	 */
-	public void deleteTemplateUser(Templatedata templateUser) {
-		
+	public void deleteTemplateUser(String templateID,String adminID) {
+		templateUserDAO.deleteByAuthId(Integer.parseInt(templateID),Integer.parseInt(adminID));
+		logservice.deleteTemplateLog(Integer.parseInt(adminID), Integer.parseInt(templateID));
 	}
 
 }

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<deployments>
+  <deployment alt-context-root="" context-root="/BigData" deployment-path="C:/apache-tomcat-8.0.28/webapps/BigData" project-name="BigData" server-id="tomcat8Server" state="DEPLOYED" type="WEB"/>
+</deployments>

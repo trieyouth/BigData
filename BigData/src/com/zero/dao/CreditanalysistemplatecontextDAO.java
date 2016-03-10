@@ -6,6 +6,7 @@ import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -88,7 +89,23 @@ public class CreditanalysistemplatecontextDAO  {
             throw re;
         }
     }
-    
+	public void deleteTempId(String tempId) {
+		org.hibernate.cfg.Configuration cfg = new 
+				org.hibernate.cfg.Configuration()
+				.configure();
+		SessionFactory factory = cfg
+				.buildSessionFactory(new 
+						ServiceRegistryBuilder().applySettings
+						(cfg.getProperties()).buildServiceRegistry());
+		Session session = factory.openSession();
+		Query query = session
+				.createQuery("delete Creditanalysistemplatecontext as A where A.templateID=?");
+		query.setString(0, tempId);
+		query.executeUpdate();
+		session.beginTransaction().commit();
+		session.close();
+		factory.close();
+	}
     public Creditanalysistemplatecontext findById( java.lang.Integer id) {
         log.debug("getting Creditanalysistemplatecontext instance with id: " + id);
         try {

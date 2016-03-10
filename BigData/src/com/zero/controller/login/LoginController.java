@@ -22,16 +22,16 @@ public class LoginController {
 	private static final String MESSAGE= "message";
 	private static final String INFO = "用户名或密码错误";
 	
-	@RequestMapping(value="",method=RequestMethod.GET)
+	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login(Model model){
 		model.addAttribute(MESSAGE,"");
 		return "login/login";
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.POST)
+	@RequestMapping(value="login",method=RequestMethod.POST)
 	public String login(String username, String password, Model model,HttpSession session){
-		//System.out.println(username);
-		//System.out.println(password);
+		System.out.println(username);
+		System.out.println(password);
 		boolean loginFlag =  userService.loginValidation1(username, password);
 		if(loginFlag){
 			session.setAttribute(Global.USERNAME, username);
