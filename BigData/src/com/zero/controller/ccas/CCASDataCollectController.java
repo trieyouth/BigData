@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
+import org.omg.SendingContext.RunTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.Session;
 
 import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 import com.zero.entitylib.CreditDataTemplate;
@@ -97,6 +101,28 @@ public class CCASDataCollectController {
        File newFile=new File(path);
        //通过CommonsMultipartFile的方法直接写文件
        file.transferTo(newFile);
+       
+       Session ssh = null;
+       try {
+ 			Connection conn = new Connection(hostname);
+ 			conn.connect();
+ 			boolean isconn = conn.authenticateWithPassword(username, password);
+ 			if (!isconn) {
+ 				System.out.println("连不起");
+ 			} else {
+ 				System.out.println("ok");
+ 				ssh = conn.openSession();
+ 				ssh.execCommand("hdfs dfs -put Documents/tomcat/webapps/BigData/WEB-INF/tmp/upData/"+ file.getOriginalFilename() +"/tmp/");
+ 				Thread.sleep(30000);
+ 			}
+ 			ssh.close();
+ 			conn.close();
+ 			System.out.println("close");
+ 		} catch (IOException e) {
+ 			e.printStackTrace();
+ 		} catch (InterruptedException e) {
+ 			e.printStackTrace();
+ 		}
        return "client-credit-analyse-system/data-collect/dataFileInput";
 	}
 	
