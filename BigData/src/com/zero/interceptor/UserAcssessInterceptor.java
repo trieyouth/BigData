@@ -42,7 +42,8 @@ public class UserAcssessInterceptor implements HandlerInterceptor {
 		String method = request.getMethod();
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute(Global.USERNAME);
-		System.out.println("debug : " + "request url : " + url + "     method : " + method);
+		System.out.println("debug : " + username + "request url : " + url + "     method : " + method);
+		System.out.println(userService.findAuthority(username, 1));
 		if (username != null) {
 			if (userService.findAuthority(username, 1)) {
 				if (Pattern.matches("/ccas/([a-z]|/|-|[0-9]|[A-Z]|.)*", url)) {

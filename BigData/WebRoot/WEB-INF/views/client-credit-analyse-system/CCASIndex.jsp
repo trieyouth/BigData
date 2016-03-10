@@ -1,60 +1,66 @@
-<%@ page language="java" import="java.util.*"
-	contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<base href="<%=basePath%>">
-<title>客户信用分析系统索引页</title>
-<c:import url="header1.jsp"/>
-
-<link href="<c:url value="/css/mycss.css"/>" rel="stylesheet">
-<style>
-hr {margin-top: 0;margin-bottom: 0;}
-#bod {height: 79%;width: 100%;margin-top: 0%;padding: 0;background-color: rgb(49, 69, 120);}
-#leftbody {margin: 0;padding: 0;border: 0;width: 20%;height: 100%;background-color: rgb(49, 69, 120);float: left;}
-#rightbody {margin: 0;padding: 0;border: 0;width: 80%;height: 100%;background-color: rgb(49, 69, 120);float: left;}
-#navhead {width: 100%;height: 50px;border: 0;margin: 0;padding: 0;background: rgb(49, 69, 120);}
-#hrc {margin-top: 0;}
-.nav ul {width: 800px;height: 50px;padding: 0;margin-top: 0;}
-.nav ul li {float: left;list-style: none;}
-.nav ul li a {width: 145px;height: 41px;line-height: 41px;background: rgb(49, 69, 120);color: #000;font-size: 14px;display: block;text-align: center;text-decoration: none;font-size: 16px;font-family: Microsoft YaHei;color: #FFF;}
-.nav ul li a:hover {width: 145px;height: 41px;line-height: 41px;border: 1px solid rgb(49, 69, 120);color: #000;}
-.over {color: red;background: blue;font-size: larger;}
-.out {color: black;background: white;font-size: smaller;}
-.click {color: yellow;background: yellow;font-size: 12px;}
-</style>
+<meta charset="utf-8">
+<title>金融行业客户信用分析系统</title>
+<link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
+<link href="<c:url value="/css/mycss.css"/>" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-	<div id="continaer">
-		<c:import url="header2.jsp"/>
-		<div id="bod">
-			<div id="leftbody">
-				<br />
-			</div>
-			<div id="rightbody">
-				<br /> <br /> <br /> <br /> <img
-					src="<c:url value='/images/ccas/indexphoto.png' />" width="600"
-					height="330" alt="系统操作流程图">
-			</div>
-		</div>
-	</div>
+<div class="system1-index-wrap">
+	<div class="header">
+    	<div class="logo">
+        	<a href=<c:url value="/ccas/index" />>
+        		<img src="<c:url value='/images/ccas/system1logo.png' />" alt="金融行业客户信用分析系统首页" width="40%">
+        	</a>
+        </div>
+        <div class="nav">
+        	<ul>
+            	<li><a href=<c:url value="/ccas/index" />>首页</a></li>
+                <li><a href=<c:url value="/ccas/index/dataCollect" />>数据采集</a></li>
+                <li><a href=<c:url value="/ccas/index/clientPortray" />>客户画像</a></li>
+                <li><a href=<c:url value="/ccas/index/BIShow" />>商业智能</a></li>
+			</ul>
+        </div>
+    </div>
+    <div class="content">
+    	<p id="datacollect" style="visibility:hidden;" >数据采集包括“数据生成”、“数据导入”、"数据录入"等功能</p>
+        <p id="bishow" style="visibility:hidden;" >商业智能展示功能</p>
+        <p id="customermsg" style="visibility:hidden;" >给客户画像</p>
+    	<img src="<c:url value='/images/ccas/system1indexguide.png' />" alt="功能导航图"  usemap="#system1-guide">
+        <map name="system1-guide" id="system1-guide">
+        <area 
+        	shape="rect"
+            onMouseOver="datacollectshowmsg()"
+            onMouseOut="datacollecthiddenmsg()"
+            onClick="datacollectclick()"
+			coords="6,75,90,230"
+			alt="数据采集" />
+        
+         <area 
+        	shape="rect"
+            onMouseOver="bishowshowmsg()"
+            onMouseOut="bishowhiddenmsg()"
+            onClick="bishowclick()"
+			coords="285,5,365,125"
+			alt="智能展示" />
+         
+          <area 
+        	shape="rect"
+            onMouseOver="customermsgshowmsg()"
+            onMouseOut="customermsghiddenmsg()"
+            onClick="customermsgclick()"
+			coords="300,230,357,352"
+			alt="客户画像" />
+    </div>
+    <div class="footer">
+    	<p>重庆邮电大学 重庆慧都科技 联合开发</p>
+    </div>
+</div>
 
-
-	<script>
-		var height900 = document.getElementById("continaer");
-		w = height900.offsetWidth;
-		h = w * 0.5;
-		//height900.style.height=h+"px";
-		pd = w * 0.01;
-		//height900.style.padding=pd+"px"
-	</script>
-
+<script src="<c:url value="/js/system1-guide.js"/>"></script>
 </body>
 </html>

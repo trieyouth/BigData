@@ -64,7 +64,7 @@ public class LogService {
 		logWeb.setAdminId(adminID);
 		logWeb.setLogDate(new Date());
 		logWeb.setLogTime(new java.sql.Time(new java.util.Date().getTime()));
-		logWeb.setLogConten("删除" + productID + "模板");
+		logWeb.setLogConten("删除" + productID + "使用模板");
 		saveLog(logWeb);
 	}
 	public void insertUserLog(int adminID,String newUserName) {

@@ -66,9 +66,8 @@ public class xitongServlet extends HttpServlet {
 	
 	
 	public static String StatisticsJobStatusBySc(){
-		//鑾峰緱瑙ｆ瀽鍚庣殑杩斿洖缁撴灉
-		JSONArray arr=sendReqGetRes("http://172.23.27.190:8090/jobs");
-		//瀛樻斁缁撴灉
+		//閼惧嘲绶辩憴锝嗙�閸氬海娈戞潻鏂挎礀缂佹挻鐏�		JSONArray arr=sendReqGetRes("http://172.23.27.190:8090/jobs");
+		//鐎涙ɑ鏂佺紒鎾寸亯
 		/*HashMap<String,HashMap<String, Integer>> hashMap=new HashMap<String,HashMap<String, Integer>>();*/
 		HashMap<String, Integer> map1=new HashMap<String, Integer>();
 		map1.put("FINISHED", 0);
@@ -82,24 +81,24 @@ public class xitongServlet extends HttpServlet {
 		mapOther.put("FINISHED", 0);
 		mapOther.put("ERROR", 0);
 		mapOther.put("RUNNING", 0);
-		//寰幆璁℃暟
-		for (int i = 0; i < arr.length(); i++) {
-			try {
-				JSONObject obj=(JSONObject) arr.get(i);
-				if(obj.getString("context").equals("sc1")){
-					String ststue=obj.getString("status");
-					map1.put(ststue, map1.get(ststue)+1);
-				}else if(obj.getString("context").equals("sc2")){
-					String ststue=obj.getString("status");
-					map2.put(ststue,  map2.get(ststue)+1);
-				}else{
-					String ststue=obj.getString("status");
-					mapOther.put(ststue,mapOther.get(ststue)+1);
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
+		//瀵邦亞骞嗙拋鈩冩殶
+//		for (int i = 0; i < arr.length(); i++) {
+//			try {
+//				JSONObject obj=(JSONObject) arr.get(i);
+//				if(obj.getString("context").equals("sc1")){
+//					String ststue=obj.getString("status");
+//					map1.put(ststue, map1.get(ststue)+1);
+//				}else if(obj.getString("context").equals("sc2")){
+//					String ststue=obj.getString("status");
+//					map2.put(ststue,  map2.get(ststue)+1);
+//				}else{
+//					String ststue=obj.getString("status");
+//					mapOther.put(ststue,mapOther.get(ststue)+1);
+//				}
+//			} catch (JSONException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		
 		int finish=map1.get("FINISHED")+map2.get("FINISHED")+mapOther.get("FINISHED");
 		int run=map1.get("RUNNING")+map2.get("RUNNING")+mapOther.get("RUNNING");
@@ -108,7 +107,7 @@ public class xitongServlet extends HttpServlet {
 		return res;
 	}
 	/**
-	 * 鍚慾ob server鍙戦�Get璇锋眰锛屽皢杩斿洖鐨勭粨鏋滄斁鍏SONArray涓�
+	 * 閸氭吘ob server閸欐垿锟紾et鐠囬攱鐪伴敍灞界殺鏉╂柨娲栭惃鍕波閺嬫粍鏂侀崗顧怱ONArray娑擄拷
 	 * @param req
 	 * @return
 	 */
