@@ -20,11 +20,11 @@ import com.zero.service.HiveQueryService;
 @RequestMapping("/ccas/index/clientPortray")
 @Controller
 public class CCASClientPortrayController {
-	@RequestMapping(value="/personalCreditQuery",method=RequestMethod.GET)
+	//@RequestMapping(value="/personalCreditQuery",method=RequestMethod.GET)
 	public String personalCreditQuery(){
 		return "client-credit-analyse-system/client-portray/PersonalCreditQuery";
 	}
-	@RequestMapping(value="/personalCreditQuery",method=RequestMethod.POST)
+	//@RequestMapping(value="/personalCreditQuery",method=RequestMethod.POST)
 	public String personalCreditQuery(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//【PersonalCreditQueryByCard.jsp】根据Id查询数据                
 		 String btnClientPortrayQuery=request.getParameter("btnClientPortrayQuery");
@@ -35,11 +35,11 @@ public class CCASClientPortrayController {
 		return null;
 		
 	}
-	@RequestMapping(value="/personalCreditQueryByCard",method=RequestMethod.GET)
+	//@RequestMapping(value="/personalCreditQueryByCard",method=RequestMethod.GET)
 	public String PersonalCreditQueryByCard(){
 		return "client-credit-analyse-system/client-portray/PersonalCreditQueryByCard";
 	}
-	@RequestMapping(value="/personalCreditQueryByCard",method=RequestMethod.POST)
+	//@RequestMapping(value="/personalCreditQueryByCard",method=RequestMethod.POST)
 	public String PersonalCreditQueryByCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		 //【PersonalCreditQuery.jsp】根据Id查询数据                               
 		 String btnPersonalCreditQuery=request.getParameter("btnPersonalCreditQuery");
@@ -111,8 +111,15 @@ public class CCASClientPortrayController {
      * 【PersonalCreditQuery.jsp】根据Id查询数据
      * 
      * */
-	public String PersonalCreditQuery(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value="/personalCreditQuery",method=RequestMethod.GET)
+	public String LoadPersonalCreditQuery(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException 
+	{
+		return "";
+	}
+	
+	@RequestMapping(value="/personalCreditQuery",method=RequestMethod.POST)
+	public String PersonalCreditQuery(HttpServletRequest request, HttpServletResponse response)
 	{
 		try
 		{

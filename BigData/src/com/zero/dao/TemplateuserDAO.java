@@ -8,6 +8,7 @@ import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -16,7 +17,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.zero.entity.Adimauthority;
+import com.zero.entity.AdimauthorityId;
 import com.zero.entity.Templateuser;
+import com.zero.entity.TemplateuserId;
+
 
 /**
  	* A data access object (DAO) providing persistence and search support for Templateuser entities.
@@ -57,7 +62,12 @@ public class TemplateuserDAO  {
             throw re;
         }
     }
-    
+    public void deleteByAuthId(int tempID,int oldauthid) {
+		Session session = getCurrentSession();
+		TemplateuserId tempAdimAuthorityId=new TemplateuserId(oldauthid,tempID);
+		Templateuser tempAdimAuthority=(Templateuser)session.load(Templateuser.class, tempAdimAuthorityId);
+		session.delete(tempAdimAuthority);
+	}
 	public void delete(Templateuser persistentInstance) {
         log.debug("deleting Templateuser instance");
         try {
@@ -68,7 +78,23 @@ public class TemplateuserDAO  {
             throw re;
         }
     }
-    
+	
+	public void deleteTempId(int tempId, int adminId) {
+			org.hibernate.cfg.Configuration cfg = new org.hibernate.cfg.Configuration()
+			.configure();
+			SessionFactory factory = cfg
+			.buildSessionFactory(new ServiceRegistryBuilder()
+					.applySettings(cfg.getProperties())
+					.buildServiceRegistry());
+			Session session = factory.openSession();
+			TemplateuserId tempAdimAuthorityId=new TemplateuserId(adminId,tempId);
+			Templateuser tempAdimAuthority=(Templateuser)session.load(Templateuser.class, tempAdimAuthorityId);
+			session.delete(tempAdimAuthority);
+			session.beginTransaction().commit();
+			session.close();
+			factory.close();
+	}
+
     public Templateuser findById( com.zero.entity.TemplateuserId id) {
         log.debug("getting Templateuser instance with id: " + id);
         try {

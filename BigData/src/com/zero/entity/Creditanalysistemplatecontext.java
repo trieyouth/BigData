@@ -2,7 +2,6 @@ package com.zero.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,28 +18,28 @@ public class Creditanalysistemplatecontext  implements java.io.Serializable {
     // Fields    
 
      private Integer templateId;
-     private String generateRecordNum;
-     private String maxSelectOwingTaxes;
+     private String generateRecordNum;  //数据记录数 
+     private String maxSelectOwingTaxes;  //欠税记录
      private String minSelectOwingTaxes;
-     private String maxmElectricityArrears;
+     private String maxmElectricityArrears;  // 电费欠费记录
      private String minElectricityArrears;
-     private String maxAdministrativerPunishment;
-     private String minAdministrativerPunishment;
-     private String maxEnforcement;
+     private String maxAdministrativerPunishment; //行政记录处罚
+     private String minAdministrativerPunishment;  //
+     private String maxEnforcement;   //强制执行记录
      private String minEnforcement;
-     private String maxCivilJudgmentRecord;
+     private String maxCivilJudgmentRecord;   //民事判断记录
      private String minCivilJudgmentRecord;
-     private String maxOwingTaxes;
+     private String maxOwingTaxes;  //欠税记录
      private String minOwingTaxes;
-     private String maxHouseLoan;
+     private String maxHouseLoan;  //住房贷款账户数
      private String minHouseLoan;
-     private String maxLoansNum;
-     private String minLoansNum;
-     private String maxCreditNum;
+     private String maxLoansNum;   //其它贷款账户数
+     private String minLoansNum;   
+     private String maxCreditNum;  //信用卡账户数
      private String minCreditNum;
-     private String maxMounthlyIncome;
+     private String maxMounthlyIncome;  //月收入
      private String minMonthlyIncome;
-     private String maxAge;
+     private String maxAge;   //年龄
      private String minAge;
 
 
@@ -52,8 +51,9 @@ public class Creditanalysistemplatecontext  implements java.io.Serializable {
 
     
     /** full constructor */
-    public Creditanalysistemplatecontext(String generateRecordNum, String maxSelectOwingTaxes, String minSelectOwingTaxes, String maxmElectricityArrears, String minElectricityArrears, String maxAdministrativerPunishment, String minAdministrativerPunishment, String maxEnforcement, String minEnforcement, String maxCivilJudgmentRecord, String minCivilJudgmentRecord, String maxOwingTaxes, String minOwingTaxes, String maxHouseLoan, String minHouseLoan, String maxLoansNum, String minLoansNum, String maxCreditNum, String minCreditNum, String maxMounthlyIncome, String minMonthlyIncome, String maxAge, String minAge) {
-        this.generateRecordNum = generateRecordNum;
+    public Creditanalysistemplatecontext(Integer templateId,String generateRecordNum, String maxSelectOwingTaxes, String minSelectOwingTaxes, String maxmElectricityArrears, String minElectricityArrears, String maxAdministrativerPunishment, String minAdministrativerPunishment, String maxEnforcement, String minEnforcement, String maxCivilJudgmentRecord, String minCivilJudgmentRecord, String maxOwingTaxes, String minOwingTaxes, String maxHouseLoan, String minHouseLoan, String maxLoansNum, String minLoansNum, String maxCreditNum, String minCreditNum, String maxMounthlyIncome, String minMonthlyIncome, String maxAge, String minAge) {
+        this.templateId=templateId;
+    	this.generateRecordNum = generateRecordNum;
         this.maxSelectOwingTaxes = maxSelectOwingTaxes;
         this.minSelectOwingTaxes = minSelectOwingTaxes;
         this.maxmElectricityArrears = maxmElectricityArrears;
@@ -80,7 +80,7 @@ public class Creditanalysistemplatecontext  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="templateID", unique=true, nullable=false)
 

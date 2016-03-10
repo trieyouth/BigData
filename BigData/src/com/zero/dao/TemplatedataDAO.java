@@ -8,6 +8,7 @@ import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 import static org.hibernate.criterion.Example.create;
 
@@ -68,7 +69,23 @@ public class TemplatedataDAO  {
             throw re;
         }
     }
-    
+	public void deleteTempId(String tempId) {
+		org.hibernate.cfg.Configuration cfg = new 
+				org.hibernate.cfg.Configuration()
+				.configure();
+		SessionFactory factory = cfg
+				.buildSessionFactory(new 
+						ServiceRegistryBuilder().applySettings
+						(cfg.getProperties()).buildServiceRegistry());
+		Session session = factory.openSession();
+		Query query = session
+				.createQuery("delete TemplateData as A where A.tempId=?");
+		query.setString(0, tempId);
+		query.executeUpdate();
+		session.beginTransaction().commit();
+		session.close();
+		factory.close();
+	}
     public Templatedata findById( java.lang.Integer id) {
         log.debug("getting Templatedata instance with id: " + id);
         try {

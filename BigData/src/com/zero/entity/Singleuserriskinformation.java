@@ -17,7 +17,7 @@ public class Singleuserriskinformation  implements java.io.Serializable {
 
 
     // Fields    
-
+	private int singleuserinfoId;
      private String userId;
      private String username;
      private String age;
@@ -40,8 +40,9 @@ public class Singleuserriskinformation  implements java.io.Serializable {
 
     
     /** full constructor */
-    public Singleuserriskinformation(String username, String age, String monthlyIncome, String proportionOfIncome, String historicalInvestment, String historicalInvestmentScope, String residualScopeOfDeposit, String listOfInvestmentProducts, String customerAgeRange, String customerIncomeRange, String listOfCustomersIndustry) {
-        this.username = username;
+    public Singleuserriskinformation(String userId,String username, String age, String monthlyIncome, String proportionOfIncome, String historicalInvestment, String historicalInvestmentScope, String residualScopeOfDeposit, String listOfInvestmentProducts, String customerAgeRange, String customerIncomeRange, String listOfCustomersIndustry) {
+        this.userId=userId;
+    	this.username = username;
         this.age = age;
         this.monthlyIncome = monthlyIncome;
         this.proportionOfIncome = proportionOfIncome;
@@ -58,8 +59,14 @@ public class Singleuserriskinformation  implements java.io.Serializable {
     // Property accessors
     @Id @GeneratedValue
     
-    @Column(name="userID", unique=true, nullable=false, length=11)
-
+    @Column(name="singleuserinfoID", unique=true, nullable=false)
+    public int getSingleuserinfoId() {
+		return singleuserinfoId;
+	}
+    public void setSingleuserinfoId(int singleuserinfoId) {
+        this.singleuserinfoId = singleuserinfoId;
+    }
+    @Column(name="userID", length=50)
     public String getUserId() {
         return this.userId;
     }
