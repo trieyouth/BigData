@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>贷款类型</title>
-<script src="js/echarts.js"></script>
-<script src="js/jquery.min.js"></script>
+<title>贷款总量统计</title>
+<script src="<c:url value="/js/echarts.js"/>"></script>
+<script src="<c:url value="/js/esl.js"/>" language="javascript" charset="utf-8"></script>
+<script src="<c:url value="/js/jquery-1.6.2.js"/>"></script>
+<link rel="stylesheet" href="<c:url value='/css/bootstrap.css' />">
 </head>
 <body style="background-color:#4B5C88">
 
@@ -31,7 +34,7 @@
  
 			require.config({
 			paths : {
-				echarts : './js/dist',
+				echarts : '/BigData/js/dist',
 
 			}
 		});
@@ -47,15 +50,14 @@
 			var selected = param;
              var year=selected.name.split("-")[0];
                var mon=selected.name.split("-")[1];
-			window.open(encodeURI("dklzq.jsp" + "?year=" + year + "?type=" + mon));
+			window.open(encodeURI("/BigData/ccas/index/BIShow/dkzl/ty/" + year + "/" + mon));
 
 		});
 
    
 			$.ajax({
-		type : "post",
-		url : "dklServerlet",
-		data : {send:"one"},
+		type : "get",
+		url : "/BigData/ccas/index/BIShow/dkzl/pie",
 		dataType : 'text', //返回数据形式为json
 		beforeSend : function() {
 			myChart.showLoading({
@@ -124,7 +126,7 @@
 						exportexcel : {
 						show : true,//是否显示    
 						title : '导出图片到Excel', //鼠标移动上去显示的文字    
-						icon : 'excel.png', //图标    
+						icon : '/BigData/images/ccas/BI/excel.png', //图标    
 						option : {},
 						onclick : function(option) {//点击事件,这里的option1是chart的option信息    
 							openImage();//这里可以加入自己的处理代码，切换不同的图形    

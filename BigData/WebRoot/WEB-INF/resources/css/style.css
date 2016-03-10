@@ -1,0 +1,117 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	background-color:#999;}
+*{
+	margin:0 auto;
+	padding:0;
+	border:0;
+	font-family:Microsoft YaHei;}
+.system1-index-wrap{
+	width:65%;
+	height:auto;
+	background-color:#FFF;
+	}
+ul{
+	list-style-type:none;
+  }
+.system1-index-wrap .header .nav li{
+	float:left;
+	color:#FFF;
+	width:10%;
+	font-size:17px;
+	font-weight:bold;
+	text-align:center;}
+.system1-index-wrap .header .nav li a{
+	display:block;
+	width:100%;
+	color:#FFF;
+	background-color:#304478;}
+.system1-index-wrap .header .nav li a:hover{
+	//background:#4C5C89;
+	border-bottom:5px solid #FFBC53;}
+a{
+	text-decoration:none;}
+.system1-index-wrap .header{
+	width:100%;
+	height:130px;
+	background-color:#0F6;}
+.system1-index-wrap .header .logo{
+	width:100%;
+	height:68px;
+	border-bottom:2px solid #858FAC;
+	background-color:#4C5C89;}
+.system1-index-wrap .header .logo img{
+	position:relative;
+	margin-left:10px;
+	margin-top:12px;}
+.system1-index-wrap .header .nav{
+	width:100%;
+	height:55px;
+	background-color:#304478;
+	border-bottom:5px solid #2A85B4;
+	line-height:55px;}
+.system1-index-wrap .content{
+	text-align:center;
+	width:100%;
+	height:600px;
+	background-color:#FFF;}
+.system1-index-wrap .content img{
+	margin-top:100px;}
+.system1-index-wrap .content .meau{
+	float:left;
+	width:20%;
+	height:600px;
+	background-color:#121830;}
+.system1-index-wrap .content .meau ul{
+	padding-top:30px;}
+.system1-index-wrap .content .meau li{
+	width:100%;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	border-bottom:1px solid #4C5C89;}
+.system1-index-wrap .content .meau li a{
+	display:block;
+	width:100%;
+	height:40px;
+	color:#CCC;
+	font-size:16px;
+	font-weight:bold;}
+.system1-index-wrap .content .meau li a:hover{
+	background:#304478;}
+.system1-index-wrap .content .main{
+	float:left;
+	width:80%;
+	height:600px;
+	background-color:#FFF;}
+.system1-index-wrap .content p{
+	position:absolute;
+	margin-left:15%;
+	margin-top:50px;
+	width:40%;
+	height:50px;
+	background-color:#D9EDF7;
+	color:#31708F;
+	line-height:50px;
+	font-size:16px;
+	border:1px solid #BCE7F1;
+	border-radius:2px;
+	-moz-border-radius:5px;
+	-webkit-box-orient:5px;}
+.system1-index-wrap .footer{
+	width:100%;
+	height:30px;
+	background-color:#304478;
+	text-align:center;
+	line-height:30px;}
+.system1-index-wrap .footer p{
+	font-family:"MS Serif", "New York", serif;
+	font-size:14px;
+	color:#FFF;} 
+.c1{
+	background:#304478;}
+.c2{
+	background:#121830;
+}
+

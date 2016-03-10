@@ -1,11 +1,13 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=00365b0495f0674b67e08ae02a06aea76f111f2d
 eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/views/client-credit-analyse-system/CCASIndex.jsp=UTF-8
 encoding//WebRoot/index.jsp=UTF-8
 encoding//src/com/zero/BI/servlet=GBK
-<<<<<<< HEAD
-encoding//src/com/zero/BI/servlet/whereServerlet.java=UTF-8
-=======
 encoding//src/com/zero/BI/servlet/CreateServlet.java=UTF-8
->>>>>>> 00365b0495f0674b67e08ae02a06aea76f111f2d
+encoding//src/com/zero/BI/servlet/whereServerlet.java=UTF-8
+encoding//src/com/zero/BI/servlet/xitongServlet.java=UTF-8
 encoding//src/com/zero/common/Global.java=UTF-8
 encoding//src/com/zero/controller/login/LoginController.java=GBK
 encoding//src/com/zero/controller/manager/UserManagerController.java=UTF-8

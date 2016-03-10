@@ -24,9 +24,9 @@
 	<!-- 配置DataSource -->
 	<bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource">
 		<property name="user" value="root"></property>
-		<property name="password" value="120277260"></property>
+		<property name="password" value="123456"></property>
 		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/bigdata?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://172.23.21.26:3306/finabigdata?useUnicode=true&amp;characterEncoding=UTF-8"></property>
 		<property name="maxPoolSize" value="40"></property>
         <property name="minPoolSize" value="1"></property>
         <property name="initialPoolSize" value="1"></property>

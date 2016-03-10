@@ -18,7 +18,7 @@
 
 		
 	</div>
-	<form id="exportForm" action="createServlet" method="post">
+	<form id="exportForm" action="/BigData/ccas/index/BIShow/excel" method="post">
 		<input type="hidden" name="img" id="img" />
 	</form>
 </body>

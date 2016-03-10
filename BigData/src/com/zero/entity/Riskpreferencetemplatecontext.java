@@ -50,8 +50,9 @@ public class Riskpreferencetemplatecontext  implements java.io.Serializable {
 
     
     /** full constructor */
-    public Riskpreferencetemplatecontext(String minAge, String maxAge, String minMonthlyIncome, String maxMonthlyIncome, String minProportionOfIncome, String maxProportionOfIncome, String minHistoricalInvestment, String maxHistoricalInvestment, String minHistoricalInvestmentScope, String maxHistoricalInvestmentScope, String minResidualScopeOfDeposit, String maxResidualScopeOfDeposit, String minListOfInvestmentProducts, String maxListOfInvestmentProducts, String minCustomerAgeRange, String maxCustomerAgeRange, String minCustomerIncomeRange, String maxCustomerIncomeRange, String minListOfCustomersIndustry, String maxListOfCustomersIndustry, String gerenalRecord) {
-        this.minAge = minAge;
+    public Riskpreferencetemplatecontext(Integer templateId,String minAge, String maxAge, String minMonthlyIncome, String maxMonthlyIncome, String minProportionOfIncome, String maxProportionOfIncome, String minHistoricalInvestment, String maxHistoricalInvestment, String minHistoricalInvestmentScope, String maxHistoricalInvestmentScope, String minResidualScopeOfDeposit, String maxResidualScopeOfDeposit, String minListOfInvestmentProducts, String maxListOfInvestmentProducts, String minCustomerAgeRange, String maxCustomerAgeRange, String minCustomerIncomeRange, String maxCustomerIncomeRange, String minListOfCustomersIndustry, String maxListOfCustomersIndustry, String gerenalRecord) {
+        this.templateId=templateId;
+    	this.minAge = minAge;
         this.maxAge = maxAge;
         this.minMonthlyIncome = minMonthlyIncome;
         this.maxMonthlyIncome = maxMonthlyIncome;
@@ -76,7 +77,7 @@ public class Riskpreferencetemplatecontext  implements java.io.Serializable {
 
    
     // Property accessors
-    @Id @GeneratedValue
+    @Id 
     
     @Column(name="templateID", unique=true, nullable=false)
 

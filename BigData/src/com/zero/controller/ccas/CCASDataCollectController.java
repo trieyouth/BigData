@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.FileUtils;
+import org.apache.hadoop.hive.ql.parse.HiveParser_PlFunctionParser.return_type_spec_return;
+import org.rhq.helpers.pluginAnnotations.agent.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,17 +29,22 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-
+import org.springframework.web.servlet.ModelAndView;
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.Session;
 import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 import com.zero.entitylib.CreditDataTemplate;
 import com.zero.entity.Adminuser;
 import com.zero.entity.CreditTemplateContext;
+import com.zero.entity.Creditanalysistemplatecontext;
+import com.zero.entity.Singleusercreditinformation;
 import com.zero.entity.Templatedata;
 import com.zero.entity.CreditTemplateAllInfo;
+import com.zero.entity.Templateuser;
 import com.zero.service.SimulationDataService;
+import com.zero.service.SingInformationService;
 import com.zero.service.TemplatService;
 import com.zero.service.UserService;
-import com.zero.entity.Templatedata;
 
 @RequestMapping("/ccas/index/dataCollect")
 @Controller
@@ -50,34 +55,30 @@ public class CCASDataCollectController {
 	TemplatService ts;
 	@Autowired
 	UserService us;
-	
+	@Autowired
+	SingInformationService sis;
 	@Autowired  
     private HttpServletRequest request;
 	
-	@RequestMapping(value="/generateData",method=RequestMethod.GET)
-	public String generateData(Model model){
-		return "client-credit-analyse-system/data-collect/generateData";
-	}
-	
-	@RequestMapping(value="/generateData",method=RequestMethod.POST)
+	/*@RequestMapping(value="/generateData",method=RequestMethod.POST)
 	public String generateData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//【CreateTemplet.jsp】界面[生成模拟数据]和[保存为模版]
-				String btnGenerateSimulateData=request.getParameter("btnGenerateSimulateData");
-				String btnSaveSimulate=request.getParameter("btnSaveSimulate");
-				
-				//【TempletDetial.jsp】将模版数据生成模拟数据
-				String btnSimulateGenerateData=request.getParameter("btnSimulateGenerateData");
-		       // System.out.println("btnSimulateGenerateData:"+btnSimulateGenerateData);
-				if(btnGenerateSimulateData!=null || btnSaveSimulate!=null)
-				{
-					CreateTemplet(request,response);
-				}
-				else if(btnSimulateGenerateData!=null)
-				{
-					SimulateGenerateData(request,response);
-				}
-			return "client-credit-analyse-system/data-collect/generateData";
-	}
+		String btnGenerateSimulateData=request.getParameter("btnGenerateSimulateData");
+		String btnSaveSimulate=request.getParameter("btnSaveSimulate");
+
+		//【TempletDetial.jsp】将模版数据生成模拟数据
+		String btnSimulateGenerateData=request.getParameter("btnSimulateGenerateData");
+		// System.out.println("btnSimulateGenerateData:"+btnSimulateGenerateData);
+		if(btnGenerateSimulateData!=null || btnSaveSimulate!=null)
+		{
+			//CreateTemplet(request,response);
+		}
+		else if(btnSimulateGenerateData!=null)
+		{
+			SimulateGenerateData(request,response);
+		}
+		return "client-credit-analyse-system/data-collect/generateData";
+	}*/
 	
 	
 	//文件上传
@@ -92,11 +93,35 @@ public class CCASDataCollectController {
 	@RequestMapping(value="/dataFileInput",method=RequestMethod.POST)
 	public String dataFileInput(@RequestParam("file") CommonsMultipartFile file) throws IOException {
        System.out.println("上传文件 fileName："+file.getOriginalFilename());
-       String path=request.getSession().getServletContext().getRealPath("/") + "WEB-INF/tmp/"  
+       String path=request.getSession().getServletContext().getRealPath("/") + "WEB-INF/tmp/upData/"  
                + file.getOriginalFilename();
        File newFile=new File(path);
        //通过CommonsMultipartFile的方法直接写文件
        file.transferTo(newFile);
+       String hostname = "";
+       String username = "";
+       String password = ""; 
+       Session ssh = null;
+       try {
+ 			Connection conn = new Connection(hostname);
+ 			conn.connect();
+ 			boolean isconn = conn.authenticateWithPassword(username, password);
+ 			if (!isconn) {
+ 				System.out.println("连不起");
+ 			} else {
+ 				System.out.println("ok");
+ 				ssh = conn.openSession();
+ 				ssh.execCommand("hdfs dfs -put Documents/tomcat/webapps/BigData/WEB-INF/tmp/upData/"+ file.getOriginalFilename() +"/tmp/");
+ 				Thread.sleep(30000);
+ 			}
+ 			ssh.close();
+ 			conn.close();
+ 			System.out.println("close");
+ 		} catch (IOException e) {
+ 			e.printStackTrace();
+ 		} catch (InterruptedException e) {
+ 			e.printStackTrace();
+ 		}
        return "client-credit-analyse-system/data-collect/dataFileInput";
 	}
 	
@@ -209,198 +234,200 @@ public class CCASDataCollectController {
      * 生成模拟数据、保存为数据模板[保存到数据库和XML] 【CreateTemplet.jsp】
      * 
      */
-    public void CreateTemplet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    //加载生成模拟数据或保存数据模板的界面
+    @RequestMapping(value="/generateData",method=RequestMethod.GET)
+	public String generateData(Model model){
+    	model.addAttribute("OperateStatus", "");
+		return "client-credit-analyse-system/data-collect/generateData";
+	}
+    
+    //生成模拟数据 
+    @RequestMapping(value="/generateData",method=RequestMethod.POST)
+    public String generateData(Model model,Creditanalysistemplatecontext catc) 
     {
-		//基本信息参数【年龄】【月收入】【工作年限】
-		String nl1=request.getParameter("nl1");
-		String nl2=request.getParameter("nl2");
-		String ysr1=request.getParameter("ysr1");
-		String ysr2=request.getParameter("ysr2");
-		String gznx1=request.getParameter("gznx1");
-		String gznx2=request.getParameter("gznx2");
-		//信贷记录参数【信用卡账户数】【银行贷款笔数】【银行消费类贷款笔数】
-		String xykzhs1=request.getParameter("xykzhs1");
-		String xykzhs2=request.getParameter("xykzhs2");
-		String yhdkbs1=request.getParameter("yhdkbs1");
-		String yhdkbs2=request.getParameter("yhdkbs2");
-		String yhxfldkbs1=request.getParameter("yhxfldkbs1");
-		String yhxfldkbs2=request.getParameter("yhxfldkbs2");
-		//贷款参数【贷款总额度】【申请贷款次数】【原贷款逾期次数】【征信查询记录】
-		String dkzed1=request.getParameter("dkzed1");
-		String dkzed2=request.getParameter("dkzed2");
-		String sqdkcs1=request.getParameter("sqdkcs1");
-		String sqdkcs2=request.getParameter("sqdkcs2");
-		String ydkyqcs1=request.getParameter("ydkyqcs1");
-		String ydkyqcs2=request.getParameter("ydkyqcs2");
-		String zxcxjl1=request.getParameter("zxcxjl1");
-		String zxcxjl2=request.getParameter("zxcxjl2");
+    	//System.out.println("----------  "+catc.getMaxAge());
+    	
 		SimpleDateFormat df1 = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
 		Date date=new Date();
-		//共生成数量
-		String sum=request.getParameter("gsc");
 		CreditTemplateAllInfo  cta=new CreditTemplateAllInfo();
-		cta.setGenerateNums(sum);
 		cta.setId(df1.format(date));
 		cta.setTime(df1.format(date));
 		CreditTemplateContext cdc=new CreditTemplateContext();
-		cdc.setMinAge(nl1);
-		cdc.setMaxAge(nl2);
-		cdc.setMinMonthlyIncome(ysr1);
-		cdc.setMaxMounthlyIncome(ysr2);
-		cdc.setMinWorkYears(gznx1);
-		cdc.setMaxWorkYears(gznx2);
-		
-		cdc.setMinCreditNum(xykzhs1);
-		cdc.setMaxCreditNum(xykzhs2);
-		cdc.setMinLoansNum(yhdkbs1);
-		cdc.setMaxLoansNum(yhdkbs2);
-		cdc.setMinExpenseLoansNum(yhxfldkbs1);
-		cdc.setMaxExpenseLoansNum(yhxfldkbs2);
-		
-		cdc.setMinLoansAmount(dkzed1);
-		cdc.setMaxLoansAmount(dkzed2);
-		cdc.setMinApplyForLoanNum(sqdkcs1);
-		cdc.setMaxApplyForLoanNum(sqdkcs1);
-		cdc.setMinOverdueLoanNum(ydkyqcs1);
-		cdc.setMaxOverdueLoanNum(ydkyqcs2);
-		cdc.setMinCreditInquiryNum(zxcxjl1);
-		cdc.setMaxCreditInquiryNum(zxcxjl2);
 		cta.setCreditTemplateContext(cdc);
 		Adminuser au=new Adminuser();
-		au.setAdminName("Admin");
+		au.setAdminName("zhangsan");
 		cta.setUseUser(au);
-		String btnGenerate=request.getParameter("btnGenerateSimulateData");
-		String btnSave=request.getParameter("btnSaveSimulate");
-		request.setAttribute("GenerateOrSave",null);
-		if(btnGenerate!=null)//生成模拟数据
-		{
-			
-			try
-			{
-				String[][] str=sds.generateCreditSimulationData(cta);
-				System.out.println(str.length);
-				if(str.length>0)
-					request.setAttribute("GenerateOrSave", "模拟数据生成成功！");
-				else
-					request.setAttribute("GenerateOrSave", "模拟数据生成失败");
-			}
-			catch(Exception ex)
-			{
-				request.setAttribute("GenerateOrSave", "模拟数据生成失败");
-				System.out.println(ex.toString());
-			}
-		}
-		else if(btnSave!=null)//插入到数据模板的接口
-		{
-			try
-			{
-				Templatedata ta=new Templatedata();				
-		
-				SimpleDateFormat ms=new SimpleDateFormat("HH:mm:ss");
-				Date n=new Date();
-				System.out.println("Time:"+ms.format(n));
-				
-				ta.setTempDate(n);
-				ta.setAdminId(1);
-				ta.setTempTime(new java.sql.Time(new java.util.Date().getTime()));
-				ts.insertTemplateData(ta, cta);
-				request.setAttribute("GenerateOrSave", "模板保存成功！");
-			}
-			catch(Exception ex)
-			{
-				request.setAttribute("GenerateOrSave", "模板保存失败");
-				System.out.println(ex.toString());
-			}
-		}
-		System.out.println(request.getAttribute("GenerateOrSave"));
-    }
-
-    /**
-     * 将模板数据生成模拟数据 【TempletDetial.jsp】
-     * 
-     * */
-    public void SimulateGenerateData (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-		//基本信息参数【年龄】【月收入】【工作年限】
-		String nl1=request.getParameter("nl1");
-		String nl2=request.getParameter("nl2");
-		String ysr1=request.getParameter("ysr1");
-		String ysr2=request.getParameter("ysr2");
-		String gznx1=request.getParameter("gznx1");
-		String gznx2=request.getParameter("gznx2");
-		//信贷记录参数【信用卡账户数】【银行贷款笔数】【银行消费类贷款笔数】
-		String xykzhs1=request.getParameter("xykzhs1");
-		String xykzhs2=request.getParameter("xykzhs2");
-		String yhdkbs1=request.getParameter("yhdkbs1");
-		String yhdkbs2=request.getParameter("yhdkbs2");
-		String yhxfldkbs1=request.getParameter("yhxfldkbs1");
-		String yhxfldkbs2=request.getParameter("yhxfldkbs2");
-		//贷款参数【贷款总额度】【申请贷款次数】【原贷款逾期次数】【征信查询记录】
-		String dkzed1=request.getParameter("dkzed1");
-		String dkzed2=request.getParameter("dkzed2");
-		String sqdkcs1=request.getParameter("sqdkcs1");
-		String sqdkcs2=request.getParameter("sqdkcs2");
-		String ydkyqcs1=request.getParameter("ydkyqcs1");
-		String ydkyqcs2=request.getParameter("ydkyqcs2");
-		String zxcxjl1=request.getParameter("zxcxjl1");
-		String zxcxjl2=request.getParameter("zxcxjl2");
-		SimpleDateFormat df1 = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
-		Date date=new Date();
-		//共生成数量
-		String sum=request.getParameter("gsc");
-		CreditTemplateAllInfo  cta=new CreditTemplateAllInfo();
-		cta.setGenerateNums(sum);
-		cta.setId(df1.format(date));
-		cta.setTime(df1.format(date));
-		CreditTemplateContext cdc=new CreditTemplateContext();
-		cdc.setMinAge(nl1);
-		cdc.setMaxAge(nl2);
-		cdc.setMinMonthlyIncome(ysr1);
-		cdc.setMaxMounthlyIncome(ysr2);
-		cdc.setMinWorkYears(gznx1);
-		cdc.setMaxWorkYears(gznx2);
-		
-		cdc.setMinCreditNum(xykzhs1);
-		cdc.setMaxCreditNum(xykzhs2);
-		cdc.setMinLoansNum(yhdkbs1);
-		cdc.setMaxLoansNum(yhdkbs2);
-		cdc.setMinExpenseLoansNum(yhxfldkbs1);
-		cdc.setMaxExpenseLoansNum(yhxfldkbs2);
-		
-		cdc.setMinLoansAmount(dkzed1);
-		cdc.setMaxLoansAmount(dkzed2);
-		cdc.setMinApplyForLoanNum(dkzed1);
-		cdc.setMaxApplyForLoanNum(dkzed2);
-		cdc.setMinOverdueLoanNum(ydkyqcs1);
-		cdc.setMaxOverdueLoanNum(ydkyqcs2);
-		cdc.setMinCreditInquiryNum(zxcxjl1);
-		cdc.setMaxCreditInquiryNum(zxcxjl2);
-		cta.setCreditTemplateContext(cdc);
-		Adminuser au=new Adminuser();
-		au.setAdminName("Admin");
-		cta.setUseUser(au);
-		String btnGenerate=request.getParameter("btnSimulateGenerateData");
-		request.setAttribute("GenerateOrSave",null);
 		try
 		{
 			String[][] str=sds.generateCreditSimulationData(cta);
-			System.out.println(str.length);
 			if(str.length>0)
 			{
-				request.setAttribute("GenerateOrSave", "模拟数据生成成功！");
+				model.addAttribute("OperateStatus", "模拟数据生成成功！");
 			}
 			else
 			{
-				request.setAttribute("GenerateOrSave", "模拟数据生成失败");
+				model.addAttribute("OperateStatus", "模拟数据生成失败！");
 			}
 		}
 		catch(Exception ex)
 		{
-			request.setAttribute("GenerateOrSave", "模拟数据生成失败");
+			model.addAttribute("OperateStatus", "模拟数据生成失败！"); 
 		}
-		System.out.println(request.getAttribute("GenerateOrSave"));
+    	
+		return "client-credit-analyse-system/data-collect/generateData";
+    }
+    
+	//保存为数据模板
+    @RequestMapping(value="/saveAsTemplate",method=RequestMethod.POST)
+    public String SaveAsTemplate(Model model,Creditanalysistemplatecontext catc) 
+    {
+    	System.out.println("=====++++++=====  "+catc.getMaxAge());
+    	try
+    	{
+    		Templatedata ta=new Templatedata();				
+    		SimpleDateFormat ms=new SimpleDateFormat("HH:mm:ss");
+    		Date n=new Date();
+    		ta.setTempDate(n);
+    		ta.setAdminId(1);
+    		ta.setTempTime(new java.sql.Time(new java.util.Date().getTime()));
+    		System.out.println("Admin="+ta.getAdminId()+" Date="+ta.getTempDate()+" Time= "+ta.getTempTime());
+    		ts.insertTemplateData(ta, catc);
+    		model.addAttribute("OperateStatus", "模板保存成功！");
+    	}
+    	catch(Exception ex)
+    	{
+    		model.addAttribute("OperateStatus", "模板保存失败！");
+    	}
+    	return "client-credit-analyse-system/data-collect/generateData";
+    }
+
+    //数据录入 dataInput.jsp
+    @RequestMapping(value="/dataInput",method=RequestMethod.GET)
+    public String DataInput(Model model)
+    {
+    	model.addAttribute("OperateStatus", "");
+    	return "client-credit-analyse-system/data-collect/dataInput";
+    }
+    
+    //录入数据保存
+    @RequestMapping(value="/dataInput",method=RequestMethod.POST)
+    public String DataInput(Model model,Singleusercreditinformation sci)
+    {
+    	System.out.println("age:"+sci.getAge()+" AdministrativerPunishment:"+sci.getAdministrativerPunishment()+" CivilJudgmentRecord:"+sci.getCivilJudgmentRecord()+" CreditNum:"+sci.getCreditNum()+" ElectricityArrears:"+sci.getElectricityArrears()+" Enforcement:"+sci.getEnforcement()+" GenerateRecordNum:"+sci.getGenerateRecordNum()+
+				" HouseLoan:"+sci.getHouseLoan()+" LoansNum:"+sci.getLoansNum()+" MonthlyIncome:"+sci.getMonthlyIncome()+" OwingTaxes:"+sci.getOwingTaxes()+" SelectOwingTaxes:"+sci.getSelectOwingTaxes());
+    	try{
+    		sis.addSingleusercreditinformation(sci);
+    		model.addAttribute("OperateStatus", "保存成功！");
+    	}
+    	catch(Exception ex)
+    	{
+    		model.addAttribute("OperateStatus", "保存失败！");
+    	}
+    	return "client-credit-analyse-system/data-collect/dataInput";
+    }
+    
+    //查询所有的模板
+    @RequestMapping(value="/TempletCreateRecordDetail",method=RequestMethod.GET)
+    public ModelAndView  CheckAllTemplates()
+    {
+    	//model.addAttribute("OperateStatus", "");
+    	List<Templatedata> tds=new ArrayList<Templatedata>();
+    	tds.clear();
+    	try{
+    		tds=ts.checkTotalCreditTemplate();
+    		//System.out.println("Size:"+tds.size());
+    		//model.addAttribute("OperateStatus", "全部模板显示成功！");
+    	}
+    	catch(Exception ex)
+    	{
+    		//model.addAttribute("OperateStatus", "全部模板显示失败！");
+    	}
+    	return new  ModelAndView("client-credit-analyse-system/data-collect/TempletCreateRecordDetail", "Templatedatas", tds);
+    }
+    
+//    //根据模板Id查看模版详细
+//    @RequestMapping(value="/checkTemplate/{id}",method=RequestMethod.GET)
+//    @ResponseBody
+//    public ModelAndView CheckTemplate(@PathVariable("id") String id)
+//    {
+//    	System.out.println("=== Id =="+id);
+//    	try{
+//    		
+//    	}
+//    	catch(Exception ex)
+//    	{
+//    		//model.addAttribute("OperateStatus", "全部模板显示失败！");
+//    	}
+//    	return new ModelAndView("client-credit-analyse-system/data-collect/generateDataDetail");
+//    }
+    
+    //根据id删除模板
+    @RequestMapping(value="/deleteTemplate/{id}",method=RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView DeleteTemplet(@PathVariable("id") String id)
+    {
+    	//System.out.println("===================== Id ================ "+id);
+    	try{
+    		ts.deleteTemplateDataByID(id);
+    		System.out.println("ok!");
+    	}
+    	catch(Exception ex)
+    	{
+    		//model.addAttribute("OperateStatus", "全部模板显示失败！");
+    	}
+    	return CheckAllTemplates();
     }
     
     
+    //加载采集记录信息
+    @RequestMapping(value="/collectingRecord",method=RequestMethod.GET)
+    public ModelAndView ShowDataCollectingRecord()
+    {
+    	//model.addAttribute("OperateStatus", "");
+    	List<Templateuser> tus=new ArrayList<Templateuser>();
+    	tus.clear();
+    	try{
+    		//tus=ts.
+    		//System.out.println("the Size of Singleusercreditinformation : "+scis.size()+"  SingleuserinfoId="+scis.get(0).getSingleuserinfoId());
+    		//model.addAttribute("OperateStatus", "全部模板显示成功！");
+    	}
+    	catch(Exception ex)
+    	{
+    		//model.addAttribute("OperateStatus", "全部模板显示失败！");
+    	}
+    	return new  ModelAndView("client-credit-analyse-system/data-collect/collectingRecord");
+    }
     
+    //根据采集记录Id查看信息详细
+    @RequestMapping(value="/checkCollectiong/{id}",method=RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView CheckCollectiong(@PathVariable("id") String id)
+    {
+    	//System.out.println("=== Id =="+id);
+    	Singleusercreditinformation sci=new Singleusercreditinformation();
+    	try{
+    		
+    	}
+    	catch(Exception ex)
+    	{
+    		//model.addAttribute("OperateStatus", "全部模板显示失败！");
+    	}
+    	return new ModelAndView("client-credit-analyse-system/data-collect/dataInputDetail");
+    }
+    
+    //根据采集记录id删除信息
+    @RequestMapping(value="/deleteCollecting/{id}",method=RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView DeleteCollecting(@PathVariable("id") String id)
+    {
+    	System.out.println("===================== Id ================ "+id);
+    	try{
+    		
+    	}
+    	catch(Exception ex)
+    	{
+    		//model.addAttribute("OperateStatus", "全部模板显示失败！");
+    	}
+    	return ShowDataCollectingRecord();
+    }
 }

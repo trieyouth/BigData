@@ -1,13 +1,8 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     
 <title>个人信用查询</title>
     
@@ -16,15 +11,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<link href="WebView/css/mycss.css" rel="stylesheet" type="text/css"  >
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/mycss.css"/>" rel="stylesheet" type="text/css">
   </head>
   
-  <body>
+  <body style="background:#fff;">
  <div style="height:4px; width:100%;"></div>
-<form  method="post">
+<form method="POST" action="<c:url value="/ccas/index/clientPortray/personalCreditQuery"/>">
   
   <!--基本参数设置区域-->
   
@@ -32,40 +25,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div style="height:4px; width:100%;"></div>
     <label  id="labelhead">基本信息参数设置</label>
     <div style="height:4px; width:100%;"></div>
-    <table frame="void" width = "47%" height="25" >
+    <table frame="void" width = "50%" height="25" >
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 年龄： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="nl1" >
-          </label></td>
-        <!--那么属性为参数名-->
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="nl2" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" >岁 </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="age" ></label></td>
+        <td width="30%"  height="25" ><label id="labelbody1" >* </label></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 月收入： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="ysr1" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="ysr2" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" >元 </label></td>
-      </tr>
-      <tr>
-        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 工作年限： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="gznx1" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="gznx2" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" >年 </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="monthlyIncome" > </label></td>
+        <td width="30%"  height="25" ><label id="labelbody1" >*</label></td>
       </tr>
     </table>
   </div>
@@ -76,30 +47,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div style="height:4px; width:100%;"></div>
     <label  id="labelhead">信贷记录参数设置</label>
     <div style="height:4px; width:100%;"></div>
-    <table frame="void" width = "47%" height="25" >
+    <table frame="void" width = "50%" height="25" >
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 信用卡账户数： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="xykzhs1" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="xykzhs2" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" >个 </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="creditNum" ></label></td>
+        <td width="30%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
       <tr>
-        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 银行贷款笔数： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="yhdkbs1" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="yhdkbs2" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" >笔 </label></td>
+        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 住房贷款账户数：</label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="houseLoan" ></label></td>
+        <td width="30%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
-     
+      <tr>
+        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" >其它贷款账户数：</label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="loansNum" > </label></td>
+        <td width="30%"  height="25"  ><label id="labelbody1" >* </label></td>
+      </tr>
     </table>
   </div>
   
@@ -107,41 +73,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div style="height:4px; width:100%;"></div>
   <div id="lightcolor">
     <div style="height:4px; width:100%;"></div>
-    <label  id="labelhead">贷款参数设置</label>
+    <label  id="labelhead">公共记录</label>
     <div style="height:4px; width:100%;"></div>
-    <table frame="void" width = "47%" height="25" >
+    <table frame="void" width = "50%" height="25" >
       <tr>
-        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 贷款总额度： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="dkzed1" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="dkzed2" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" >元 </label></td>
+        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 欠税记录： </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="owingTaxes" ></label></td>
+         <td width="30%"  height="25"  style="text-align:center"  ><label id="labelbody" > </label></td>
+         </tr>
+      <tr>
+        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 民事判断记录： </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="civilJudgmentRecord" ></label></td>
+        <td width="30%"  height="25"  style="text-align:center"  ></td>
       </tr>
       <tr>
-        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 申请贷款次数： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="sqdkcs1" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="sqdkcs2" >
-          </label></td>
-        <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" >次 </label></td>
+        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 强制执行记录： </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="enforcement" ></label></td>
+         <td width="30%"  height="25"  style="text-align:center"  ></td>
+      </tr>
+      <tr>
+        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 行政记录处罚： </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="administrativerPunishment" ></label></td>
+         <td width="30%"  height="25"  style="text-align:center"  ><label id="labelbody" > </label></td> 
+      </tr>
+      <tr>
+        <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 电费欠费记录： </label></td>
+        <td width="40%"  height="25"  ><label id="labelbody" >
+            <input  type="text" id="inputwidth" name="electricityArrears" ></label></td>
+         <td width="30%"  height="25"  style="text-align:center"  ><label id="labelbody" > </label></td> 
       </tr>
     </table>
   </div>
-        <div style="height:20px; width:100%;">
-        </div>
-        <div id="buttoncon">
-          <button name="btnPersonalCreditQuery"  type="submit" style="width:150px ;height:25px;background:#2976BE;border:0;color:#FFF;font-family: Microsoft YaHei;">查询</button> 
-          <!--点击按钮后根据前面的去跳转-->
-          <button  type="reset" style="width:150px ;height:25px;background:#A74544;border:0;color:#FFF;font-family: Microsoft YaHei;">重置</button>
-<!--           <a href="WebView/ClientCreditAnalyseSystem/ClientPortray/PersonalCreditQueryCrowd.jsp">查询测试</a> -->
-          </div>
-      </form>
+  
+    <i><div style="height:4px; width:100%;"></div>
+    <div id="lightcolor">
+    <label id="labelhead">查询记录</label>
+    <div style="height:4px; width:100%;"></div>
+    <table frame="void" width="50%" height="25">
+      <tr>
+        <td width="30%" height="25" style="text-align:right"><label id="labelbody">欠税记录： </label></td>
+        <td width="40%" height="25"><label id="labelbody">
+            <input type="text" id="inputwidth" name="selectOwingTaxes"> </label></td>
+         <td width="30%" height="25" style="text-align:center"><label id="labelbody"> </label></td> 
+      </tr>
+    </table>
+  </div></i>
+  
+  <!--选择按钮功能-->
+  <div id="buttoncon">
+    <button  id="button1style" type="submit">开始画像</button>
+    <!--点击此按钮后台获得参数-->
+    <button  type="Reset" id="button2style">重填</button>
+  </div>
+</form>
   </body>
 </html>
