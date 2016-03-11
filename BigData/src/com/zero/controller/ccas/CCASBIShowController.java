@@ -54,6 +54,7 @@ import com.zero.cache.LRUCache;
 import com.zero.common.Global;
 import com.zero.controller.ccas.AbsJsonProducer;
 import com.zero.service.HiveService;
+import com.zero.utils.BiUtil;
 
 /*
  * created by youth
@@ -67,6 +68,7 @@ public class CCASBIShowController {
 
 	@Autowired
 	HiveService hiveService;
+	
 
 	private final String AREA = "AREA";// 地区贷款量统计缓存
 	private final String PIE = "PIE";// 行业逾期总表缓存
@@ -80,6 +82,7 @@ public class CCASBIShowController {
 	private LRUCache<String, String> cache = new LRUCache<String, String>(10,
 			60000);
 
+	
 	@RequestMapping("/BI")
 	public String BI() {
 		return "client-credit-analyse-system/BI-show/BI";
