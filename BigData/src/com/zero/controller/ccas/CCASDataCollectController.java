@@ -2,6 +2,9 @@ package com.zero.controller.ccas;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,12 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
-<<<<<<< HEAD
-import org.omg.SendingContext.RunTime;
-=======
 import org.apache.hadoop.hive.ql.parse.HiveParser_PlFunctionParser.return_type_spec_return;
 import org.rhq.helpers.pluginAnnotations.agent.Parameter;
->>>>>>> 8edc81c456780c5f93e22be5d7b0033cad4212f5
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -53,7 +52,8 @@ import com.zero.service.SimulationDataService;
 import com.zero.service.SingInformationService;
 import com.zero.service.TemplatService;
 import com.zero.service.UserService;
-import com.zero.entity.Templatedata;
+import com.zero.utils.ExcelReader;
+import com.zero.utils.FileUpLoadUtil;
 
 @RequestMapping("/ccas/index/dataCollect")
 @Controller
@@ -68,6 +68,9 @@ public class CCASDataCollectController {
 	SingInformationService sis;
 	@Autowired  
     private HttpServletRequest request;
+	@Autowired
+	FileUpLoadUtil util;
+
 	
 	/*@RequestMapping(value="/generateData",method=RequestMethod.POST)
 	public String generateData(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -101,36 +104,36 @@ public class CCASDataCollectController {
 	//数据表 userId filepath 
 	@RequestMapping(value="/dataFileInput",method=RequestMethod.POST)
 	public String dataFileInput(@RequestParam("file") CommonsMultipartFile file) throws IOException {
+		
        System.out.println("上传文件 fileName："+file.getOriginalFilename());
        String path=request.getSession().getServletContext().getRealPath("/") + "WEB-INF/tmp/upData/"  
                + file.getOriginalFilename();
        File newFile=new File(path);
        //通过CommonsMultipartFile的方法直接写文件
-       file.transferTo(newFile);
-       
-       Session ssh = null;
-       try {
- 			Connection conn = new Connection(hostname);
- 			conn.connect();
- 			boolean isconn = conn.authenticateWithPassword(username, password);
- 			if (!isconn) {
- 				System.out.println("连不起");
- 			} else {
- 				System.out.println("ok");
- 				ssh = conn.openSession();
- 				ssh.execCommand("hdfs dfs -put Documents/tomcat/webapps/BigData/WEB-INF/tmp/upData/"+ file.getOriginalFilename() +"/tmp/");
- 				Thread.sleep(30000);
- 			}
- 			ssh.close();
- 			conn.close();
- 			System.out.println("close");
- 		} catch (IOException e) {
- 			e.printStackTrace();
- 		} catch (InterruptedException e) {
- 			e.printStackTrace();
- 		}
+       file.transferTo(newFile); 
+       newFile = ExcelReader.ExcelToTxt(newFile);
+       util.syncMoveFileToHDFS(newFile);
        return "client-credit-analyse-system/data-collect/dataFileInput";
 	}
+	
+	public Object exec(String cmd) {
+        try {
+            String[] cmdA = { "/bin/sh", "-c", cmd };
+            Process process = Runtime.getRuntime().exec(cmdA);
+            LineNumberReader br = new LineNumberReader(new InputStreamReader(
+                    process.getInputStream()));
+            StringBuffer sb = new StringBuffer();
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                sb.append(line).append("\n");
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 	
 	@RequestMapping("/dataInput")
 	public String dataInput(){
