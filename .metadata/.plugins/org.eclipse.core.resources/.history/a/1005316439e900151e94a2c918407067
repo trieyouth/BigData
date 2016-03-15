@@ -1,0 +1,201 @@
+package com.zero.service;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zero.entity.Creditanalysistemplatecontext;
+import com.zero.entity.Riskpreferencetemplatecontext;
+import com.zero.entity.Secondtemplatedata;
+import com.zero.entity.Secondtemplateuser;
+import com.zero.entity.Templatedata;
+import com.zero.entity.Templateuser;
+import com.zero.dao.AdminuserDAO;
+import com.zero.dao.CreditanalysistemplatecontextDAO;
+import com.zero.dao.RiskpreferencetemplatecontextDAO;
+import com.zero.dao.SecondtemplatedataDAO;
+import com.zero.dao.SecondtemplateuserDAO;
+import com.zero.dao.TemplatedataDAO;
+import com.zero.dao.TemplateuserDAO;
+import com.zero.service.LogService;
+
+
+
+
+@Service
+public class TemplatService {
+	@Autowired
+	private TemplatedataDAO templateDataDao;
+	@Autowired
+	private TemplateuserDAO templateUserDAO;
+	@Autowired
+	private SecondtemplatedataDAO secondtemplatedataDAO;
+	@Autowired
+	private SecondtemplateuserDAO secondtemplateuserDAO;
+	
+	private Creditanalysistemplatecontext creditanalysistemplatecontext=new Creditanalysistemplatecontext();
+	private Riskpreferencetemplatecontext riskpreferencetemplatecontext=new Riskpreferencetemplatecontext();
+	
+	private Templatedata templatedata=new Templatedata();
+	private Secondtemplatedata secondtemplatedata=new Secondtemplatedata();
+	
+	@Autowired
+	private AdminuserDAO adminuserDao;
+	@Autowired
+	private LogService logservice;
+	@Autowired
+	private CreditanalysistemplatecontextDAO creditanalysistemplatecontextDAO;
+	@Autowired
+	private RiskpreferencetemplatecontextDAO riskpreferencetemplatecontextDAO;
+	
+	public int adminID;
+	public int templateID;
+	public TemplatService() {
+		
+	}
+
+	/**
+	 * 查询模板列表
+	 * 
+	 * @return 返回一个list
+	 */
+	public List<Templatedata> checkTotalCreditTemplate() {
+		return templateDataDao.findAll();
+	}
+
+	public List<Templatedata> getUserList() {
+		return templateDataDao.findAll();
+	}
+	
+	public List<Templateuser> checkTotalCreditTemplateUser()
+	{
+		return templateUserDAO.findAll();
+	}
+	public List<Secondtemplatedata> checkTotalRiskTemplate()
+	{
+		return secondtemplatedataDAO.findAll();
+	}
+	public List<Secondtemplateuser> checkTotalRiskTemplateUser()
+	{
+		return secondtemplateuserDAO.findAll();
+	}
+	/**
+	 * 根据模板id查询
+	 * 
+	 * @param templateID
+	 * @return
+	 */
+	public Creditanalysistemplatecontext checkUseDetailCreditTemplate(String templateID) {
+		System.out.println(templateID);
+		return creditanalysistemplatecontextDAO.findById(Integer.parseInt(templateID));
+	}
+	public Riskpreferencetemplatecontext checkUseDetailRiskTemplate(String templateID) {
+		System.out.println(templateID);
+		return riskpreferencetemplatecontextDAO.findById(Integer.parseInt(templateID));
+	}
+
+	/**
+	 * 插入一个模板
+	 * 
+	 * @param templateData
+	 */
+	public void insertTemplateData(Templatedata templateData,Creditanalysistemplatecontext tempCreditTemplateAllInfo) 
+	{
+		templateDataDao.save(templateData);
+		List<Templatedata> temp = templateDataDao.findByAdminId(templateData.getAdminId());
+		logservice.saveTemplateLog(adminID, temp.get(temp.size()-1).getTempId());
+		tempCreditTemplateAllInfo.setTemplateId(temp.get(temp.size()-1).getTempId());
+		System.out.println("afsasfawf"+tempCreditTemplateAllInfo.getTemplateId());
+		creditanalysistemplatecontextDAO.save(tempCreditTemplateAllInfo);
+	}
+	/**
+	 * 插入一个模板
+	 * 
+	 * @param templateData
+	 */
+	public void insertSecondTemplateData(Secondtemplatedata templateData,Secondtemplateuser stu,Riskpreferencetemplatecontext tempRiskTemplateAllInfo) 
+	{
+		secondtemplatedataDAO.save(templateData);
+		List<Secondtemplatedata> temp = secondtemplatedataDAO.findByAdminId(templateData.getAdminId());
+		logservice.saveTemplateLog(adminID, temp.get(temp.size()-1).getTempId());
+		tempRiskTemplateAllInfo.setTemplateId(temp.get(temp.size()-1).getTempId());
+		stu.setTempId(temp.get(temp.size()-1).getTempId());
+		System.out.println("AdminId:"+stu.getAdminId()+"   DataNumber:"+stu.getDataNumber()+"   UseDate:"+stu.getUseDate()+"  UseTime:"+stu.getUseTime()+" Template:"+stu.getTempId());
+		secondtemplateuserDAO.save(stu);
+		riskpreferencetemplatecontextDAO.save(tempRiskTemplateAllInfo);
+	}
+
+
+	/**
+	 * 根据模板id删除一个模板
+	 * 
+	 * @param templateData
+	 */
+	public void deleteSecondTemplateDataByID(String TempId) {
+		secondtemplatedata.setTempId(Integer.parseInt(TempId));
+		secondtemplatedataDAO.delete(secondtemplatedata);
+		//templateDataDao.deleteTempId(TempId);
+		riskpreferencetemplatecontext.setTemplateId(Integer.parseInt(TempId));
+		riskpreferencetemplatecontextDAO.delete(riskpreferencetemplatecontext);
+		//creditanalysistemplatecontextDAO.deleteTempId(TempId);
+		logservice.deleteTemplateLog(adminID, Integer.parseInt(TempId));
+	}
+	/**
+	 * 根据模板id删除一个模板
+	 * 
+	 * @param templateData
+	 */
+	public void deleteTemplateDataByID(String TempId) {
+		templatedata.setTempId(Integer.parseInt(TempId));
+		templateDataDao.delete(templatedata);
+		//templateDataDao.deleteTempId(TempId);
+		creditanalysistemplatecontext.setTemplateId(Integer.parseInt(TempId));
+		creditanalysistemplatecontextDAO.delete(creditanalysistemplatecontext);
+		//creditanalysistemplatecontextDAO.deleteTempId(TempId);
+		logservice.deleteTemplateLog(adminID, Integer.parseInt(TempId));
+	}
+
+	/**
+	 * 保存模板
+	 * 
+	 * @param templateUser
+	 */
+	public void useTemplateUser(Templateuser templateUser) {
+		templateUserDAO.save(templateUser);
+		List<Templateuser> temp = templateUserDAO.findByDataNumber(templateUser.getDataNumber());
+		logservice.useTemplateLog(adminID, temp.get(temp.size()-1).getId().getTempId());
+	}
+	/**
+	 * 保存模板
+	 * 
+	 * @param templateUser
+	 */
+	public void useSecondTemplateUser(Secondtemplateuser templateUser) {
+		secondtemplateuserDAO.save(templateUser);
+		List<Secondtemplateuser> temp = secondtemplateuserDAO.findByDataNumber(templateUser.getDataNumber());
+		logservice.useTemplateLog(adminID, temp.get(temp.size()-1).getTempId());
+	}
+	/**
+	 * 删除模板
+	 * 
+	 * @param templateUser
+	 */
+	public void deleteTemplateUser(String templateID,String adminID) {
+		templateUserDAO.deleteByAuthId(Integer.parseInt(templateID),Integer.parseInt(adminID));
+		logservice.deleteTemplateLog(Integer.parseInt(adminID), Integer.parseInt(templateID));
+	}
+	/**
+	 * 删除模板
+	 * 
+	 * @param templateUser
+	 */
+	public void deleteSecondTemplateUser(String templateID,String adminID) {
+		Secondtemplateuser secondtemplateuser=new Secondtemplateuser();
+		secondtemplateuser.setTempId(Integer.parseInt(templateID));
+		secondtemplateuserDAO.delete(secondtemplateuser);
+		logservice.deleteTemplateLog(Integer.parseInt(adminID), Integer.parseInt(templateID));
+	}
+
+}

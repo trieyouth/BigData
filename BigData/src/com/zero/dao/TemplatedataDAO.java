@@ -90,7 +90,7 @@ public class TemplatedataDAO  {
         log.debug("getting Templatedata instance with id: " + id);
         try {
             Templatedata instance = (Templatedata) getCurrentSession()
-                    .get("com.entity.Templatedata", id);
+                    .get("com.zero.entity.Templatedata", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

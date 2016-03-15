@@ -71,7 +71,7 @@ public class RoleDAO  {
         log.debug("getting Role instance with id: " + id);
         try {
             Role instance = (Role) getCurrentSession()
-                    .get("com.entity.Role", id);
+                    .get("com.zero.entity.Role", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

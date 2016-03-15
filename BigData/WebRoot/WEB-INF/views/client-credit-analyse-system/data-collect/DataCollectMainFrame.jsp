@@ -20,7 +20,7 @@
         </div>
         <div class="nav">
         	<ul>
-            	<li><a href=<c:url value="/ccas/index" />>首页</a></li>
+        	    <li><a href=<c:url value="/ccas/index" />>首页</a></li>
                 <li><a href=<c:url value="/ccas/index/dataCollect" />>数据采集</a></li>
                 <li><a href=<c:url value="/ccas/index/clientPortray" />>客户画像</a></li>
                 <li><a href=<c:url value="/ccas/index/BIShow" />>商业智能</a></li>

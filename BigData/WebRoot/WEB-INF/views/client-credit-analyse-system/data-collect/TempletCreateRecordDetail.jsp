@@ -43,14 +43,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <form  method="get" action="<c:url value="/ccas/index/dataCollect/TempletCreateRecordDetail"/>">
 <div id="lighttable">
   <table  frame="void" width = "100%" height="25" >
-<!--     <span style="overflow:hidden;height:30"></span> -->
-   
    <c:forEach items="${Templatedatas}" var="tds">
     <tr>
       <td width="20%"  height="30" class="cell" ><label id="labelbody" ><c:out value="${ tds.tempId}"/></label></td>		
-      <td width="30%"  height="30" class="cell"><label id="labelbody" ><c:out value=" ${ tds.tempDate} ${ tds.tempTime}"/> </label></td>		
+      <td width="30%"  height="30" class="cell"><label id="labelbody" ><c:out value="${ tds.tempDate} ${ tds.tempTime}"/> </label></td>		
       <td width="20%"  height="30"class="cell"><label id="labelbody" ><c:out value="${ tds.adminId }"/></label></td> 
-<!--       <td width="20%"  height="30"><label id="labelbody" ><a href="<c:url value="/ccas/index/dataCollect/checkTemplate/${ tds.tempId}"/>" style="color:#09F">查看详情</a></label></td>		 -->
       <td width="10%"  height="30"><label id="labelbody" ><a href="<c:url value="/ccas/index/dataCollect/deleteTemplate/${ tds.tempId}"/>" style="color:#09F">删除</a></label></td> 
     </tr>
     </c:forEach> 

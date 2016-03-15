@@ -1,0 +1,61 @@
+package com.zero.controller.icpas;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.zero.entity.Singleusercreditinformation;
+import com.zero.service.HiveQueryService;
+
+@RequestMapping("/icpas/index/evaluateRiskPreference")
+@Controller
+public class ICPASEvaluateRiskPreference {
+	@RequestMapping(value="/clientRiskBearQuery",method=RequestMethod.GET)
+	public String clientRiskBearQuery(){
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQuery";
+	}
+	
+	@RequestMapping(value="/clientRiskBearQueryByCard",method=RequestMethod.GET)
+	public String clientRiskBearQueryByCard(){
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryByCard";
+	}
+	
+	@RequestMapping(value="/riskPreferenceType",method=RequestMethod.GET)
+	public String riskPreferenceType(){
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/riskPreferenceType";
+	}
+	
+	@RequestMapping(value="/clientRiskBearQuery",method=RequestMethod.POST)
+	public String ClientRiskBearQuery(Singleusercreditinformation sci)
+	{
+		
+		//// hive的数据查询 ////
+		
+		return  "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryResult";
+	}
+	
+    ////根据Id的hive的数据查询 ////
+	@RequestMapping(value="/clientRiskBearQueryByCard",method=RequestMethod.POST)
+	public String PersonalCreditQueryByCardPost(String Id,Model model){
+		
+		
+		if( Id !="" && Id!=null )
+		{
+			List<String> list = new ArrayList<String>();
+			list.clear();
+			HiveQueryService hqs=new HiveQueryService();
+			try {
+				list=hqs.getInfoByCardnums(Id);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return  "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryResult";
+	}
+}

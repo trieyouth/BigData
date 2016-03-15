@@ -63,7 +63,8 @@
 				<value>com.zero.entity.Authority</value>
 				<value>com.zero.entity.Riskpreferencetemplatecontext</value>
 				<value>com.zero.entity.Adminuser</value>
-				<value>com.zero.entity.Creditanalysistemplatecontext</value></list>
+				<value>com.zero.entity.Creditanalysistemplatecontext</value>
+				<value>com.zero.entity.Secondtemplateuser</value></list>
 		</property>
 	</bean>
 	<bean id="transactionManager"
@@ -159,6 +160,12 @@
 	</bean>
 	<bean id="CreditanalysistemplatecontextDAO"
 		class="com.zero.dao.CreditanalysistemplatecontextDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SecondtemplateuserDAO"
+		class="com.zero.dao.SecondtemplateuserDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>

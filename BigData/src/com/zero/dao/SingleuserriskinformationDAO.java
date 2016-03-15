@@ -12,6 +12,7 @@ import static org.hibernate.criterion.Example.create;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zero.entity.Singleuserriskinformation;
@@ -81,14 +82,51 @@ public class SingleuserriskinformationDAO  {
         log.debug("getting Singleuserriskinformation instance with id: " + id);
         try {
             Singleuserriskinformation instance = (Singleuserriskinformation) getCurrentSession()
-                    .get("com.entity.Singleuserriskinformation", id);
+                    .get("com.zero.entity.Singleuserriskinformation", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
             throw re;
         }
     }
+    public int count()
+    {
+    	HibernateTemplate hibernateTemplate=new HibernateTemplate(); 
+    	Session session = null;
+    	session=sessionFactory.openSession();
+    	String sql = "select count(*) from singleuserriskinformation";
+    	Query query = session.createSQLQuery(sql);
+    	List list = query.list();
+    	session.close();
+    	return Integer.parseInt((list.get(0).toString()));
+    }
     
+    public void outPutTxT() 
+    {
+    	HibernateTemplate hibernateTemplate=new HibernateTemplate(); 
+    	Session session = null;
+    	session=sessionFactory.openSession();
+    	String sql = "select * from singleuserriskinformation into OUTFILE 'F:/"+System.currentTimeMillis()+"' FIELDS TERMINATED BY ','";
+    	Query query = session.createSQLQuery(sql);
+    	try {
+    		query.list();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	session.close();
+	}
+    
+    
+    public void cleanAndRefresh()
+    {
+    	HibernateTemplate hibernateTemplate=new HibernateTemplate(); 
+    	Session session = null;
+    	session=sessionFactory.openSession();
+    	String sql = "delete from singleuserriskinformation where 1=1";
+    	Query query = session.createSQLQuery(sql);
+    	query.executeUpdate();
+    	session.close();
+    }
     
     public List<Singleuserriskinformation> findByExample(Singleuserriskinformation instance) {
         log.debug("finding Singleuserriskinformation instance by example");

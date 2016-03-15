@@ -99,7 +99,7 @@ public class TemplateuserDAO  {
         log.debug("getting Templateuser instance with id: " + id);
         try {
             Templateuser instance = (Templateuser) getCurrentSession()
-                    .get("com.entity.Templateuser", id);
+                    .get("com.zero.entity.Templateuser", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="com.zero.entitylib.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,34 +10,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-<title>客户信用详情报告</title>
-    
+    <title>客户信用详情报告</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<link href="WebView/css/mycss.css" rel="stylesheet" type="text/css"  >
-<style>
-#lightcolor {
-	width: 96%;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 10px;
-	margin-left: 1%;
-	background-color: #4B5C88;
-	border: 0;
-}
-
-</style>
+	<link href="<c:url value="/css/mycss.css"/>" rel="stylesheet" type="text/css">
   </head>
   
-  <body>
-
 <body>
 <div style="height:8px; width:100%;"></div>
   <div id="lightcolor">
@@ -44,49 +26,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <label id="labelhead">
       <div align="center" class="STYLE1"> <h1> <label id="labelhead">个人信用报告</label></h1></div>
       </label> 
-      
       <%
-         PersonalDetail p=new PersonalDetail();    
-         p=(PersonalDetail)request.getAttribute("PersonalDetail");    
+        List<String> p=new ArrayList<String>();
+         p=(List)request.getAttribute("list");    
       %>
       
       <label id="labelbody">
       <div align="left">
         <table width="100%" border="0">
           <tr>
-            <td width="33%"> <label id="labelbody">报告编号：<%=p.getV1() %></label></td>
-            <td width="33%"> <label id="labelbody">查询时间：<%=p.getV2() %></label></td>
-            <td width="34%"> <label id="labelbody">申请日期：<%=p.getV3() %></label></td>
+            <td width="33%"> <label id="labelbody">报告编号：<%=p.get(0) %></label></td>
+            <td width="33%"> <label id="labelbody">查询时间：<%=new java.text.SimpleDateFormat("yyyyMMddhhmmss").format(new java.util.Date()) %></label></td>
+            <td width="34%"> <label id="labelbody">申请日期：<%=p.get(61) %></label></td>
           </tr>
         </table><table width="100%" border="0">
           <tr>
             <td width="23%"> <label id="labelbody">证件类型：身份证</label></td>
-            <td width="23%"> <label id="labelbody">证件号：<%=p.getV4() %></label></td>
-            <td width="30%"> <label id="labelbody">证主贷人学历：<%=p.getV5() %></label></td>
-            <td width="24%"> <label id="labelbody">主贷人性别：<%=p.getV6() %></label></td>
+            <td width="23%"> <label id="labelbody">证件号：<%=p.get(0) %></label></td>
+            <td width="30%"> <label id="labelbody">证主贷人学历：<%=p.get(11) %></label></td>
+            <td width="24%"> <label id="labelbody">主贷人性别：<%=p.get(12) %></label></td>
           </tr>
            <tr>
-            <td width="23%"> <label id="labelbody">职位类别：<%=p.getV7() %></label></td>
-            <td width="23%"> <label id="labelbody">主贷人年龄：<%=p.getV8() %></label></td>
-            <td width="30%"> <label id="labelbody">主贷人婚姻状况：<%=p.getV9() %></label></td>
-            <td width="24%"> <label id="labelbody">单位性质：<%=p.getV10() %></label></td>
+            <td width="23%"> <label id="labelbody">职位类别：<%=p.get(10) %></label></td>
+            <td width="23%"> <label id="labelbody">主贷人年龄：<%=p.get(13) %></label></td>
+            <td width="30%"> <label id="labelbody">主贷人婚姻状况：<%=p.get(14) %></label></td>
+            <td width="24%"> <label id="labelbody">单位性质：<%=p.get(17) %></label></td>
           </tr>
            <tr>
-            <td width="23%"> <label id="labelbody">贷款类型：<%=p.getV11() %></label></td>
-            <td width="23%"> <label id="labelbody">贷款用途 ：<%=p.getV12() %></label></td>
-            <td width="30%"> <label id="labelbody">当前是否逾期 ：<%=p.getV13() %></label></td>
-            <td width="24%"> <label id="labelbody">信用卡总额度：<%=p.getV14() %></label></td>
+            <td width="23%"> <label id="labelbody">贷款类型：<%=p.get(2) %></label></td>
+            <td width="23%"> <label id="labelbody">贷款用途 ：<%=p.get(5) %></label></td>
+            <td width="30%"> <label id="labelbody">当前是否逾期 ：<%=p.get(45) %></label></td>
+            <td width="24%"> <label id="labelbody">信用卡总额度：<%=p.get(48) %></label></td>
           </tr>
            <tr>
-            <td width="23%"> <label id="labelbody">在使用信用卡账户数：<%=p.getV15() %></label></td>
-            <td width="23%"> <label id="labelbody">信用评分：<%=p.getV16() %></label></td>
+            <td width="23%"> <label id="labelbody">在使用信用卡账户数：<%=p.get(49) %></label></td>
+            <td width="23%"> <label id="labelbody">信用评分：<%=Integer.parseInt(p.get(50))*4 %></label></td>
             <td width="30%"></td>
             <td width="24%"></td>
           </tr>
         </table>
         <table>
         <tr>
-            <td width="100" colpan="4" style="width: 895px; "> <label id="labelbody">地址：<%=p.getV17() %></label></td>
+            <td width="100" colpan="4" style="width: 895px; "> <label id="labelbody">地址：<%=p.get(60) %></label></td>
           </tr>
         </table>
       </div>
@@ -100,10 +81,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div style="height:8px; width:100%;"></div>
   <div style="height:2px; width:100%;"></div>
   <div style="height:2px; width:100%;"></div>
-
-
-
-
-
   </body>
 </html>

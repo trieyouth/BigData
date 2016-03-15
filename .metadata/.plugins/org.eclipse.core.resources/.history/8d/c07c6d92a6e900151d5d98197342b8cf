@@ -1,0 +1,5 @@
+package com.zero.entity.self;
+
+public class RiskConsiderBuy {
+
+}

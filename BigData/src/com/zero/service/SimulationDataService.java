@@ -2,8 +2,11 @@ package com.zero.service;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zero.entity.CreditTemplateAllInfo;
@@ -26,6 +29,10 @@ public class SimulationDataService {
 	 *            包含模板所有信息的javabean
 	 * @return
 	 */
+	
+	@Autowired
+	DBUtils_Hive hive;
+	
 	public String[][] generateCreditSimulationData(CreditTemplateAllInfo allInfo) {
 		String userAndTime = allInfo.getUseUser().getAdminName()
 				+ allInfo.getTime();
@@ -42,7 +49,7 @@ public class SimulationDataService {
 				"sc11", Integer.valueOf(allInfo.getGenerateNums()), dataSaveDir,
 				userAndTime, "/tmp/modelsave/model", scopeInput, 40);
 		// 将生成数据插入hive
-		Connection con = DBUtils_Hive.getConn();
+		Connection con = hive.getConn();
 		String sql = "ALTER TABLE makedata1_table ADD PARTITION (v63='"
 				+ userAndTime + "') location '" + dataSaveDir + "'";
 		DBUtils_Hive.exeStatement(DBUtils_Hive.getStatement(con), sql);
@@ -55,13 +62,21 @@ public class SimulationDataService {
 				+ allInfo.getTime();
 		String dataSaveDir = "/tmp/makedata2/" + userAndTime;
 		String[][] dataarr = JobServiceCon.runMakedataJobAndGetDoubleArr2(
-				"sc2", Integer.valueOf(allInfo.getGenerateNums()), dataSaveDir,
+				"sc12", Integer.valueOf(allInfo.getGenerateNums()), dataSaveDir,
 				userAndTime, 20);
 		// 将生成数据插入hive
-		Connection con = DBUtils_Hive.getConn();
+		Connection con = hive.getConn();
 		String sql = "ALTER TABLE makedata2_table ADD PARTITION (v15='"
 				+ userAndTime + "') location '" + dataSaveDir + "'";
-		DBUtils_Hive.exeStatement(DBUtils_Hive.getStatement(con), sql);
+		try {
+			Statement stmt = con.createStatement();
+			System.out.println(sql);
+			stmt.execute(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DBUtils_Hive.exeStatement(DBUtils_Hive.getStatement(con),sql);
 		// 返回十个
 		return dataarr;
 	}

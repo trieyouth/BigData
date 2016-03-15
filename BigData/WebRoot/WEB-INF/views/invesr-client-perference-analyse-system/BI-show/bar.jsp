@@ -233,11 +233,11 @@
 	<div
 		style="font-family:Arial, Helvetica, sans-serif; text-align:center">
 		<b><font size="7">投资承载能力 </font> </b> <br /> <br />
-		<hr color="#0033CC" width="1024px" />
+		<hr color="#0033CC" width="100%" />
 		<br />
-		<hr color="#0033CC" width="1024px" />
+		<hr color="#0033CC" width="100%px" />
 		<div>
-			<div id="main" style="height:600px;border:1px solid blue" />
+			<div id="main" style="height:100%;border:1px solid blue" />
 
 		</div>
 	</div>

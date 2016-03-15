@@ -5,140 +5,75 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
-  <head>
-    <base href="<%=basePath%>">
-<title>投资客户分析偏好数据分析与推荐系统索引页</title>
-<c:import url="header1.jsp"/>
-<style>
+<head>
+<meta charset="utf-8">
+<title>投资客户风险偏好数据分析与推荐系统</title>
+<link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
+</head>
 
-#continaer{
-	margin: 0px auto;
-	width:80%;
-	height:750px;
-	background-color:rgb(18,24,48);
-	padding:10px;
-	}
-#header{
-	height:20%;
-	width:100%;
-	margin:0 auto;
-	padding:0;
-	border:0;
-	background-color:rgb(76,93,137);}
-    hr{ margin-top:0;
-	margin-bottom:0;}
-	
-#bod{
-	height:79%;
-	width:100%;
-	margin-top:0%;
-	padding:0;
-	background-color:rgb(49,69,120);
-	}
-#leftbody{
-	margin:0;
-	padding:0;
-	border:0;
-	width:20%;
-	height:100%;
-	background-color:rgb(49,69,120);
-	float:left;
-	}
-#rightbody{
-	margin:0;
-	padding:0;
-	border:0;
-	width:80%;
-	height:100%;
-	background-color:rgb(49,69,120);
-	float:left;}
-#navhead{
-	width:100%;
-	height:50px;
-	border:0;
-	margin:0;
-	padding:0;
-	background:rgb(49,69,120);}
-	
-#hrc{
-	margin-top:0;}	
-.nav ul {
-	width: 800px;
-	height: 50px;
-	padding: 0;
-	margin-top:0;
-}
-.nav ul li {
-	float: left;
-	list-style: none;
-}
-.nav ul li a {
-	width: 145px;
-	height: 41px;
-	line-height: 41px;
-	background: rgb(49,69,120);
-	color: #000;
-	font-size: 14px;
-	display: block;
-	text-align: center;
-	text-decoration: none;
-	font-size: 16px;
-	font-family:Microsoft YaHei;
-	color:#FFF;
-}
-.nav ul li a:hover {
-	width: 145px;
-	height: 41px;
-	line-height: 41px;
-	border: 1px solid rgb(49,69,120);
-	color: #000;
-}
-	
-.over {
-        color:red;
-        background:blue;
-        font-size:larger;
-    }
-    .out {
-        color:black;
-        background:white;
-        font-size:smaller;
-    }
-    .click {
-        color:yellow;
-        background:yellow;
-        font-size:12px;
-    }
-</style>
-  </head>
-  
-  <body>
-
-<div id="continaer">
-	<c:import url="header2.jsp"/>
-
-   
-   <div id="bod">
-		<div id="leftbody">
-        <br/>
+<body>
+<div class="system1-index-wrap">
+	<div class="header">
+    	<div class="logo">
+        	<a href=<c:url value="/icpas/index" />>
+        		<img src="<c:url value='/images/icpas/system2logo.png' />" alt="金融行业客户信用分析系统首页" width="40%">
+        	</a>
         </div>
-
-     <div id="rightbody">
-        <br/>
-        <br/>
-         <br/>
-          <br/> 
+        <div class="nav">
+        	<ul>
+            	<li><a href=<c:url value="/icpas/index" />>首页</a></li>
+                <li><a href=<c:url value="/icpas/index/dataCollect" />>数据采集</a></li>
+                <li><a href=<c:url value="/icpas/index/evaluateRiskPreference" />>偏好评估</a></li>
+                <li><a href=<c:url value="/icpas/index/BIShow" />>商业智能</a></li>
+			</ul>
+        </div>
+    </div>
+    <div class="content">
+    	<p id="datacollect" style="visibility:hidden;" >提供“数据生成”、“数据导入”、"数据录入"等功能</p>
+        <p id="bishow" style="visibility:hidden;" >商业智能展示提供报表、图标等展示形式，提供数据挖掘、钻取等操作</p>
+        <p id="customermsg" style="visibility:hidden;" >根据大数据建立的模型，对用户的投资风险偏好进行科学评估</p>
+         <p id="productsadvice" style="visibility:hidden;" >根据客户的投资风险偏好，对客户精确推荐理财产品</p>
+    	<img src="<c:url value='/images/icpas/system2guide.png' />" alt="功能导航图"  width="50%" usemap="#system2-guide">
+        <map name="system2-guide" id="system2-guide">
+        <area 
+        	shape="rect"
+            onMouseOver="datacollectshowmsg()"
+            onMouseOut="datacollecthiddenmsg()"
+            onClick="datacollectclick()"
+			coords="5,100,90,220"
+			alt="数据采集" />
         
-        
-       <img src="<c:url value='/images/icpas/InvesrClientPerferenceAnalyseSystemLogoIndex.png'/>" width="700" height="330" alt="系统操作流程图"> </div>
-
-
-   </div>
-
-   
+         <area 
+        	shape="rect"
+            onMouseOver="bishowshowmsg()"
+            onMouseOut="bishowhiddenmsg()"
+            onClick="bishowclick()"
+			coords="245,5,335,125"
+			alt="智能展示" />
+         
+          <area 
+        	shape="rect"
+            onMouseOver="customermsgshowmsg()"
+            onMouseOut="customermsghiddenmsg()"
+            onClick="customermsgclick()"
+			coords="150,230,320,352"
+			alt="风险评估" />
+          <area 
+        	shape="rect"
+            onMouseOver="productsadviceshowmsg()"
+            onMouseOut="productsadvicehiddenmsg()"
+            onClick=""
+			coords="380,210,490,362"
+			alt="推荐产品" />
+    </div>
+    <div class="footer">
+    	<p>重庆邮电大学 重庆慧都科技 联合开发</p>
+    </div>
 </div>
+
+<script src="<c:url value="/js/system2-guide.js"/>"></script>
 
 <script async>
 	var height900=document.getElementById("continaer");

@@ -1,14 +1,10 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ page import="com.zero.entity.Creditanalysistemplatecontext" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     <meta charset="utf-8">
 <title>数据录入 </title>
     
@@ -24,36 +20,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 <div style="height:4px; width:100%;"></div>
-<form name="frm" method="POST" action="<c:url value="/ccas/index/dataCollect/generateData"/>">
+<form name="frm" method="get" action="<c:url value="/ccas/index/dataCollect/generateData"/>">
   
   <!--基本参数设置区域-->
-  
   <div id="lightcolor">
     <div style="height:4px; width:100%;"></div>
     <label  id="labelhead">基本信息参数设置</label>
-    <div style="height:4px; width:100%;"></div>
+    <div style="height:4px; width:100%;"> </div>
     <table frame="void" width = "70%" height="25" >
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 年龄： </label></td>
-        <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minAge" >
-          </label></td>
+        <td width="25%"  height="25"  ><label id="labelbody">
+            <input  type="text" id="inputwidth"  name="minAge" value=${catc.minAge}></label></td>
         <!--那么属性为参数名-->
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxAge" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="maxAge" value=${catc.maxAge}></label></td>
         <td width="10%"  height="25" ><label id="labelbody1" >* </label></td>
       </tr>
+      
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 月收入： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minMonthlyIncome" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="minMonthlyIncome" value=${catc.minMonthlyIncome} > </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxMounthlyIncome" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="maxMounthlyIncome" value=${catc.maxMounthlyIncome}></label></td>
         <td width="10%"  height="25" ><label id="labelbody1" >*</label></td>
       </tr>
       
@@ -70,34 +62,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 信用卡账户数： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minCreditNum" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="minCreditNum" value=${catc.minCreditNum}></label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxCreditNum" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="maxCreditNum" value=${catc.maxCreditNum}></label></td>
         <td width="10%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 住房贷款账户数：</label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minHouseLoan" >
+            <input  type="text" id="inputwidth" name="minHouseLoan" value=${catc.minHouseLoan}>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxHouseLoan" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="maxHouseLoan" value=${catc.maxHouseLoan}> </label></td>
         <td width="10%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" >其它贷款账户数：</label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minLoansNum" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="minLoansNum" value=${catc.minLoansNum}> </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxLoansNum" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="maxLoansNum"  value=${catc.maxLoansNum}></label></td>
         <td width="10%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
     </table>
@@ -113,55 +100,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 欠税记录： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minOwingTaxes" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="minOwingTaxes" value=${catc.minOwingTaxes}></label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxOwingTaxes" >
-          </label></td>
+            <input  type="text" id="inputwidth" name="maxOwingTaxes"  value=${catc.maxOwingTaxes}></label></td>
          <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > </label></td>
          </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 民事判断记录： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minCivilJudgmentRecord" >
+            <input  type="text" id="inputwidth" name="minCivilJudgmentRecord" value=${catc.minCivilJudgmentRecord}>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxCivilJudgmentRecord" >
+            <input  type="text" id="inputwidth" name="maxCivilJudgmentRecord" value=${catc.maxCivilJudgmentRecord}>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 强制执行记录： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minEnforcement" >
+            <input  type="text" id="inputwidth" name="minEnforcement" value=${catc.minEnforcement}>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxEnforcement" >
+            <input  type="text" id="inputwidth" name="maxEnforcement"  value=${catc.maxEnforcement}>
           </label></td>
          <td width="10%"  height="25"  style="text-align:center"  ></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 行政记录处罚： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minAdministrativerPunishment" >
+            <input  type="text" id="inputwidth" name="minAdministrativerPunishment" value=${catc.minAdministrativerPunishment}>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxAdministrativerPunishment" >
+            <input  type="text" id="inputwidth" name="maxAdministrativerPunishment" value=${catc.maxAdministrativerPunishment}>
           </label></td>
          <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > </label></td> 
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 电费欠费记录： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minElectricityArrears" >
+            <input  type="text" id="inputwidth" name="minElectricityArrears" value=${catc.minElectricityArrears}>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxmElectricityArrears" >
+            <input  type="text" id="inputwidth" name="maxmElectricityArrears"  value=${catc.maxmElectricityArrears}>
           </label></td>
          <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > </label></td> 
       </tr>
@@ -176,10 +161,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td width="30%" height="25" style="text-align:right"><label id="labelbody">欠税记录： </label></td>
         <td width="25%" height="25"><label id="labelbody">
-            <input type="text" id="inputwidth" name="minSelectOwingTaxes"></label></td>
+            <input type="text" id="inputwidth" name="minSelectOwingTaxes" value=${catc.minSelectOwingTaxes}></label></td>
         <td width="10%" height="25" style="text-align:center"><label id="labelbody"> 至 </label></td>
         <td width="25%" height="25"><label id="labelbody">
-            <input type="text" id="inputwidth" name="maxSelectOwingTaxes"> </label></td>
+            <input type="text" id="inputwidth" name="maxSelectOwingTaxes"  value=${catc.maxSelectOwingTaxes}> </label></td>
          <td width="10%" height="25" style="text-align:center"><label id="labelbody"> </label></td> 
       </tr>
     </table>
@@ -195,19 +180,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td width="23%"  height="25"  style="text-align:right" ><label id="labelbody" > 共生成： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="generateRecordNum" ></label></td>
+            <input  type="text" id="inputwidth" name="generateRecordNum" value=${catc.generateRecordNum}></label></td>
         <td width="52%"  height="25"    ><label id="labelbody" style="text-align:left"> 条</label></td>
       </tr>
     </table><br>
   </div>
   
-  <div style="height:25px; width:100%;padding-left:5px;ling-height:25px;">${OperateStatus }</div>
   <!--选择按钮功能-->
   <div id="buttoncon">
     <button  id="button1style" type="submit" onclick="ClickGenerateData()" >生成模拟数据</button>
     <!--点击此按钮后台获得参数-->
-    <button  type="Reset" id="button2style">重新设置参数</button>
-    <button  type="submit" id="button3style" onclick="ClickSaveForTemplate()" >保存为模板</button>
+    <button  type="submit" id="button2style" onclick="ClickBackToList()">返 回</button>
     <!-- <button  type="Reset" id="button2style">设置生成字段</button> -->
   </div>
   <div style="height:10px; width:100%;"></div>
@@ -217,11 +200,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </body>
   <script language="javascript" type="text/javascript">
   function ClickGenerateData(){
-        document.frm.action="<c:url value="/ccas/index/dataCollect/generateData"/>";
+        document.frm.action="<c:url value="/ccas/index/dataCollect/generateDataAgain"/>";
         document.frm.submit();
    }
-  function ClickSaveForTemplate(){
-      document.frm.action="<c:url value="/ccas/index/dataCollect/saveAsTemplate"/>";
+  function ClickBackToList(){
+      document.frm.action="<c:url value="/ccas/index/dataCollect/collectingRecord"/>";
       document.frm.submit();
  }
   </script>

@@ -17,7 +17,7 @@
   
   <body style="background:#fff;">
  <div style="height:4px; width:100%;"></div>
-<form method="POST" action="<c:url value="/ccas/index/clientPortray/personalCreditQuery"/>">
+<form method="post" action="<c:url value="/ccas/index/clientPortray/personalCreditQuery"/>">
   
   <!--基本参数设置区域-->
   
@@ -122,8 +122,9 @@
       </tr>
     </table>
   </div></i>
-  
+  </br>
   <!--选择按钮功能-->
+  <div ><a>${OperateStatus}</a></div>
   <div id="buttoncon">
     <button  id="button1style" type="submit">开始画像</button>
     <!--点击此按钮后台获得参数-->

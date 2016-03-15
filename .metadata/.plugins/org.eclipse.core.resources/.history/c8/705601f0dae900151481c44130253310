@@ -1,0 +1,94 @@
+package com.zero.controller.icpas;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.zero.entity.Singleusercreditinformation;
+import com.zero.entity.Singleuserriskinformation;
+import com.zero.service.HiveQueryService;
+import com.zero.service.TemplatService;
+
+@RequestMapping("/icpas/index/evaluateRiskPreference")
+@Controller
+public class ICPASEvaluateRiskPreference {
+	
+	@Autowired
+	HiveQueryService hqs;
+	@Autowired
+	TemplatService ts;
+	
+	@RequestMapping(value="/clientRiskBearQuery",method=RequestMethod.GET)
+	public String clientRiskBearQuery(){
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQuery";
+	}
+	
+	@RequestMapping(value="/clientRiskBearQueryByCard",method=RequestMethod.GET)
+	public String clientRiskBearQueryByCard(){
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryByCard";
+	}
+	
+	@RequestMapping(value="/riskPreferenceType",method=RequestMethod.GET)
+	public String riskPreferenceType(){
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/riskPreferenceType";
+	}
+	
+	@RequestMapping(value="/clientRiskBearQuery",method=RequestMethod.POST)
+	public String ClientRiskBearQuery(Singleuserriskinformation sri,Model model)
+	{
+		//System.out.println("1123366622");
+		//// hive的数据查询 ////
+		String Id=hqs.getInfoRiskReturnId(sri);
+		String str=PersonalCreditQueryByCardPost(Id,model);
+		if(str.equals("invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryResult"))
+		{
+			return  "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryResult";
+		}
+		else
+		{
+			return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQuery";
+		}
+	}
+	
+    ////根据Id的hive的数据查询 ////
+	@RequestMapping(value="/clientRiskBearQueryByCard",method=RequestMethod.POST)
+	public String PersonalCreditQueryByCardPost(String Id,Model model){
+		System.out.println("+++++ "+Id);
+		try{
+			
+			if( Id !="" && Id!=null )
+			{
+				List<String> list = new ArrayList<String>();
+				list.clear();
+				try {
+					list=hqs.getInfobyCardnums2(Id);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				if(list.size()>0)
+				{
+					String typeStr=list.get(13);
+					String recommandBuys="<h3>灵动4号股票型</br>灵动7号股票型</br>灵动15号股票型</h3>";
+					model.addAttribute("typeStr", typeStr);
+					model.addAttribute("recommandBuys", recommandBuys);
+					System.out.println(Id);
+				}
+				else
+				{
+					return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryByCard";
+				}
+			}
+		}
+		catch(Exception ex)
+		{
+			return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryByCard";
+		}
+		return  "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryResult";
+	}
+}
