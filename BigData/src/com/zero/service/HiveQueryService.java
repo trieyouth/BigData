@@ -6,9 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zero.entity.PersonalCreditQuery;
+import com.zero.entity.Singleusercreditinformation;
+import com.zero.entity.Singleuserriskinformation;
 import com.zero.utils.DBUtils_Hive;
 
 /**
@@ -16,12 +19,7 @@ import com.zero.utils.DBUtils_Hive;
  * @author WangHong
  *
  */
-/**
- * 由传入id号得到
- * 
- * @author WangHong
- * 
- */
+
 @Service
 public class HiveQueryService {
 	private static Random random=new Random(10);
@@ -36,7 +34,9 @@ public class HiveQueryService {
 		ResultSet resultSet = DBUtils_Hive.getResultSet(
 				DBUtils_Hive.getStatement(DBUtils_Hive.getConn()),
 				"select * from makedata1_table_orc where v2=" + nums);
+		System.out.println("10000=== "+nums);
 		ArrayList list = new ArrayList<String>();
+		//System.out.println("10000=== "+list.size());
 		while (resultSet.next()) {
 			for (int i = 1; i < 64; i++) {
 				list.add(resultSet.getString(i));
@@ -53,7 +53,7 @@ public class HiveQueryService {
 	public ArrayList<String> getInfobyCardnums2(String nums) throws SQLException{
 		ResultSet resultSet = DBUtils_Hive.getResultSet(
 				DBUtils_Hive.getStatement(DBUtils_Hive.getConn()),
-				"select * from makedata2_table_orc where v1=" + nums);
+				"select * from makedata2_table where v1=" + nums);
 		ArrayList list = new ArrayList<String>();
 		while (resultSet.next()) {
 			for (int i = 1; i < 16; i++) {
@@ -139,6 +139,94 @@ public class HiveQueryService {
 			lists.add(list);
 		}
 		return lists;
+	}
+	/*
+	 * 新的模糊查询， 系统一
+	 * @return id
+	 */
+	public String getInfoCreditReturnId (Singleusercreditinformation singleusercreditinformation)
+	{
+		String res="";
+		String age=singleusercreditinformation.getAge();
+		String monthlyIncome=Integer.parseInt(singleusercreditinformation.getMonthlyIncome())*1+"";
+		String creditNum=singleusercreditinformation.getCreditNum();
+		String houseLoan=singleusercreditinformation.getHouseLoan();
+		ArrayList<ArrayList<String>> lists = new ArrayList<>();
+		String sql="select * from makedata1_table_orc where cast (v14 as bigint)="+Integer.parseInt(age)+
+				" And cast(v9 as bigint)="+Integer.parseInt(monthlyIncome)+" And cast(v50 as bigint)="+
+				Integer.parseInt(creditNum)+" limit 1";
+		System.out.println(sql);
+		ResultSet resultSet = DBUtils_Hive.getResultSet(
+				DBUtils_Hive.getStatement(DBUtils_Hive.getConn()),sql);
+		try {
+			while(resultSet.next()){
+				ArrayList<String> list=new ArrayList<>();
+				for (int i = 1; i < 64; i++) {
+					list.add(resultSet.getString(i));
+				}
+				lists.add(list);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(lists.size()>0)
+			res+=lists.get(0).get(1);
+		return res;
+	}
+	
+	/*
+	 * 新的模糊查询， 系统一
+	 * @return id
+	 */
+	public String getInfoRiskReturnId (Singleuserriskinformation singleuserriskinformation)
+	{
+		String res="";
+		String age="";
+		String proportionOfIncome="";
+		if(Integer.parseInt(singleuserriskinformation.getAge())<=30)
+				age="30岁以下";
+		else if(Integer.parseInt(singleuserriskinformation.getAge())>30&&Integer.parseInt(singleuserriskinformation.getAge())<=40)
+			   age="31-40岁";
+		else if(Integer.parseInt(singleuserriskinformation.getAge())>40&&Integer.parseInt(singleuserriskinformation.getAge())<=50)
+			   age="41-50岁";
+		else if(Integer.parseInt(singleuserriskinformation.getAge())>50&&Integer.parseInt(singleuserriskinformation.getAge())<=60)
+			   age="51-60岁";
+		else if(Integer.parseInt(singleuserriskinformation.getAge())>60)
+			age="60岁以上";
+		if(Integer.parseInt(singleuserriskinformation.getProportionOfIncome())<10)
+			proportionOfIncome="10%以下";
+		else if(Integer.parseInt(singleuserriskinformation.getProportionOfIncome())>=10&&Integer.parseInt(singleuserriskinformation.getProportionOfIncome())<=30)
+			proportionOfIncome="10%-30%";
+		else if(Integer.parseInt(singleuserriskinformation.getProportionOfIncome())>30&&Integer.parseInt(singleuserriskinformation.getProportionOfIncome())<=50)
+			proportionOfIncome="30%-50%";
+		else if(Integer.parseInt(singleuserriskinformation.getProportionOfIncome())>50&&Integer.parseInt(singleuserriskinformation.getProportionOfIncome())<=70)
+			proportionOfIncome="50%-70%";
+		else if(Integer.parseInt(singleuserriskinformation.getProportionOfIncome())>70)
+			proportionOfIncome="70%以上";
+		
+		ArrayList<ArrayList<String>> lists = new ArrayList<>();
+		String sql="select * from makedata2_table where  v2='"+age+
+				"' And v3='"+proportionOfIncome+"' limit 1";
+		System.out.println(sql);
+		ResultSet resultSet = DBUtils_Hive.getResultSet(
+				DBUtils_Hive.getStatement(DBUtils_Hive.getConn()),sql);
+		try {
+			while(resultSet.next()){
+				ArrayList<String> list=new ArrayList<>();
+				for (int i = 1; i < 16; i++) {
+					list.add(resultSet.getString(i));
+				}
+				lists.add(list);
+			}
+			System.out.println(lists.size()+"fffffffffffffffffffffffffffffffffff");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(lists.size()>0)
+			res+=lists.get(0).get(0);
+		return res;
 	}
 	/**
 	 * 模糊查询符合条件的用户的投资信息

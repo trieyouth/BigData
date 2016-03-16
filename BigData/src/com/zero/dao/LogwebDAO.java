@@ -80,7 +80,7 @@ public class LogwebDAO  {
         log.debug("getting Logweb instance with id: " + id);
         try {
             Logweb instance = (Logweb) getCurrentSession()
-                    .get("com.entity.Logweb", id);
+                    .get("com.zero.entity.Logweb", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

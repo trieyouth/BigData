@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div style="height:4px; width:100%;"></div>
 <form name="frm" method="POST" action="<c:url value="/ccas/index/dataCollect/generateData"/>">
   
-  <!--基本参数设置区域-->
+ <!--基本参数设置区域-->
   
   <div id="lightcolor">
     <div style="height:4px; width:100%;"></div>
@@ -36,23 +36,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 年龄： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minAge" >
+           <input  type="text" id="inputwidth" name="minAge"  onblur="agelowchick()" onClick="clearagelow()">
+           <span class="tips" id="divagelow"></span>
           </label></td>
         <!--那么属性为参数名-->
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxAge" >
+            <input  type="text" id="inputwidth" name="maxAge" onBlur="agehighchick()" onClick="clearagehigh()" >
+            <span class="tips" id="divagehigh"></span>
           </label></td>
         <td width="10%"  height="25" ><label id="labelbody1" >* </label></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 月收入： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minMonthlyIncome" >
+            <input  type="text" id="inputwidth" name="minMonthlyIncome" onBlur="minMonthlyIncomechick()" onClick="minMonthlyIncomeclear()">
+            <span class="tips" id="divminMonthlyIncome"></span>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxMounthlyIncome" >
+            <input  type="text" id="inputwidth" name="maxMounthlyIncome"  onBlur="maxMounthlyIncomechick()" onClick="maxMounthlyIncomeclear()">
+            <span class="tips" id="divmaxMounthlyIncome"></span>
           </label></td>
         <td width="10%"  height="25" ><label id="labelbody1" >*</label></td>
       </tr>
@@ -70,33 +74,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 信用卡账户数： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minCreditNum" >
+            <input  type="text" id="inputwidth" name="minCreditNum" onBlur="minCreditNumchick()" onClick="minCreditNumclear()" >
+             <span class="tips" id="divminCreditNum"></span>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxCreditNum" >
+            <input  type="text" id="inputwidth" name="maxCreditNum"  onBlur="maxCreditNumchick()" onClick="maxCreditNumclear()">
+             <span class="tips" id="divmaxCreditNum"></span>
           </label></td>
         <td width="10%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" > 住房贷款账户数：</label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minHouseLoan" >
+            <input  type="text" id="inputwidth" name="minHouseLoan"  onBlur="minHouseLoanchick()" onClick="minHouseLoanclear()">
+             <span class="tips" id="divminHouseLoan"></span>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxHouseLoan" >
+            <input  type="text" id="inputwidth" name="maxHouseLoan"  onBlur="maxHouseLoanchick()" onClick="maxHouseLoanclear()">
+             <span class="tips" id="divmaxHouseLoan"></span>
           </label></td>
         <td width="10%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
       <tr>
         <td width="30%"  height="25"  style="text-align:right" ><label id="labelbody" >其它贷款账户数：</label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="minLoansNum" >
+            <input  type="text" id="inputwidth" name="minLoansNum" onBlur="minLoansNumchick()" onClick="minLoansNumclear()">
+            <span class="tips" id="divminLoansNum"></span>
           </label></td>
         <td width="10%"  height="25"  style="text-align:center"  ><label id="labelbody" > 至 </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="maxLoansNum" >
+            <input  type="text" id="inputwidth" name="maxLoansNum"  onBlur="maxLoansNumchick()" onClick="maxLoansNumclear()">
+            <span class="tips" id="divmaxLoansNum"></span>
           </label></td>
         <td width="10%"  height="25"  ><label id="labelbody1" >* </label></td>
       </tr>
@@ -195,25 +205,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td width="23%"  height="25"  style="text-align:right" ><label id="labelbody" > 共生成： </label></td>
         <td width="25%"  height="25"  ><label id="labelbody" >
-            <input  type="text" id="inputwidth" name="generateRecordNum" ></label></td>
+            <input  type="text" id="inputwidth" name="generateRecordNum"  onBlur="generateRecordNumchick()" onClick="generateRecordNumclear()">
+             <span class="tips" id="divgenerateRecordNum"></span></label></td>
         <td width="52%"  height="25"    ><label id="labelbody" style="text-align:left"> 条</label></td>
       </tr>
     </table><br>
   </div>
-  
-  <div style="height:25px; width:100%;padding-left:5px;ling-height:25px;">${OperateStatus }</div>
+<div style="height:25px; width:100%;padding-left:5px;ling-height:25px;">${OperateStatus }</div>
   <!--选择按钮功能-->
   <div id="buttoncon">
-    <button  id="button1style" type="submit" onclick="ClickGenerateData()" >生成模拟数据</button>
+    <button  id="button1style" type="submit" onclick="ClickGenerateData()" >生成数据</button>
     <!--点击此按钮后台获得参数-->
-    <button  type="Reset" id="button2style">重新设置参数</button>
-    <button  type="submit" id="button3style" onclick="ClickSaveForTemplate()" >保存为模板</button>
+    <button  type="Reset" id="button2style">重设参数</button>
+    <button  type="submit" id="button3style" onclick="ClickSaveForTemplate()" >保存模板</button>
     <!-- <button  type="Reset" id="button2style">设置生成字段</button> -->
   </div>
   <div style="height:10px; width:100%;"></div>
 </form>
 
-
+<script src="<c:url value="/js/system1formchick.js"/>"></script>
   </body>
   <script language="javascript" type="text/javascript">
   function ClickGenerateData(){

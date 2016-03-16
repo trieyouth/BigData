@@ -16,33 +16,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-<link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
-<link href="<c:url value="/css/mycss.css"/>" rel="stylesheet" type="text/css">
+<!--     <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css"> -->
+    <link href="<c:url value="/css/mycss.css"/>" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/css/style.css"/>" rel="stylesheet" type="text/css">
   </head>
-  
-
 
   <body style="background:#fff;">
-  
- <div style="height:8px; width:100%;"></div>
-      <div id="lightcolor" style="width:97%;magin 0px auto;" >
-      <form method="post">
+ <div style="height:20px; width:100%;margin:20px;text-align:center;"><H3>已有用户画像</H3></div>
+    <form method="post" action="<c:url value="/ccas/index/clientPortray/personalCreditQueryByCard"/>">
+      <div id="lightcolor"  >
         <label id="labelbody" >证件类型： </label>
-        <select name="cars"  style=" border: 1; background:#4B5C88;color:#FFF;">
+        <select name="cars"  style=" border: 1; background:;color:;" value="证件类型">
           <option value="fiat" selected="selected" style="background: #4B5C88;"> 身份证  </option>
           <option value="volvo" style="background: #4B5C88;"> 护照 </option>
           <option value="saab" style="background: #4B5C88;" > 军官证  </option>   <!--证件类型-->
         </select>
-        <input name="ID" type="text" style="border:#000 soild 1px;" >   <!--证件号码-->
-        
+        <input name="Id" type="text" style="border:#000 soild 1px;" >   <!--证件号码-->
         </div>
-        <button name="btnClientPortrayQuery"  type="submit" style="width:150px ;height:25px;background:#2976BE;border:0;color:#FFF;font-family: Microsoft YaHei;margin:6px;">查询333</button>  
-      
-        
+        <div height="20px"><a>${OperateStatus}</a></div>
+        <button type="submit" id="button2style" style="margin:20px;">开始画像</button>  
       </form>
-
   </body>
 </html>

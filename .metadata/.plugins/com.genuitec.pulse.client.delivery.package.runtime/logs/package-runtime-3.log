@@ -1,0 +1,240 @@
+三月 14, 2016 5:27:36 下午 com.genuitec.pulse.client.deliverypackage.runtime.internal.Activator initializeLoggers
+信息: Package starting up at Mon Mar 14 17:27:36 CST 2016
+三月 14, 2016 5:27:38 下午 com.genuitec.pulse.client.deliverypackage.runtime.UpdatesService checkForWorkspaceUpdates
+信息: Latest version of package has already been enabled in the workspace; check finished in 124ms
+三月 14, 2016 5:34:34 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:34:36 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:34:37 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:34:37 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:37:29 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:37:29 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:38:45 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:38:45 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:39:17 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:39:17 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:40:08 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:40:08 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:43:21 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:43:22 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:43:46 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:43:46 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:44:32 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:44:33 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:53:36 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:53:37 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:55:28 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:55:28 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:56:52 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:56:53 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:58:43 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:58:43 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:59:18 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:59:18 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 5:59:38 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 5:59:39 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:05:00 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:05:01 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:07:06 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:07:07 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:07:14 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:07:14 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:07:38 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:07:38 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:11:04 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:11:04 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:20:32 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:20:32 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:24:35 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:24:36 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:25:12 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:25:12 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:25:16 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:25:17 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:25:39 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:25:40 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:26:44 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:26:44 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:27:44 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:27:44 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:28:05 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:28:05 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:29:03 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:29:03 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:30:19 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:30:20 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:33:01 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:33:02 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:36:02 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:36:03 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:39:03 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:39:04 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:39:11 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:39:12 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:46:32 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:46:33 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:50:24 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:50:25 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:55:57 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:55:57 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 7:59:44 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 7:59:44 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:08:28 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:08:28 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:10:09 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:10:10 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:10:30 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:10:31 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:11:19 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:11:20 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:11:56 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:11:57 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:12:43 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:12:44 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:13:26 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:13:26 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:13:36 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:13:36 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:13:43 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:13:43 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:14:57 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:14:58 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:15:01 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:15:01 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:15:39 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:15:40 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:16:42 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:16:42 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:16:51 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:16:52 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:17:38 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:17:38 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:18:01 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:18:02 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:19:03 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:19:04 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:19:37 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:19:37 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:19:47 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:19:48 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:20:08 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:20:09 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]
+三月 14, 2016 8:20:16 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/web-context.xml]
+三月 14, 2016 8:20:16 下午 org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+信息: Loading XML bean definitions from file [F:/BigData-youth/BigData/src/applicationContext.xml]

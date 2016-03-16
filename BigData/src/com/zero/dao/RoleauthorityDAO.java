@@ -70,7 +70,7 @@ public class RoleauthorityDAO  {
         log.debug("getting Roleauthority instance with id: " + id);
         try {
             Roleauthority instance = (Roleauthority) getCurrentSession()
-                    .get("com.entity.Roleauthority", id);
+                    .get("com.zero.entity.Roleauthority", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

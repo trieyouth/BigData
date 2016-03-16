@@ -4,55 +4,50 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
-  <head>
-    <base href="<%=basePath%>">
-<title>客户风险偏好系统数据采集页面组主框架</title>
-    
-	<c:import url="../header1.jsp"/>
-<style>
-#labelbody {
-	color: #FFF;
-	font-size: 12px;
-	font-family: Microsoft YaHei;
-}
-</style>
-  </head>
-  
-  <body>
-<div id="continaer">
-  <c:import url="../header2.jsp"/>
-  <div id="bod">
-    <div id="leftbody"> <br/>
-      <div class="meau">
-        <ul>
-          <hr color="#575C6F"/>
-          
-          
-          <!--选择子功能-->
-          <li ><a href="<c:url value='/icpas/index/dataCollect/generateData'/>" target="rightbody" >生成数据</a></li>   <!--链接到生成模拟数据页面-->
-          <hr color="#575C6F"/>
-          <li><a href="<c:url value='/icpas/index/dataCollect/dataFileInput'/>"  target="rightbody">数据导入</a></li>
-          <hr color="#575C6F"/>
-          <li><a href="<c:url value='/icpas/index/dataCollect/dataInput'/>"  target="rightbody">数据录入</a></li>
-          <hr color="#575C6F"/>
-          <li><a href="EvaluateClientRiskPreferenceDataCollectServlet?s=1"  target="rightbody">模板管理</a></li>
-          <hr color="#575C6F"/>
-<!--       <li><a href="EvaluateClientRiskPreferenceDataCollectServlet?s=1" method="get"  target="rightbody">采集记录</a></li>
-          <hr color="#575C6F"/> -->
-<!--           <li><a href="WebView/InvesrClientPerferenceAnalyseSystem/DataCollect/CreateRecord.jsp" target="rightbody">查询生成记录</a></li>
-          <hr color="#575C6F"/> -->
-          
-          
-        </ul>
-      </div>
+<head>
+<meta charset="utf-8">
+<title>金融行业客户信用分析系统</title>
+<link href="../../css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="system1-index-wrap">
+	<div class="header">
+    	<div class="logo">
+        	<a href=<c:url value="/icpas/index" />>
+        		<img src="<c:url value='/images/icpas/system2logo.png' />" alt="金融行业客户信用分析系统首页" width="40%">
+        	</a>
+        </div>
+        <div class="nav">
+        	<ul>
+            <li><a href=<c:url value="/icpas/index" />>首页</a></li>
+                <li><a href=<c:url value="/icpas/index/dataCollect" />>数据采集</a></li>
+                <li><a href=<c:url value="/icpas/index/evaluateRiskPreference" />>偏好评估</a></li>
+                <li><a href=<c:url value="/icpas/index/BIShow" />>商业智能</a></li>
+			</ul>
+        </div>
     </div>
-    <div id="rightbody">
-      <iframe src="<c:url value='/icpas/index/dataCollect/generateData'/>" name="rightbody" width="100%" height="100%"  frameborder=”no” border=”0″></iframe>
+    <div class="content">
+    	<div class="meau">
+        	<ul>
+            	<li><a href="<c:url value='/icpas/index/dataCollect/generateData'/>" target="system1main" id="system1-meau1" style="border-top:1px solid #4C5C89;" onClick="system1meau1backgroundchange()">生成数据</a></li>
+                <li><a href="<c:url value='/icpas/index/dataCollect/dataFileInput'/>" target="system1main" id="system1-meau2" onClick="system1meau2backgroundchange()">数据导入</a></li>
+                <li><a href="<c:url value='/icpas/index/dataCollect/dataInput'/>" target="system1main" id="system1-meau3" onClick="system1meau3backgroundchange()">数据录入</a></li>
+                <li><a href="<c:url value='/icpas/index/dataCollect/templetCreateRecordDetail'/>" target="system1main" id="system1-meau4" onClick="system1meau4backgroundchange()">模板管理</a></li>
+                <li><a href="<c:url value='/icpas/index/dataCollect/collectingRecord'/>" target="system1main" id="system1-meau5" onClick="system1meau5backgroundchange()">采集记录</a></li>
+            </ul>
+        </div>
+        <div class="main">
+        	 <iframe src="<c:url value='/icpas/index/dataCollect/generateData'/>" name="system1main" width="100%"  height="100%" frameborder=”no” border=”0″></iframe>
+        </div>
     </div>
-  </div>
+    <div class="footer">
+    	<p>重庆邮电大学 重庆慧都科技 联合开发</p>
+    </div>
 </div>
+<script src="<c:url value="/js/system1-guide.js"/>"></script>
 <script async>
 	var height900=document.getElementById("continaer");
 	w=height900.offsetWidth;

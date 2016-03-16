@@ -1,17 +1,24 @@
 package com.zero.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.lang.SystemUtils;
+import org.hibernate.HibernateException;
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import static org.hibernate.criterion.Example.create;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.zero.entity.Singleusercreditinformation;
@@ -83,7 +90,7 @@ public class SingleusercreditinformationDAO  {
         log.debug("getting Singleusercreditinformation instance with id: " + id);
         try {
             Singleusercreditinformation instance = (Singleusercreditinformation) getCurrentSession()
-                    .get("com.entity.Singleusercreditinformation", id);
+                    .get("com.zero.entity.Singleusercreditinformation", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
@@ -118,7 +125,46 @@ public class SingleusercreditinformationDAO  {
          throw re;
       }
 	}
-
+    
+    public int count()
+    {
+    	HibernateTemplate hibernateTemplate=new HibernateTemplate(); 
+    	Session session = null;
+    	session=sessionFactory.openSession();
+    	String sql = "select count(*) from singleusercreditinformation";
+    	Query query = session.createSQLQuery(sql);
+    	List list = query.list();
+    	session.close();
+    	return Integer.parseInt((list.get(0).toString()));
+    }
+    
+    public void outPutTxT() 
+    {
+    	HibernateTemplate hibernateTemplate=new HibernateTemplate(); 
+    	Session session = null;
+    	session=sessionFactory.openSession();
+    	String sql = "select * from singleusercreditinformation into OUTFILE 'F:/"+System.currentTimeMillis()+"' FIELDS TERMINATED BY ','";
+    	Query query = session.createSQLQuery(sql);
+    	try {
+    		query.list();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	session.close();
+	}
+    
+    
+    public void cleanAndRefresh()
+    {
+    	HibernateTemplate hibernateTemplate=new HibernateTemplate(); 
+    	Session session = null;
+    	session=sessionFactory.openSession();
+    	String sql = "delete from singleusercreditinformation where 1=1";
+    	Query query = session.createSQLQuery(sql);
+    	query.executeUpdate();
+    	session.close();
+    }
+    
 	public List<Singleusercreditinformation> findByUserName(Object userName
 	) {
 		return findByProperty(USER_NAME, userName

@@ -70,7 +70,7 @@ public class AdminroleDAO  {
         log.debug("getting Adminrole instance with id: " + id);
         try {
             Adminrole instance = (Adminrole) getCurrentSession()
-                    .get("com.entity.Adminrole", id);
+                    .get("com.zero.entity.Adminrole", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
