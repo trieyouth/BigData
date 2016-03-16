@@ -106,7 +106,6 @@ public class CCASBIShowController {
 					while (res.next()) {
 						String s = res.getString(2).substring(0,
 								res.getString(2).length() - 4);
-						System.out.println(s);
 						json += "{\"name\":\"" + res.getString(1)
 								+ "\",\"value\":\"" + s + "\"},";
 					}
@@ -116,6 +115,7 @@ public class CCASBIShowController {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+				System.out.println(json);
 				return json;
 			}
 
