@@ -38,7 +38,7 @@
    <form method="POST" name="frmLogin" action="/BigData/login">
               <div id="container">
                     <div id="login-bg" >
-                     <div class="user">   <input id="name" type="text" name="username" value="zhangsan" style="width:350px;height: 36px;background: #040a20"  onfocus="if (this.value=='Your name')  this.value='';" />   </div>
+                     <div class="user">   <input id="name" type="text" name="username" value="wangwu" style="width:350px;height: 36px;background: #040a20"  onfocus="if (this.value=='Your name')  this.value='';" />   </div>
                      <div class="password">  <input id="password" type="password" name="password" value="123456" style="width:350px;height: 36px;background-color: #040a20" onfocus="if (this.value=='Your password')  this.value='';" /> </div>
                         <div class="row" >
                         <div  class="login-row ">

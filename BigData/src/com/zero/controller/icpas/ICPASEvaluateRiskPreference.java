@@ -1,25 +1,99 @@
 package com.zero.controller.icpas;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.zero.entity.Singleusercreditinformation;
+import com.zero.entity.Singleuserriskinformation;
+import com.zero.service.HiveQueryService;
+import com.zero.service.TemplatService;
+
 @RequestMapping("/icpas/index/evaluateRiskPreference")
 @Controller
 public class ICPASEvaluateRiskPreference {
+	
+	@Autowired
+	HiveQueryService hqs;
+	@Autowired
+	TemplatService ts;
+	
 	@RequestMapping(value="/clientRiskBearQuery",method=RequestMethod.GET)
-	public String clientRiskBearQuery(){
+	public String clientRiskBearQuery(Model model){
+		model.addAttribute("OperateStatus", "");
 		return "invesr-client-perference-analyse-system/evaluate-risk-preference/ClientRiskBearQuery";
 	}
 	
 	@RequestMapping(value="/clientRiskBearQueryByCard",method=RequestMethod.GET)
-	public String clientRiskBearQueryByCard(){
+	public String clientRiskBearQueryByCard(Model model){
+		model.addAttribute("OperateStatus", "");
 		return "invesr-client-perference-analyse-system/evaluate-risk-preference/ClientRiskBearQueryByCard";
 	}
 	
 	@RequestMapping(value="/riskPreferenceType",method=RequestMethod.GET)
 	public String riskPreferenceType(){
 		return "invesr-client-perference-analyse-system/evaluate-risk-preference/RiskPreferenceType";
+	}
+	
+	@RequestMapping(value="/clientRiskBearQuery",method=RequestMethod.POST)
+	public String ClientRiskBearQuery(Singleuserriskinformation sri,Model model)
+	{
+		model.addAttribute("OperateStatus", "");
+		try{
+			String Id=hqs.getInfoRiskReturnId(sri);
+			String str=PersonalCreditQueryByCardPost(Id,model);
+			if(str.equals("invesr-client-perference-analyse-system/evaluate-risk-preference/ClientRiskBearQueryResult"))
+			{
+				return  "invesr-client-perference-analyse-system/evaluate-risk-preference/ClientRiskBearQueryResult";
+			}
+		}
+		catch(Exception ex)
+		{
+			model.addAttribute("OperateStatus", "没有查询到相关的信息！");
+			return "invesr-client-perference-analyse-system/evaluate-risk-preference/ClientRiskBearQuery";
+		}
+		model.addAttribute("OperateStatus", "没有查询到相关的信息！");
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/ClientRiskBearQuery";
+	}
+	
+    ////根据Id的hive的数据查询 ////
+	@RequestMapping(value="/clientRiskBearQueryByCard",method=RequestMethod.POST)
+	public String PersonalCreditQueryByCardPost(String Id,Model model){
+		System.out.println("+++++ "+Id);
+		try{
+			
+			if( Id !="" && Id!=null )
+			{
+				List<String> list = new ArrayList<String>();
+				list.clear();
+				try {
+					list=hqs.getInfobyCardnums2(Id);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				if(list.size()>0)
+				{
+					String typeStr=list.get(13);
+					String recommandBuys="<h3>灵动4号股票型</br>灵动7号股票型</br>灵动15号股票型</h3>";
+					model.addAttribute("typeStr", typeStr);
+					model.addAttribute("recommandBuys", recommandBuys);
+					System.out.println(Id);
+					return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryResult";
+				}
+			}
+		}
+		catch(Exception ex)
+		{
+			model.addAttribute("OperateStatus", "没有查询到相关的信息！");
+			return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryByCard";
+		}
+		model.addAttribute("OperateStatus", "没有查询到相关的信息！");
+		return "invesr-client-perference-analyse-system/evaluate-risk-preference/clientRiskBearQueryByCard";
 	}
 }

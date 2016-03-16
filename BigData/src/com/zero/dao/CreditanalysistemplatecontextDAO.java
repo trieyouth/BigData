@@ -110,7 +110,7 @@ public class CreditanalysistemplatecontextDAO  {
         log.debug("getting Creditanalysistemplatecontext instance with id: " + id);
         try {
             Creditanalysistemplatecontext instance = (Creditanalysistemplatecontext) getCurrentSession()
-                    .get("com.entity.Creditanalysistemplatecontext", id);
+                    .get("com.zero.entity.Creditanalysistemplatecontext", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

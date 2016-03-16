@@ -71,7 +71,7 @@ public class AdimauthorityDAO  {
         log.debug("getting Adimauthority instance with id: " + id);
         try {
             Adimauthority instance = (Adimauthority) getCurrentSession()
-                    .get("com.entity.Adimauthority", id);
+                    .get("com.zero.entity.Adimauthority", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
@@ -120,7 +120,7 @@ public class AdimauthorityDAO  {
 		}
 	}
 	
-	//Ìí¼ÓµÄ
+	//ï¿½ï¿½Óµï¿½
 	public List findAuthId(int adminId) {
 		Session session = getCurrentSession();
 		Criteria criteria=session.createCriteria(Adimauthority.class);
@@ -128,7 +128,7 @@ public class AdimauthorityDAO  {
 		return criteria.list();
 	}
 	
-	//Ìí¼ÓµÄ
+	//ï¿½ï¿½Óµï¿½
 	public void deleteByAuthId(int adminId,int oldauthid) {
 		Session session = getCurrentSession();
 		AdimauthorityId tempAdimAuthorityId=new AdimauthorityId(oldauthid,adminId);

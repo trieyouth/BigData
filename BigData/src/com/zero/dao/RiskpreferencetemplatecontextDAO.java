@@ -91,7 +91,7 @@ public class RiskpreferencetemplatecontextDAO  {
         log.debug("getting Riskpreferencetemplatecontext instance with id: " + id);
         try {
             Riskpreferencetemplatecontext instance = (Riskpreferencetemplatecontext) getCurrentSession()
-                    .get("com.entity.Riskpreferencetemplatecontext", id);
+                    .get("com.zero.entity.Riskpreferencetemplatecontext", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

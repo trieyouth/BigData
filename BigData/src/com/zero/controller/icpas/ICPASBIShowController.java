@@ -38,13 +38,13 @@ public class ICPASBIShowController {
 				String msg = "";
 				try {
 					while (res.next()) {
-						if (res.getString(1).equals("30锟斤拷锟斤拷锟斤拷")) {
+						if (res.getString(1).equals("30岁以下")) {
 							msg1 += res.getString(3) + ",";
-						} else if (res.getString(1).equals("31-40锟斤拷")) {
+						} else if (res.getString(1).equals("31-40岁")) {
 							msg2 += res.getString(3) + ",";
-						} else if (res.getString(1).equals("41-50锟斤拷")) {
+						} else if (res.getString(1).equals("41-50岁")) {
 							msg3 += res.getString(3) + ",";
-						} else if (res.getString(1).equals("51-60锟斤拷")) {
+						} else if (res.getString(1).equals("51-60岁")) {
 							msg4 += res.getString(3) + ",";
 						} else {
 							msg5 += res.getString(3) + ",";
@@ -64,7 +64,7 @@ public class ICPASBIShowController {
 			
 			@Override
 			public String getSql() {
-				String sql = "select v2,v3,count(*) from  makedata2_table_orc group by v2,v3 order by v2,v3";
+				String sql = "select v2,v3,count(*) from  makedata2_table group by v2,v3 order by v2,v3";
 				return sql;
 			}
 		});

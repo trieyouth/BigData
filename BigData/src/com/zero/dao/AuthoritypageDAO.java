@@ -76,7 +76,7 @@ public class AuthoritypageDAO  {
         log.debug("getting Authoritypage instance with id: " + id);
         try {
             Authoritypage instance = (Authoritypage) getCurrentSession()
-                    .get("com.entity.Authoritypage", id);
+                    .get("com.zero.entity.Authoritypage", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

@@ -76,7 +76,7 @@ public class CreditratingclassificationDAO  {
         log.debug("getting Creditratingclassification instance with id: " + id);
         try {
             Creditratingclassification instance = (Creditratingclassification) getCurrentSession()
-                    .get("com.entity.Creditratingclassification", id);
+                    .get("com.zero.entity.Creditratingclassification", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

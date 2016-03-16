@@ -73,7 +73,7 @@ public class SecondtemplatedataDAO  {
         log.debug("getting Secondtemplatedata instance with id: " + id);
         try {
             Secondtemplatedata instance = (Secondtemplatedata) getCurrentSession()
-                    .get("com.entity.Secondtemplatedata", id);
+                    .get("com.entity.zero.Secondtemplatedata", id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);

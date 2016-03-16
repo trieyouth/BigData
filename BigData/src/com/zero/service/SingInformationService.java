@@ -12,7 +12,7 @@ import com.zero.entity.Creditratingclassification;
 import com.zero.entity.Singleusercreditinformation;
 import com.zero.entity.Singleuserriskinformation;
 
-@Service
+@Service("singInformationservice")
 public class SingInformationService {
 	@Autowired
 	private SingleusercreditinformationDAO singleusercreditinformationDAO;
@@ -26,10 +26,20 @@ public class SingInformationService {
 	
 	public void addSingleusercreditinformation(Singleusercreditinformation singleusercreditinformation) {
 		singleusercreditinformationDAO.save(singleusercreditinformation);
+		if(singleusercreditinformationDAO.count()>=100)
+		{
+			singleusercreditinformationDAO.outPutTxT();
+			singleusercreditinformationDAO.cleanAndRefresh();
+		}
 	}
 	
 	public void addSingleuserriskinformation(Singleuserriskinformation singleuserriskinformation) {
 		singleuserriskinformationDAO.save(singleuserriskinformation);
+		if(singleuserriskinformationDAO.count()>=100)
+		{
+			singleuserriskinformationDAO.outPutTxT();
+			singleuserriskinformationDAO.cleanAndRefresh();
+		}
 	}
 	
 	public List<Singleusercreditinformation> checkSingleusercreditinformation() {
