@@ -47,7 +47,7 @@ public class UserManagerController {
 	public String authShow(@PathVariable("username")String username,Model model){
 		int auth = userService.findAuthority(username);
 		model.addAttribute("auth",auth);
-		model.addAttribute("authDetail",auth==1?"���ʺ�̨����ϵͳ":auth==2?"���ʿͻ����÷���ϵͳ":auth==3?"����Ͷ�ʿͻ�����ƫ����ݷ������Ƽ�ϵͳ":"");
+		model.addAttribute("authDetail",auth==1?"后台管理系统":auth==2?"客户信用数据分析系统":auth==3?"客户风险偏好数据分析与推荐系统":"");
 		model.addAttribute("username",username);
 		return "manager/user-manager/UserAuthority";
 	}
@@ -57,9 +57,9 @@ public class UserManagerController {
 	public String authUpdate(@PathVariable("username")String username,Model model){
 		//System.out.println(username);
 		int auth = userService.findAuthority(username);
-		model.addAttribute("clientAuthDetail",auth == 1?"�Ѽ���":"δ����");
-		model.addAttribute("invesrAuthDetail",auth == 2?"�Ѽ���":"δ����");
-		model.addAttribute("managerAuthDetail",auth == 3?"�Ѽ���":"δ����");
+		model.addAttribute("clientAuthDetail",auth == 1?"已激活":"未激活");
+		model.addAttribute("invesrAuthDetail",auth == 2?"已激活":"未激活");
+		model.addAttribute("managerAuthDetail",auth == 3?"已激活":"未激活");
 		model.addAttribute("clientAuthChecked",auth == 1?"checked":"");
 		model.addAttribute("invesrAuthChecked",auth == 2?"checked":"");
 		model.addAttribute("managerAuthChecked",auth == 3?"checked":"");
